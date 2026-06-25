@@ -20,7 +20,7 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. LABELS LIST (Keeps your native emojis!)
+        // 2. LABELS LIST
         const buttonLabels = [
             '<img src="Pug.png" alt="pug">',
             '<img src="Poodle.png" alt="poodle">',
@@ -33,60 +33,63 @@
         ];
 
         const container = document.getElementById('button-container');
-        const placedButtons = [];
 
-        // Center-to-Center Overlap Inspector
-        function doesOverlap(newX, newY, newSize, placedItems) {
-            // Give every item a flat 160px base radius scaled up by its size multiplier
-            const newRadius = 160 * (newSize / 2); 
-            
-            for (let item of placedItems) {
-                const oldRadius = 160 * (item.size / 2);
-                
-                // Pure center-point distance check (perfectly circular safety shield)
-                const dx = newX - item.x;
-                const dy = newY - item.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+        // Capture layout dimensions
+        const containerWidth = window.innerWidth;
+        // Target available height below your large header
+        const headerHeight = document.getElementById('site-header').offsetHeight || 250;
+        const containerHeight = window.innerHeight - headerHeight;
 
-                if (distance < (newRadius + oldRadius)) {
-                    return true;
-                }
+        // Grid sector allocation setup (e.g., 4 columns x 2 rows = 8 distinct zones)
+        const cols = 4;
+        const rows = 2;
+        const sectorWidth = containerWidth / cols;
+        const sectorHeight = containerHeight / rows;
+
+        // Create a list of all available sector coordinates
+        let sectors = [];
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                sectors.push({ col: c, row: r });
             }
-            return false;
         }
 
-        // Generate elements based on their mathematical center point
-        buttonLabels.forEach((imageHtml) => {
+        // Shuffle sectors randomly so the dogs don't spawn in a boring, predictable order
+        sectors.sort(() => Math.random() - 0.5);
+
+        // Map every single item to its own isolated sector
+        buttonLabels.forEach((imageHtml, index) => {
+            // Safety check if items exceed total grid sectors
+            if (index >= sectors.length) return; 
+
             const button = document.createElement('button');
             button.className = 'random-btn';
             button.innerHTML = imageHtml;
 
-            // Get total window bounds in pixels for true distance tracking
-            const containerWidth = window.innerWidth;
-            const containerHeight = window.innerHeight - 250; // Accounting for your large header
+            const sector = sectors[index];
 
-            let pixelX, pixelY, randomSize, randomRotation;
-            let attempts = 0;
-            const maxAttempts = 500; // Increased to ensure it finds a clean spot
+            // Find center coordinates of the assigned zone
+            const sectorCenterX = (sector.col * sectorWidth) + (sectorWidth / 2);
+            const sectorCenterY = (sector.row * sectorHeight) + (sectorHeight / 2) + headerHeight;
 
-            do {
-                // Generate random pixel coordinates instead of fluid percentages
-                // Keeps them safely away from the exact margins
-                pixelX = Math.floor(Math.random() * (containerWidth * 0.8)) + (containerWidth * 0.1);
-                pixelY = Math.floor(Math.random() * (containerHeight * 0.7)) + (containerHeight * 0.15);
-                
-                randomSize = Math.random() * (3.5 - 2.2) + 2.2;
-                randomRotation = Math.floor(Math.random() * 90) - 45;
-                attempts++;
-            } while (doesOverlap(pixelX, pixelY, randomSize, placedButtons) && attempts < maxAttempts);
+            // Introduce a subtle, controlled drift within their own zone so it still looks completely organic
+            const maxDriftX = sectorWidth * 0.15;
+            const maxDriftY = sectorHeight * 0.15;
+            
+            const driftX = (Math.random() * maxDriftX * 2) - maxDriftX;
+            const driftY = (Math.random() * maxDriftY * 2) - maxDriftY;
 
-            // Save center coordinates
-            placedButtons.push({ x: pixelX, y: pixelY, size: randomSize });
+            const finalX = sectorCenterX + driftX;
+            const finalY = sectorCenterY + driftY;
 
-            // Position from top-left, but translate back by 50% so left/top targets the EXACT center
-            button.style.left = pixelX + 'px';
-            button.style.top = pixelY + 'px';
-            button.style.transform = `translate(-50%, -50%) scale(${randomSize}) rotate(${randomRotation}deg)`;
+            // Generate size and rotation configurations
+            const randomSize = Math.random() * (3.2 - 2.2) + 2.2;
+            const randomRotation = Math.floor(Math.random() * 80) - 40;
+
+            // Style placement mapping using translate coordinates directly
+            button.style.left = '0px';
+            button.style.top = '0px';
+            button.style.transform = `translate3d(${finalX}px, ${finalY}px, 0) translate(-50%, -50%) scale(${randomSize}) rotate(${randomRotation}deg)`;
 
             container.appendChild(button);
         });
