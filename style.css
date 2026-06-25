@@ -50,7 +50,7 @@ body, html {
 
 /* CARTRIDGE BADGE BASE ELEMENT */
 .dog-btn {
-    position: relative; /* Forces text child components to lock dead-center on top */
+    position: relative;
     background: none !important;
     border: none !important;
     outline: none !important;
@@ -80,7 +80,7 @@ body, html {
     object-fit: contain;
     background: transparent !important;
     opacity: 0.95;
-    pointer-events: none; /* Prevents long-press image saving bugs on mobile devices */
+    pointer-events: none;
 }
 
 /* DEAD CENTER OVERLAID STICKER BADGE TEXT */
@@ -88,12 +88,11 @@ body, html {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Forces mathematical alignment over the image center */
+    transform: translate(-50%, -50%);
     
-    /* Font family assignment stack ensuring Comic Sans registers correctly */
     font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
     
-    font-size: 1.8rem; 
+    font-size: 1.8rem; /* Brought back up slightly now that the layout uses single words */
     font-weight: 900;
     color: #ffffff; 
     letter-spacing: 2px;
@@ -101,7 +100,6 @@ body, html {
     white-space: nowrap;
     pointer-events: none; 
     
-    /* Legibility line stroke values protecting font borders */
     -webkit-text-stroke: 4.5px #111111;
     paint-order: stroke fill; 
     filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.15));
@@ -137,7 +135,7 @@ body, html {
         width: 85%; 
     }
     .btn-text { 
-        font-size: 1.4rem; 
+        font-size: 1.35rem; 
         -webkit-text-stroke: 3.5px #111111; 
     }
 }
