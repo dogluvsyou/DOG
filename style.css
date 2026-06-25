@@ -73,9 +73,11 @@ body, html {
 }
 
 /* Mobile Layout Safeguards */
+/* Find the @media section at the bottom of style.css and update this: */
+
 @media (max-width: 600px) {
     #site-header {
-        height: 80px; /* Shrinks top strip for small mobile profiles */
+        height: 150px; /* Bumps up mobile header height (was 80px) */
     }
     .random-btn img {
         max-width: 80px;
@@ -84,3 +86,4 @@ body, html {
         font-size: 2.5rem;
     }
 }
+
