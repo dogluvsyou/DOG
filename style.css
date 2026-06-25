@@ -136,6 +136,6 @@ body, html {
     }
     .btn-text { 
         font-size: 1.35rem; 
-        -webkit-text-stroke: 3.5px #111111; 
+        -webkit-text-stroke: 1px #111111; 
     }
 }
