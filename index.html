@@ -3,73 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Creative Brand Studio</title>
-    <!-- A modern minimal reset to keep layout spacing consistent across devices -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
+    <title>DogLuvsYou</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Nav Bar: Stays fixed or scrolls, flexible for artistic branding -->
-    <header class="site-header">
-        <div class="logo">Brand Name/Logo</div>
-        <nav class="main-nav">
-            <a href="#work">Creative</a>
-            <a href="#shop">Shop</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+    <div id="button-container"></div>
 
-    <main class="content-wrapper">
-        <!-- Hero Section: Treat this like an exhibition space -->
-        <section class="hero-section">
-            <div class="hero-statement">
-                <h1>Where Art Meets Commerce.</h1>
-                <p>A completely custom experience tailored to your creative vision.</p>
-            </div>
-        </section>
+    <script>
+        // Configuration
+        const TOTAL_BUTTONS = 15; // Change this to add more or fewer buttons
+        const container = document.getElementById('button-container');
+        
+        // Array of text or emojis you want on your buttons
+        const buttonLabels = ['🐶', 'Click Me', 'Woof!', 'DOG', '🐾', 'Bone', 'Play', '🐕', 'Love'];
 
-        <!-- Dynamic Grid Section: Perfect for asymmetrical layouts or your lookbook -->
-        <section id="work" class="creative-grid">
-            <div class="grid-item dynamic-1">
-                <div class="art-frame">
-                    <!-- Your creative media goes here -->
-                    <p>[Art Asset / Lookbook Focus 1]</p>
-                </div>
-            </div>
-            <div class="grid-item dynamic-2">
-                <div class="art-frame">
-                    <p>[Art Asset / Lookbook Focus 2]</p>
-                </div>
-            </div>
-            <div class="grid-item dynamic-3">
-                <div class="art-frame">
-                    <p>[Art Asset / Lookbook Focus 3]</p>
-                </div>
-            </div>
-        </section>
+        for (let i = 0; i < TOTAL_BUTTONS; i++) {
+            const button = document.createElement('button');
+            button.className = 'random-btn';
+            
+            // Pick a random label from our list
+            const randomLabel = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
+            button.innerHTML = randomLabel;
 
-        <!-- Commerce Section: Where your Shopify Buy Buttons will drop in -->
-        <section id="shop" class="product-grid">
-            <div class="product-card">
-                <div class="product-visual">[Product Image]</div>
-                <h3>Product Title One</h3>
-                <p>$45.00</p>
-                <!-- Paste your Shopify Buy Button JS Code snippet exactly right here -->
-                <button class="mock-buy-button">Add To Cart</button> 
-            </div>
-            <div class="product-card">
-                <div class="product-visual">[Product Image]</div>
-                <h3>Product Title Two</h3>
-                <p>$60.00</p>
-                <button class="mock-buy-button">Add To Cart</button>
-            </div>
-        </section>
-    </main>
- 
-    <footer class="site-footer">
-        <p>&copy; 2026 Your Studio. All Rights Reserved.</p>
-    </footer>
+            // Generate random positions from -20% to 100% 
+            // (-20% allows buttons to sit up to 1/5th off the left/top edges)
+            const randomX = Math.floor(Math.random() * 120) - 20;
+            const randomY = Math.floor(Math.random() * 120) - 20;
 
+            // Apply the random coordinates
+            button.style.left = randomX + '%';
+            button.style.top = randomY + '%';
+
+            // Optional: Randomize button sizes slightly for chaos
+            const randomSize = Math.random() * (1.5 - 0.8) + 0.8;
+            button.style.transform = `scale(${randomSize})`;
+
+            container.appendChild(button);
+        }
+    </script>
 </body>
-</html> 
+</html>
