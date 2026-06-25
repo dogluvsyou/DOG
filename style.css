@@ -85,22 +85,32 @@ body, html {
 }
 
 /* THE OVERLAID GIRLY ROUNDED BLOCK TEXT */
+./* Find the .btn-text section in your style.css and replace it with this: */
+
 .btn-text {
     position: absolute;
-    font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, 'Arial Rounded MT Bold', sans-serif;
-    font-size: 1rem; 
+    
+    /* 1. COMIC SANS BACKUP CHAIN: Gives that fun, slightly girly, casual sticker text look */
+    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+    
+    font-size: 1.8rem; /* Keeps it compact and clean across the dog graphics */
     font-weight: 900;
     color: #ffffff; 
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none; 
     
-    /* Outlining values to protect legibility on huge images */
-    -webkit-text-stroke: 8px #111111;
+    /* Thinned outline to match Comic Sans letter geometry */
+    -webkit-text-stroke: 4.5px #111111;
     paint-order: stroke fill; 
-    filter: drop-shadow(0px 6px 0px rgba(0,0,0,0.15));
+    filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.15));
 }
+
+/* Also make sure to update the mobile responsive rule at the very bottom of style.css: */
+
+
+
 
 
 /* Interactive states */
@@ -129,16 +139,12 @@ body, html {
 
 /* Mobile responsive optimization */
 @media (max-width: 600px) {
-    #site-header {
-        height: 130px;
-    }
-    #button-stack {
-        gap: 35px;
-    }
-    .dog-btn {
-        width: 85%;
-    }
-    .btn-text {
-        font-size: 1rem; /* Scales text down comfortably for standard mobile displays */
+    #site-header { height: 130px; }
+    #button-stack { gap: 25px; }
+    .dog-btn { width: 85%; }
+    
+    .btn-text { 
+        font-size: 1.4rem; /* Adapts Comic Sans cleanly for small iPhone screens */
+        -webkit-text-stroke: 3.5px #111111; 
     }
 }
