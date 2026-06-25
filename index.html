@@ -16,39 +16,67 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. YOUR 3 UPLOADED DOG IMAGES
+        // 2. YOUR EXACT CAPITALIZED IMAGES (No Duplicates)
         const buttonLabels = [
             '<img src="Pug.png" alt="pug">',
             '<img src="Poodle.png" alt="poodle">',
             '<img src="Dalmation.png" alt="dalmation">'
         ];
 
-        const TOTAL_BUTTONS = 6; 
         const container = document.getElementById('button-container');
+        const placedButtons = [];
 
-        for (let i = 0; i < TOTAL_BUTTONS; i++) {
+        // Helper function to check if two buttons overlap by more than 10%
+        function doesOverlap(newX, newY, newSize, placedItems) {
+            // Estimate element radius based on size metric
+            const newRadius = (60 * newSize) * 0.9; // 0.9 allows a tight 10% overlap cushion
+
+            for (let item of placedItems) {
+                const oldRadius = (60 * item.size) * 0.9;
+                
+                // Calculate distance between centers using Pythagorean theorem
+                const dx = newX - item.x;
+                const dy = newY - item.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // If distance is less than the combined radii, they overlap too much
+                if (distance < (newRadius + oldRadius)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Loop exactly through the array items with no duplicates
+        buttonLabels.forEach((imageHtml) => {
             const button = document.createElement('button');
             button.className = 'random-btn';
-            
-            // Randomly chooses one of your three dogs for each button slot
-            const randomImage = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
-            button.innerHTML = randomImage;
+            button.innerHTML = imageHtml;
 
-            // Placement keeps them strictly safe but chaotic (-10% to 90%)
-            const randomX = Math.floor(Math.random() * 100) - 10;
-            const randomY = Math.floor(Math.random() * 100) - 10;
+            let randomX, randomY, randomSize, randomRotation;
+            let attempts = 0;
+            const maxAttempts = 200; // Prevents infinite loops if screen is too packed
 
+            // Keep rolling coordinates until a relatively open spot is found
+            do {
+                // Keep boundaries inward (-5% to 85%) so giant scale fits cleanly
+                randomX = Math.floor(Math.random() * 90) - 5;
+                randomY = Math.floor(Math.random() * 90) - 5;
+                randomSize = Math.random() * (3.5 - 2.2) + 2.2;
+                randomRotation = Math.floor(Math.random() * 90) - 45;
+                attempts++;
+            } while (doesOverlap(randomX, randomY, randomSize, placedButtons) && attempts < maxAttempts);
+
+            // Save the coordinates to compare against the next dog
+            placedButtons.push({ x: randomX, y: randomY, size: randomSize });
+
+            // Apply layout attributes
             button.style.left = randomX + '%';
             button.style.top = randomY + '%';
-
-            // BIGGER SIZE BOOST: Moved up from (1.5 - 2.6) to (2.2 - 3.5)
-            const randomSize = Math.random() * (3.5 - 2.2) + 2.2;
-            const randomRotation = Math.floor(Math.random() * 90) - 45;
-
             button.style.transform = `scale(${randomSize}) rotate(${randomRotation}deg)`;
 
             container.appendChild(button);
-        }
+        });
     </script>
 </body>
 </html>
