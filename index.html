@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DogLuvsYou</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +12,7 @@
         <img src="IMG_6742.png" alt="DOG" class="header-logo">
     </header>
 
-    <div id="button-container"></div>
+    <div id="button-stack"></div>
 
     <script>
         // 1. BACKGROUND PALETTE
@@ -20,78 +20,40 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. LABELS LIST
-        const buttonLabels = [
+        // 2. YOUR THREE DOG IMAGES
+        const dogImages = [
             '<img src="Pug.png" alt="pug">',
             '<img src="Poodle.png" alt="poodle">',
-            '<img src="Dalmation.png" alt="dalmation">',
-            '<span class="emoji-btn">🐶</span>',
-            '<span class="emoji-btn">🦮</span>',
-            '<span class="emoji-btn">🐕‍🦺</span>',
-            '<span class="emoji-btn">🐕</span>',
-            '<span class="emoji-btn">🐾</span>'
+            '<img src="Dalmation.png" alt="dalmation">'
         ];
 
-        const container = document.getElementById('button-container');
+        // Shuffle the array order completely on every refresh
+        dogImages.sort(() => Math.random() - 0.5);
 
-        // Capture layout dimensions
-        const containerWidth = window.innerWidth;
-        // Target available height below your large header
-        const headerHeight = document.getElementById('site-header').offsetHeight || 250;
-        const containerHeight = window.innerHeight - headerHeight;
+        const container = document.getElementById('button-stack');
 
-        // Grid sector allocation setup (e.g., 4 columns x 2 rows = 8 distinct zones)
-        const cols = 4;
-        const rows = 2;
-        const sectorWidth = containerWidth / cols;
-        const sectorHeight = containerHeight / rows;
+        // Loop through the shuffled list and build the rows
+        dogImages.forEach((imageHtml) => {
+            // Create a full-width row wrapper
+            const row = document.createElement('div');
+            row.className = 'dog-row';
 
-        // Create a list of all available sector coordinates
-        let sectors = [];
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                sectors.push({ col: c, row: r });
-            }
-        }
-
-        // Shuffle sectors randomly so the dogs don't spawn in a boring, predictable order
-        sectors.sort(() => Math.random() - 0.5);
-
-        // Map every single item to its own isolated sector
-        buttonLabels.forEach((imageHtml, index) => {
-            // Safety check if items exceed total grid sectors
-            if (index >= sectors.length) return; 
-
+            // Create the borderless button
             const button = document.createElement('button');
-            button.className = 'random-btn';
+            button.className = 'dog-btn';
             button.innerHTML = imageHtml;
 
-            const sector = sectors[index];
-
-            // Find center coordinates of the assigned zone
-            const sectorCenterX = (sector.col * sectorWidth) + (sectorWidth / 2);
-            const sectorCenterY = (sector.row * sectorHeight) + (sectorHeight / 2) + headerHeight;
-
-            // Introduce a subtle, controlled drift within their own zone so it still looks completely organic
-            const maxDriftX = sectorWidth * 0.15;
-            const maxDriftY = sectorHeight * 0.15;
+            // Generate slight organic chaos (tilt between -8 and +8 degrees)
+            const randomTilt = Math.floor(Math.random() * 16) - 8;
             
-            const driftX = (Math.random() * maxDriftX * 2) - maxDriftX;
-            const driftY = (Math.random() * maxDriftY * 2) - maxDriftY;
+            // Subtle horizontal shift (left or right by up to 15 pixels)
+            const randomShift = Math.floor(Math.random() * 30) - 15;
 
-            const finalX = sectorCenterX + driftX;
-            const finalY = sectorCenterY + driftY;
+            // Apply style effects directly to the inner button
+            button.style.transform = `translateX(${randomShift}px) rotate(${randomTilt}deg)`;
 
-            // Generate size and rotation configurations
-            const randomSize = Math.random() * (3.2 - 2.2) + 2.2;
-            const randomRotation = Math.floor(Math.random() * 80) - 40;
-
-            // Style placement mapping using translate coordinates directly
-            button.style.left = '0px';
-            button.style.top = '0px';
-            button.style.transform = `translate3d(${finalX}px, ${finalY}px, 0) translate(-50%, -50%) scale(${randomSize}) rotate(${randomRotation}deg)`;
-
-            container.appendChild(button);
+            row.appendChild(button);
+            container.appendChild(row);
         });
     </script>
 </body>
