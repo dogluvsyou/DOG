@@ -1,4 +1,4 @@
-/* Reset defaults and lock layout views */
+/* Reset defaults and secure scrolling */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,83 +9,88 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column; /* Stacks header vertically on top of canvas zone */
-    transition: background-color 0.3s ease;
+    background-color: #b8d7e9; /* Fallback background */
+    overflow-x: hidden; /* Prevents any side-scrolling entirely */
+    overflow-y: auto;   /* Allows smooth vertical scrolling if screens are short */
 }
 
-/* Header Area Rule styling */
-/* Find this section in your style.css and update the numbers: */
-
+/* Header Constraints */
 #site-header {
     width: 100%;
-    height: 250px; /* 1. INCREASE THIS: This is the height of the header box (was 120px) */
+    height: 180px; /* Controlled top spacing */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    z-index: 10;
+    padding: 15px;
     background: transparent;
 }
 
 .header-logo {
     max-height: 100%;
     width: auto;
-    max-width: 90%; /* 2. ADD THIS: Allows the image to span across almost the whole screen width */
+    max-width: 90%;
     object-fit: contain;
-    background: transparent;
 }
 
-
-/* Main random content wrapper zone */
-#button-container {
-    position: relative;
-    width: 100%;
-    flex-grow: 1; /* Automatically occupies remaining space beneath header */
-}
-
-/* Button & Canvas Base specs */
-/.random-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0; /* Clear out old padding so text bounds stay tight */
-    background: transparent;
-    border: none;
-    cursor: pointer;
+/* Stack layout container */
+#button-stack {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 10px;
+    gap: 40px; /* Clean breathing room between rows */
     align-items: center;
+}
+
+/* Full-width container row */
+.dog-row {
+    width: 100%;
+    display: flex;
     justify-content: center;
-    z-index: 5;
-    touch-action: manipulation; /* Optimizes mobile tap registration speeds */
+    align-items: center;
 }
 
-/* Make sure the clickable area doesn't swallow half the layout screen */
-.random-btn img, .random-btn .emoji-btn {
-    max-width: 110px;
-    font-size: 3.5rem;
+/* COMPLETELY STRIPPED BUTTONS: No background, no grey box, no border */
+.dog-btn {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    width: 85%; /* Spans comfortably across phone viewports */
+    max-width: 400px; /* Keeps it from blowing up too huge on iPads/PCs */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
+}
+
+/* The actual image files fill out the clean button wrappers */
+.dog-btn img {
+    width: 100%;
     height: auto;
-    pointer-events: auto; /* Ensures tap execution directly through transparent gaps */
+    display: block;
+    object-fit: contain;
+    background: transparent !important;
 }
 
-
-.random-btn:hover {
-    filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.12));
+/* Interactive hover state */
+.dog-btn:hover {
+    filter: drop-shadow(0px 12px 12px rgba(0,0,0,0.1));
 }
 
-/* Mobile Layout Safeguards */
-/* Find the @media section at the bottom of style.css and update this: */
-
+/* Mobile responsive scaling optimization */
 @media (max-width: 600px) {
     #site-header {
-        height: 150px; /* Bumps up mobile header height (was 80px) */
+        height: 130px;
     }
-    .random-btn img {
-        max-width: 80px;
+    #button-stack {
+        gap: 25px; /* Tighter gap configuration for short mobile screens */
     }
-    .random-btn .emoji-btn {
-        font-size: 2.5rem;
+    .dog-btn {
+        width: 90%;
     }
 }
-
