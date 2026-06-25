@@ -20,9 +20,9 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. EXPANDED DOG POOL (Will be randomly matched to the links)
+        // 2. EXPANDED DOG POOL
         const dogImages = [
-            '<img src="Pug.png" alt="German Shepherd">',
+            '<img src="Pug.png" alt="Pug">',
             '<img src="Poodle.png" alt="Poodle">',
             '<img src="Dalmation.png" alt="Dalmation">',
             '<img src="Germshep.png" alt="German Shepherd">',
@@ -30,20 +30,13 @@
         ];
 
         // 3. FIXED BUTTON TEXT ORDER
-        const menuLinks = [
-            'SHOP',
-            'MAGAZINE',
-            'RADIO',
-            'YOUTUBE',
-            'PATREON'
-        ];
+        const menuLinks = ['SHOP', 'MAGAZINE', 'RADIO', 'YOUTUBE', 'PATREON'];
 
-        // Shuffle the dog pool completely so a different dog guards each link on refresh
+        // Shuffle the dog pool completely
         dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
 
-        // Loop through your 5 fixed menu links
         menuLinks.forEach((textLabel, index) => {
             const row = document.createElement('div');
             row.className = 'dog-row';
@@ -51,17 +44,16 @@
             const button = document.createElement('button');
             button.className = 'dog-btn';
 
-            // Pull a dog from our shuffled pool (falls back to a repeat if you add more links later)
             const assignedDogHtml = dogImages[index % dogImages.length];
 
-            // Combine the random dog image directly on top of the fixed menu text label
+            // Renders the image element and text badge inside the absolute target zone
             button.innerHTML = `
                 ${assignedDogHtml}
                 <span class="btn-text">${textLabel}</span>
             `;
 
-            // Controlled design shifts
-            const randomTilt = Math.floor(Math.random() * 12) - 6; // Tightened down slightly for better legibility 
+            // Controlled design structural shifts
+            const randomTilt = Math.floor(Math.random() * 12) - 6; 
             const randomShift = Math.floor(Math.random() * 24) - 12;
 
             button.style.setProperty('--base-tilt', `${randomTilt}deg`);
