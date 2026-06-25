@@ -1,4 +1,4 @@
-/* Reset defaults and secure scrolling */
+/* Reset defaults and secure phone viewport limits */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,12 +8,12 @@
 body, html {
     width: 100%;
     height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-/* Header Constraints */
+/* Header Base Grid Layout */
 #site-header {
     width: 100%;
     height: 180px;
@@ -31,13 +31,13 @@ body, html {
     object-fit: contain;
 }
 
-/* Stack layout container */
+/* Full Width Stack Container */
 #button-stack {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px 10px 60px 10px; /* Padding on bottom to make scrolling comfortable */
-    gap: 55px; /* Widened slightly to accommodate text height */
+    padding: 20px 10px 80px 10px;
+    gap: 40px;
     align-items: center;
 }
 
@@ -48,12 +48,9 @@ body, html {
     align-items: center;
 }
 
-/* NAVIGATION LINK BUTTON STYLING */
-/* Find and replace this section in your style.css to bring back full-size images: */
-
-/* CARTRIDGE BADGE CONFIGURATION */
+/* CARTRIDGE BADGE BASE ELEMENT */
 .dog-btn {
-    position: relative; /* Allows text child to anchor inside here */
+    position: relative; /* Forces text child components to lock dead-center on top */
     background: none !important;
     border: none !important;
     outline: none !important;
@@ -61,8 +58,8 @@ body, html {
     padding: 0 !important;
     margin: 0 !important;
     cursor: pointer;
-    width: 95%; /* 1. INCREASE THIS: Expands the button profile width across the screen */
-    max-width: 450px; /* Bumps up tablet/PC sizing parameters */
+    width: 95%; 
+    max-width: 450px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,25 +72,28 @@ body, html {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
 }
 
+/* Full Size Background Image Constraint Map */
 .dog-btn img {
-    width: 100%; /* 2. LOCKED AT 100%: Forces the images to stay full width inside the row container */
+    width: 100%; 
     height: auto;
     display: block;
     object-fit: contain;
     background: transparent !important;
     opacity: 0.95;
+    pointer-events: none; /* Prevents long-press image saving bugs on mobile devices */
 }
 
-/* THE OVERLAID GIRLY ROUNDED BLOCK TEXT */
-./* Find the .btn-text section in your style.css and replace it with this: */
-
+/* DEAD CENTER OVERLAID STICKER BADGE TEXT */
 .btn-text {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Forces mathematical alignment over the image center */
     
-    /* 1. COMIC SANS BACKUP CHAIN: Gives that fun, slightly girly, casual sticker text look */
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+    /* Font family assignment stack ensuring Comic Sans registers correctly */
+    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
     
-    font-size: 1.8rem; /* Keeps it compact and clean across the dog graphics */
+    font-size: 1.8rem; 
     font-weight: 900;
     color: #ffffff; 
     letter-spacing: 2px;
@@ -101,19 +101,13 @@ body, html {
     white-space: nowrap;
     pointer-events: none; 
     
-    /* Thinned outline to match Comic Sans letter geometry */
+    /* Legibility line stroke values protecting font borders */
     -webkit-text-stroke: 4.5px #111111;
     paint-order: stroke fill; 
     filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.15));
 }
 
-/* Also make sure to update the mobile responsive rule at the very bottom of style.css: */
-
-
-
-
-
-/* Interactive states */
+/* Dynamic Interaction Profiles */
 .dog-btn:hover {
     filter: drop-shadow(0px 15px 15px rgba(0,0,0,0.15));
 }
@@ -124,27 +118,26 @@ body, html {
     transition: transform 0.05s ease;
 }
 
-/* CSS MATH TIMELINE FOR IDLE WIGGLING */
+/* CSS Hardware Engine Animation Mapping Loop */
 @keyframes gentleWiggle {
-    0% {
-        transform: translateX(var(--base-shift)) rotate(var(--base-tilt)) scale(1);
-    }
-    50% {
-        transform: translateX(calc(var(--base-shift) + 6px)) rotate(calc(var(--base-tilt) + 2deg)) scale(1.02);
-    }
-    100% {
-        transform: translateX(calc(var(--base-shift) - 6px)) rotate(calc(var(--base-tilt) - 1deg)) scale(0.99);
-    }
+    0% { transform: translateX(var(--base-shift)) rotate(var(--base-tilt)) scale(1); }
+    50% { transform: translateX(calc(var(--base-shift) + 6px)) rotate(calc(var(--base-tilt) + 2deg)) scale(1.02); }
+    100% { transform: translateX(calc(var(--base-shift) - 6px)) rotate(calc(var(--base-tilt) - 1deg)) scale(0.99); }
 }
 
-/* Mobile responsive optimization */
+/* Compact Smartphone Display Overrides */
 @media (max-width: 600px) {
-    #site-header { height: 130px; }
-    #button-stack { gap: 25px; }
-    .dog-btn { width: 85%; }
-    
+    #site-header { 
+        height: 130px; 
+    }
+    #button-stack { 
+        gap: 25px; 
+    }
+    .dog-btn { 
+        width: 85%; 
+    }
     .btn-text { 
-        font-size: 1.4rem; /* Adapts Comic Sans cleanly for small iPhone screens */
+        font-size: 1.4rem; 
         -webkit-text-stroke: 3.5px #111111; 
     }
 }
