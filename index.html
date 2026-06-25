@@ -29,8 +29,8 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 3. FIXED BUTTON TEXT ORDER
-        const menuLinks = ['SHOP', 'MAGAZINE', 'RADIO', 'YOUTUBE', 'PATREON'];
+        // 3. FINAL CHEEKY LINK LIST (Updated to single-word "WOOFERS")
+        const menuLinks = ['SWAG', 'PROPAGANDA', 'DOGTUBE', 'BARK', 'EXCLUSIVE'];
 
         // Shuffle the dog pool completely
         dogImages.sort(() => Math.random() - 0.5);
@@ -46,7 +46,7 @@
 
             const assignedDogHtml = dogImages[index % dogImages.length];
 
-            // Renders the image element and text badge inside the absolute target zone
+            // Render
             button.innerHTML = `
                 ${assignedDogHtml}
                 <span class="btn-text">${textLabel}</span>
