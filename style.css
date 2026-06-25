@@ -36,8 +36,8 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px 10px;
-    gap: 40px;
+    padding: 20px 10px 60px 10px; /* Padding on bottom to make scrolling comfortable */
+    gap: 55px; /* Widened slightly to accommodate text height */
     align-items: center;
 }
 
@@ -48,7 +48,7 @@ body, html {
     align-items: center;
 }
 
-/* THE WIGGLING STRIPPED BUTTON */
+/* NAVIGATION LINK BUTTON STYLING */
 .dog-btn {
     background: none !important;
     border: none !important;
@@ -57,55 +57,63 @@ body, html {
     padding: 0 !important;
     margin: 0 !important;
     cursor: pointer;
-    width: 85%;
-    max-width: 400px;
+    width: 80%;
+    max-width: 320px; /* Narrowed layout to look more like a neat button menu */
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Places the Dog Image on top of the text label */
     align-items: center;
+    justify-content: center;
+    gap: 10px; /* Small layout spacing gap between dog feet and text */
     -webkit-tap-highlight-color: transparent;
 
-    /* Setup initial variables in case JS loads late */
     --base-tilt: 0deg;
     --base-shift: 0px;
 
-    /* 1. IDLE MOVEMENT: Runs a super lightweight CSS hardware wiggle looping every 4 seconds */
     animation: gentleWiggle 4s ease-in-out infinite alternate;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
 }
 
+/* The actual image scaling inside rows */
 .dog-btn img {
-    width: 100%;
+    width: 80%; /* Keeps the dog slightly smaller than the text spread */
     height: auto;
     display: block;
     object-fit: contain;
     background: transparent !important;
 }
 
-/* 2. HOVER/TAP INTERACTION: Lifts up and stands out when touched */
+/* THE FIXED NAVIGATION TEXT STYLE */
+.btn-text {
+    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif; /* Back into Comic Sans style theme */
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #111111;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.8); /* Injects a clean white outline depth backdrop */
+}
+
+/* Interactive states */
 .dog-btn:hover {
     filter: drop-shadow(0px 15px 15px rgba(0,0,0,0.15));
 }
 
-/* 3. ACTIVE CLICK/TAP PHYSICS: Quickly squishes down and pops violently when your finger presses it */
 .dog-btn:active {
-    transform: scale(0.9) rotate(calc(var(--base-tilt) + 5deg)) !important;
+    transform: scale(0.9) rotate(calc(var(--base-tilt) + 4deg)) !important;
     filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));
-    transition: transform 0.05s ease; /* Fast response time for physical tap feel */
+    transition: transform 0.05s ease;
 }
 
 /* CSS MATH TIMELINE FOR IDLE WIGGLING */
 @keyframes gentleWiggle {
     0% {
-        /* Start at your exact random JavaScript generation points */
         transform: translateX(var(--base-shift)) rotate(var(--base-tilt)) scale(1);
     }
     50% {
-        /* Softly drift right and add 3 degrees of rotation mid-way */
-        transform: translateX(calc(var(--base-shift) + 8px)) rotate(calc(var(--base-tilt) + 3deg)) scale(1.02);
+        transform: translateX(calc(var(--base-shift) + 6px)) rotate(calc(var(--base-tilt) + 2deg)) scale(1.02);
     }
     100% {
-        /* Softly drift left and subtract 2 degrees of rotation */
-        transform: translateX(calc(var(--base-shift) - 8px)) rotate(calc(var(--base-tilt) - 2deg)) scale(0.99);
+        transform: translateX(calc(var(--base-shift) - 6px)) rotate(calc(var(--base-tilt) - 1deg)) scale(0.99);
     }
 }
 
@@ -115,9 +123,12 @@ body, html {
         height: 130px;
     }
     #button-stack {
-        gap: 25px;
+        gap: 35px;
     }
     .dog-btn {
-        width: 90%;
+        width: 85%;
+    }
+    .btn-text {
+        font-size: 1.8rem; /* Scales text down comfortably for standard mobile displays */
     }
 }
