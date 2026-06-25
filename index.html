@@ -16,11 +16,11 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. MULTIPLE IMAGES SEPARATED BY COMMAS
-        // Just upload your new images (like bone.png or ball.png) to GitHub and add them here!
+        // 2. YOUR 3 UPLOADED DOG IMAGES
         const buttonLabels = [
-            '<img src="IMG_6738.png" alt="poodle">',
-            '<img src="poodle.png" alt="poodle">' // You can repeat or change these to new names
+            '<img src="pug.png" alt="pug">',
+            '<img src="poodle.png" alt="poodle">',
+            '<img src="dalmation.png" alt="dalmation">'
         ];
 
         const TOTAL_BUTTONS = 6; 
@@ -30,20 +30,19 @@
             const button = document.createElement('button');
             button.className = 'random-btn';
             
-            // This line automatically cycles through or randomly picks from your array
+            // Randomly chooses one of your three dogs for each button slot
             const randomImage = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
             button.innerHTML = randomImage;
 
-            // FIX: Pulling the boundaries inward from (-20% to 100%) down to (-10% to 90%)
-            // This prevents them from slipping more than 1/10th off the screen edges
+            // Placement keeps them strictly safe but chaotic (-10% to 90%)
             const randomX = Math.floor(Math.random() * 100) - 10;
             const randomY = Math.floor(Math.random() * 100) - 10;
 
             button.style.left = randomX + '%';
             button.style.top = randomY + '%';
 
-            // FIX: Boosted the sizes up by 20% (Old was 1.2 to 2.2, New is 1.5 to 2.6)
-            const randomSize = Math.random() * (2.6 - 1.5) + 1.5;
+            // BIGGER SIZE BOOST: Moved up from (1.5 - 2.6) to (2.2 - 3.5)
+            const randomSize = Math.random() * (3.5 - 2.2) + 2.2;
             const randomRotation = Math.floor(Math.random() * 90) - 45;
 
             button.style.transform = `scale(${randomSize}) rotate(${randomRotation}deg)`;
