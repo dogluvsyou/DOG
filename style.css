@@ -49,7 +49,11 @@ body, html {
 }
 
 /* NAVIGATION LINK BUTTON STYLING */
+/* Find and replace this section in your style.css to bring back full-size images: */
+
+/* CARTRIDGE BADGE CONFIGURATION */
 .dog-btn {
+    position: relative; /* Allows text child to anchor inside here */
     background: none !important;
     border: none !important;
     outline: none !important;
@@ -57,13 +61,11 @@ body, html {
     padding: 0 !important;
     margin: 0 !important;
     cursor: pointer;
-    width: 80%;
-    max-width: 320px; /* Narrowed layout to look more like a neat button menu */
+    width: 95%; /* 1. INCREASE THIS: Expands the button profile width across the screen */
+    max-width: 450px; /* Bumps up tablet/PC sizing parameters */
     display: flex;
-    flex-direction: column; /* Places the Dog Image on top of the text label */
     align-items: center;
     justify-content: center;
-    gap: 10px; /* Small layout spacing gap between dog feet and text */
     -webkit-tap-highlight-color: transparent;
 
     --base-tilt: 0deg;
@@ -73,25 +75,33 @@ body, html {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
 }
 
-/* The actual image scaling inside rows */
 .dog-btn img {
-    width: 80%; /* Keeps the dog slightly smaller than the text spread */
+    width: 100%; /* 2. LOCKED AT 100%: Forces the images to stay full width inside the row container */
     height: auto;
     display: block;
     object-fit: contain;
     background: transparent !important;
+    opacity: 0.95;
 }
 
-/* THE FIXED NAVIGATION TEXT STYLE */
+/* THE OVERLAID GIRLY ROUNDED BLOCK TEXT */
 .btn-text {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif; /* Back into Comic Sans style theme */
-    font-size: 2.2rem;
+    position: absolute;
+    font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, 'Arial Rounded MT Bold', sans-serif;
+    font-size: 2.8rem; 
     font-weight: 900;
-    color: #111111;
-    letter-spacing: 2px;
+    color: #ffffff; 
+    letter-spacing: 3px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 0px rgba(255,255,255,0.8); /* Injects a clean white outline depth backdrop */
+    white-space: nowrap;
+    pointer-events: none; 
+    
+    /* Outlining values to protect legibility on huge images */
+    -webkit-text-stroke: 8px #111111;
+    paint-order: stroke fill; 
+    filter: drop-shadow(0px 6px 0px rgba(0,0,0,0.15));
 }
+
 
 /* Interactive states */
 .dog-btn:hover {
