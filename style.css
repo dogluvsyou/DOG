@@ -9,8 +9,8 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Clips elements 1/5th off-screen without breaking layout */
-    transition: background-color 0.3s ease; /* Smooth fade when color changes */
+    overflow: hidden; /* Keeps screen perfectly fixed while poodles peek off-edge */
+    transition: background-color 0.3s ease;
 }
 
 #button-container {
@@ -19,42 +19,36 @@ body, html {
     height: 100%;
 }
 
-/* Invisible background buttons with pure black font */
+/* Stripped-down clickable canvas elements */
 .random-btn {
     position: absolute;
     padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: 800; /* Chunky black font */
-    color: #000000;   /* Pure Black text */
-    background: transparent; /* No background color */
-    border: none;     /* No border box outlines */
+    background: transparent;
+    border: none;
     cursor: pointer;
     white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: filter 0.2s ease;
 }
 
-/* If you use <img> tags inside your buttons, this keeps them clean */
+/* Image scaling rules */
 .random-btn img {
-    max-width: 100px;
+    max-width: 120px;
     height: auto;
     display: block;
     background: transparent;
 }
 
-/* Subtle scale effect on hover without changing colors */
+/* Slight lift interaction style on hover */
 .random-btn:hover {
-    transform: scale(1.1) !important; 
+    filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.12));
 }
 
-/* Mobile responsive scaling */
+/* Mobile viewport layout protection */
 @media (max-width: 600px) {
-    .random-btn {
-        padding: 5px 10px;
-        font-size: 0.9rem;
-    }
     .random-btn img {
-        max-width: 60px;
+        max-width: 80px;
     }
 }
