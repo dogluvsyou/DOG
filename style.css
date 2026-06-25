@@ -16,24 +16,27 @@ body, html {
 }
 
 /* Header Area Rule styling */
+/* Find this section in your style.css and update the numbers: */
+
 #site-header {
     width: 100%;
-    height: 120px; /* Clean height profile allocated for title */
+    height: 250px; /* 1. INCREASE THIS: This is the height of the header box (was 120px) */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    z-index: 10; /* Ensures header mathematically stays on top tier layered */
+    padding: 20px;
+    z-index: 10;
     background: transparent;
 }
 
-/* Forces your Dalmatian 'DOG' text image full size comfortably */
 .header-logo {
     max-height: 100%;
     width: auto;
+    max-width: 90%; /* 2. ADD THIS: Allows the image to span across almost the whole screen width */
     object-fit: contain;
     background: transparent;
 }
+
 
 /* Main random content wrapper zone */
 #button-container {
