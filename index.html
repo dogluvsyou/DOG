@@ -11,31 +11,43 @@
     <div id="button-container"></div>
 
     <script>
-        // Configuration
-        const TOTAL_BUTTONS = 15; // Change this to add more or fewer buttons
+        // 1. RANDOM BACKGROUND COLOR SETUP
+        // You can tweak these exact hex codes to get the perfect shades
+        const bgColors = [
+            '#87CEEB', // Baby Blue
+            '#2ed573', // Clean Green
+            '#ff4757', // Vibrant Red
+            '#ffa502'  // Warm Yellow
+        ];
+        
+        // Pick one at random and apply it to the page background
+        const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
+        document.body.style.backgroundColor = randomBg;
+
+        // 2. RANDOM BUTTON GENERATOR
+        const TOTAL_BUTTONS = 15; 
         const container = document.getElementById('button-container');
         
-        // Array of text or emojis you want on your buttons
+        // Custom labels: You can use plain text, emojis, or even <img> tags for your images!
+        // Example with images: '<img src="your-image.png" alt="button">'
         const buttonLabels = ['🐶', 'Click Me', 'Woof!', 'DOG', '🐾', 'Bone', 'Play', '🐕', 'Love'];
 
         for (let i = 0; i < TOTAL_BUTTONS; i++) {
             const button = document.createElement('button');
             button.className = 'random-btn';
             
-            // Pick a random label from our list
+            // Pick a random label/image
             const randomLabel = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
             button.innerHTML = randomLabel;
 
-            // Generate random positions from -20% to 100% 
-            // (-20% allows buttons to sit up to 1/5th off the left/top edges)
+            // Positioning logic (-20% to 100% allows up to 1/5th overflow)
             const randomX = Math.floor(Math.random() * 120) - 20;
             const randomY = Math.floor(Math.random() * 120) - 20;
 
-            // Apply the random coordinates
             button.style.left = randomX + '%';
             button.style.top = randomY + '%';
 
-            // Optional: Randomize button sizes slightly for chaos
+            // Random sizes for variation
             const randomSize = Math.random() * (1.5 - 0.8) + 0.8;
             button.style.transform = `scale(${randomSize})`;
 
