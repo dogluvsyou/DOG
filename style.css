@@ -46,31 +46,29 @@ body, html {
 }
 
 /* Button & Canvas Base specs */
-/* Update this specific block inside your style.css */
-.random-btn {
+/.random-btn {
     position: absolute;
-    top: 0;             /* ADD THIS: Resets the base anchor point */
-    left: 0;            /* ADD THIS: Resets the base anchor point */
-    padding: 10px 20px;
+    top: 0;
+    left: 0;
+    padding: 0; /* Clear out old padding so text bounds stay tight */
     background: transparent;
     border: none;
     cursor: pointer;
-    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: filter 0.2s ease;
+    z-index: 5;
+    touch-action: manipulation; /* Optimizes mobile tap registration speeds */
 }
 
-
-/* Image/Emoji rendering constraints */
+/* Make sure the clickable area doesn't swallow half the layout screen */
 .random-btn img, .random-btn .emoji-btn {
-    max-width: 120px;
-    font-size: 4rem;
+    max-width: 110px;
+    font-size: 3.5rem;
     height: auto;
-    display: block;
-    background: transparent;
+    pointer-events: auto; /* Ensures tap execution directly through transparent gaps */
 }
+
 
 .random-btn:hover {
     filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.12));
