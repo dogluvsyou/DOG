@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Creative Sandbox Stylesheet
+   ========================================================================== */
+
+/* Design Tokens - change these colors/fonts to instantly shift the vibe */
+:root {
+    --bg-color: #fcfcfc;
+    --text-color: #111111;
+    --accent-color: #ff3366;
+    --card-bg: #f4f4f4;
+    --font-primary: system-ui, -apple-system, sans-serif;
+    --gap: 2rem;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header & Navigation */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.main-nav a:hover {
+    opacity: 0.6;
+}
+
+/* Structural Wrapper */
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Hero Frame */
+.hero-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-statement h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Scales smoothly across screen sizes */
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+/* Creative Asymmetrical Grid (Desktop Default) */
+.creative-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--gap);
+    margin-bottom: 8rem;
+}
+
+.grid-item {
+    background: var(--card-bg);
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Forcing an asymmetrical layout on desktop */
+.dynamic-1 { grid-column: span 7; }
+.dynamic-2 { grid-column: span 5; margin-top: 3rem; }
+.dynamic-3 { grid-column: span 8; grid-column-start: 3; }
+
+/* Product Display Area */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap);
+    margin-bottom: 8rem;
+}
+
+.product-card {
+    background: white;
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.product-visual {
+    background: var(--card-bg);
+    height: 350px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mock-buy-button {
+    background: var(--text-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Mobile First Fixes)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .main-nav a {
+        margin: 0 0.75rem;
+    }
+
+    /* Flattens the asymmetrical grid so it stacks beautifully on small mobile screens */
+    .creative-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dynamic-1, .dynamic-2, .dynamic-3 {
+        grid-column: span 1 !important;
+        margin-top: 0 !important;
+    }
+}
