@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <header id="site-header">
+        <img src="DogText.png" alt="DOG" class="header-logo">
+    </header>
+
     <div id="button-container"></div>
 
     <script>
@@ -16,7 +20,7 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. YOUR EXACT CAPITALIZED IMAGES (No Duplicates)
+        // 2. YOUR LABELS LIST
         const buttonLabels = [
             '<img src="Pug.png" alt="pug">',
             '<img src="Poodle.png" alt="poodle">',
@@ -31,20 +35,15 @@
         const container = document.getElementById('button-container');
         const placedButtons = [];
 
-        // Helper function to check if two buttons overlap by more than 10%
+        // Overlap safety inspector
         function doesOverlap(newX, newY, newSize, placedItems) {
-            // Estimate element radius based on size metric
-            const newRadius = (60 * newSize) * 0.9; // 0.9 allows a tight 10% overlap cushion
-
+            const newRadius = (60 * newSize) * 0.9; 
             for (let item of placedItems) {
                 const oldRadius = (60 * item.size) * 0.9;
-                
-                // Calculate distance between centers using Pythagorean theorem
                 const dx = newX - item.x;
                 const dy = newY - item.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                // If distance is less than the combined radii, they overlap too much
                 if (distance < (newRadius + oldRadius)) {
                     return true;
                 }
@@ -52,7 +51,7 @@
             return false;
         }
 
-        // Loop exactly through the array items with no duplicates
+        // Generate non-overlapping buttons safely below header area
         buttonLabels.forEach((imageHtml) => {
             const button = document.createElement('button');
             button.className = 'random-btn';
@@ -60,22 +59,21 @@
 
             let randomX, randomY, randomSize, randomRotation;
             let attempts = 0;
-            const maxAttempts = 200; // Prevents infinite loops if screen is too packed
+            const maxAttempts = 200;
 
-            // Keep rolling coordinates until a relatively open spot is found
             do {
-                // Keep boundaries inward (-5% to 85%) so giant scale fits cleanly
+                // X stays safely within wide bounds (-5% to 85%)
                 randomX = Math.floor(Math.random() * 90) - 5;
-                randomY = Math.floor(Math.random() * 90) - 5;
+                // FIX: Y starts at 5% and only goes up to 80% max, keeping items well clear of top header space
+                randomY = Math.floor(Math.random() * 75) + 5;
+                
                 randomSize = Math.random() * (3.5 - 2.2) + 2.2;
                 randomRotation = Math.floor(Math.random() * 90) - 45;
                 attempts++;
             } while (doesOverlap(randomX, randomY, randomSize, placedButtons) && attempts < maxAttempts);
 
-            // Save the coordinates to compare against the next dog
             placedButtons.push({ x: randomX, y: randomY, size: randomSize });
 
-            // Apply layout attributes
             button.style.left = randomX + '%';
             button.style.top = randomY + '%';
             button.style.transform = `scale(${randomSize}) rotate(${randomRotation}deg)`;
@@ -83,5 +81,3 @@
             container.appendChild(button);
         });
     </script>
-</body>
-</html>
