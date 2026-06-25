@@ -46,8 +46,11 @@ body, html {
 }
 
 /* Button & Canvas Base specs */
+/* Update this specific block inside your style.css */
 .random-btn {
     position: absolute;
+    top: 0;             /* ADD THIS: Resets the base anchor point */
+    left: 0;            /* ADD THIS: Resets the base anchor point */
     padding: 10px 20px;
     background: transparent;
     border: none;
@@ -58,6 +61,7 @@ body, html {
     justify-content: center;
     transition: filter 0.2s ease;
 }
+
 
 /* Image/Emoji rendering constraints */
 .random-btn img, .random-btn .emoji-btn {
