@@ -20,32 +20,50 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. YOUR THREE DOG IMAGES
+        // 2. EXPANDED DOG POOL (Will be randomly matched to the links)
         const dogImages = [
-            '<img src="Pug.png" alt="pug">',
-            '<img src="Poodle.png" alt="poodle">',
-            '<img src="Dalmation.png" alt="dalmation">',
-            '<img src="Germshep.png" alt="german shepard">',
-            '<img src="Greatdane.png" alt="great dane">',
+            '<img src="Pug.png" alt="German Shepherd">',
+            '<img src="Poodle.png" alt="Poodle">',
+            '<img src="Dalmation.png" alt="Dalmation">',
+            '<img src="Germshep.png" alt="German Shepherd">',
+            '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
+        // 3. FIXED BUTTON TEXT ORDER
+        const menuLinks = [
+            'SHOP',
+            'MAGAZINE',
+            'RADIO',
+            'YOUTUBE',
+            'PATREON'
+        ];
+
+        // Shuffle the dog pool completely so a different dog guards each link on refresh
         dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
 
-        dogImages.forEach((imageHtml) => {
+        // Loop through your 5 fixed menu links
+        menuLinks.forEach((textLabel, index) => {
             const row = document.createElement('div');
             row.className = 'dog-row';
 
             const button = document.createElement('button');
             button.className = 'dog-btn';
-            button.innerHTML = imageHtml;
 
-            // Generate slight base offsets
-            const randomTilt = Math.floor(Math.random() * 16) - 8;
-            const randomShift = Math.floor(Math.random() * 30) - 15;
+            // Pull a dog from our shuffled pool (falls back to a repeat if you add more links later)
+            const assignedDogHtml = dogImages[index % dogImages.length];
 
-            // FIX: Pass the base offsets into custom CSS variables so the animation knows where to start and wiggle from!
+            // Combine the random dog image directly on top of the fixed menu text label
+            button.innerHTML = `
+                ${assignedDogHtml}
+                <span class="btn-text">${textLabel}</span>
+            `;
+
+            // Controlled design shifts
+            const randomTilt = Math.floor(Math.random() * 12) - 6; // Tightened down slightly for better legibility 
+            const randomShift = Math.floor(Math.random() * 24) - 12;
+
             button.style.setProperty('--base-tilt', `${randomTilt}deg`);
             button.style.setProperty('--base-shift', `${randomShift}px`);
 
