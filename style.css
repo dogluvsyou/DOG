@@ -1,4 +1,4 @@
-/* Reset defaults and lock screen dimensions */
+/* Reset defaults and lock layout views */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,17 +9,40 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Keeps screen perfectly fixed while poodles peek off-edge */
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column; /* Stacks header vertically on top of canvas zone */
     transition: background-color 0.3s ease;
 }
 
+/* Header Area Rule styling */
+#site-header {
+    width: 100%;
+    height: 120px; /* Clean height profile allocated for title */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    z-index: 10; /* Ensures header mathematically stays on top tier layered */
+    background: transparent;
+}
+
+/* Forces your Dalmatian 'DOG' text image full size comfortably */
+.header-logo {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Main random content wrapper zone */
 #button-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    flex-grow: 1; /* Automatically occupies remaining space beneath header */
 }
 
-/* Stripped-down clickable canvas elements */
+/* Button & Canvas Base specs */
 .random-btn {
     position: absolute;
     padding: 10px 20px;
@@ -33,22 +56,28 @@ body, html {
     transition: filter 0.2s ease;
 }
 
-/* Image scaling rules */
-.random-btn img {
+/* Image/Emoji rendering constraints */
+.random-btn img, .random-btn .emoji-btn {
     max-width: 120px;
+    font-size: 4rem;
     height: auto;
     display: block;
     background: transparent;
 }
 
-/* Slight lift interaction style on hover */
 .random-btn:hover {
     filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.12));
 }
 
-/* Mobile viewport layout protection */
+/* Mobile Layout Safeguards */
 @media (max-width: 600px) {
+    #site-header {
+        height: 80px; /* Shrinks top strip for small mobile profiles */
+    }
     .random-btn img {
         max-width: 80px;
+    }
+    .random-btn .emoji-btn {
+        font-size: 2.5rem;
     }
 }
