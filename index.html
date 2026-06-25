@@ -11,8 +11,7 @@
     <div id="button-container"></div>
 
     <script>
-        // 1. RANDOM BACKGROUND COLOR SETUP
-        // You can tweak these exact hex codes to get the perfect shades
+        // 1. YOUR EXACT PASTEL BACKGROUND PALETTE
         const bgColors = [
             '#b8d7e9', // Baby Blue
             '#d1f3c5', // Clean Green
@@ -20,43 +19,37 @@
             '#fffbc8'  // Warm Yellow
         ];
         
-        // Pick one at random and apply it to the page background
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. RANDOM BUTTON GENERATOR
-        const TOTAL_BUTTONS = 15; 
+        // 2. POODLE BUTTON GENERATOR
+        const TOTAL_BUTTONS = 6; 
         const container = document.getElementById('button-container');
         
-        // Custom labels: You can use plain text, emojis, or even <img> tags for your images!
-        // Example with images: '<img src="your-image.png" alt="button">'
-        const buttonLabels = ['🐶', '<img src="IMG_6738.png"alt="poodle">', 
-            'Woof!', 
-            'DOG', 
-            '🐾', 
-            'Bone', 
-            'Play', 
-            '🐕', 
-            'Love'];
+        // Link to your uploaded poodle image
+        const buttonLabels = ['<img src="poodle.png" alt="poodle">'];
 
         for (let i = 0; i < TOTAL_BUTTONS; i++) {
             const button = document.createElement('button');
             button.className = 'random-btn';
             
-            // Pick a random label/image
-            const randomLabel = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
-            button.innerHTML = randomLabel;
+            button.innerHTML = buttonLabels[0];
 
-            // Positioning logic (-20% to 100% allows up to 1/5th overflow)
+            // Positioning matrix (-20% to 100% for that 1/5th off-screen look)
             const randomX = Math.floor(Math.random() * 120) - 20;
             const randomY = Math.floor(Math.random() * 120) - 20;
 
             button.style.left = randomX + '%';
             button.style.top = randomY + '%';
 
-            // Random sizes for variation
-            const randomSize = Math.random() * (1.5 - 0.8) + 0.8;
-            button.style.transform = `scale(${randomSize})`;
+            // Size variance (1.2x to 2.2x scale)
+            const randomSize = Math.random() * (2.2 - 1.2) + 1.2;
+            
+            // Random rotation angle from -45 to +45 degrees
+            const randomRotation = Math.floor(Math.random() * 90) - 45;
+
+            // Apply size and rotation together smoothly
+            button.style.transform = `scale(${randomSize}) rotate(${randomRotation}deg)`;
 
             container.appendChild(button);
         }
