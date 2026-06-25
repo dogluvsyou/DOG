@@ -38,7 +38,7 @@
         // Overlap safety inspector
         function doesOverlap(newX, newY, newSize, placedItems) {
             // FIX: Boosted base multiplier from 60 to 110 to account for massive visual sizes
-            const newRadius = (110 * newSize) * 0.9; 
+            const newRadius = (140 * newSize) * 0.9; 
             for (let item of placedItems) {
                 const oldRadius = (110 * item.size) * 0.9;
                 const dx = newX - item.x;
