@@ -9,15 +9,14 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #b8d7e9; /* Fallback background */
-    overflow-x: hidden; /* Prevents any side-scrolling entirely */
-    overflow-y: auto;   /* Allows smooth vertical scrolling if screens are short */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Header Constraints */
 #site-header {
     width: 100%;
-    height: 180px; /* Controlled top spacing */
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,11 +37,10 @@ body, html {
     flex-direction: column;
     width: 100%;
     padding: 20px 10px;
-    gap: 40px; /* Clean breathing room between rows */
+    gap: 40px;
     align-items: center;
 }
 
-/* Full-width container row */
 .dog-row {
     width: 100%;
     display: flex;
@@ -50,7 +48,7 @@ body, html {
     align-items: center;
 }
 
-/* COMPLETELY STRIPPED BUTTONS: No background, no grey box, no border */
+/* THE WIGGLING STRIPPED BUTTON */
 .dog-btn {
     background: none !important;
     border: none !important;
@@ -59,16 +57,22 @@ body, html {
     padding: 0 !important;
     margin: 0 !important;
     cursor: pointer;
-    width: 85%; /* Spans comfortably across phone viewports */
-    max-width: 400px; /* Keeps it from blowing up too huge on iPads/PCs */
+    width: 85%;
+    max-width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease, filter 0.2s ease;
-    -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
+    -webkit-tap-highlight-color: transparent;
+
+    /* Setup initial variables in case JS loads late */
+    --base-tilt: 0deg;
+    --base-shift: 0px;
+
+    /* 1. IDLE MOVEMENT: Runs a super lightweight CSS hardware wiggle looping every 4 seconds */
+    animation: gentleWiggle 4s ease-in-out infinite alternate;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
 }
 
-/* The actual image files fill out the clean button wrappers */
 .dog-btn img {
     width: 100%;
     height: auto;
@@ -77,18 +81,41 @@ body, html {
     background: transparent !important;
 }
 
-/* Interactive hover state */
+/* 2. HOVER/TAP INTERACTION: Lifts up and stands out when touched */
 .dog-btn:hover {
-    filter: drop-shadow(0px 12px 12px rgba(0,0,0,0.1));
+    filter: drop-shadow(0px 15px 15px rgba(0,0,0,0.15));
 }
 
-/* Mobile responsive scaling optimization */
+/* 3. ACTIVE CLICK/TAP PHYSICS: Quickly squishes down and pops violently when your finger presses it */
+.dog-btn:active {
+    transform: scale(0.9) rotate(calc(var(--base-tilt) + 5deg)) !important;
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));
+    transition: transform 0.05s ease; /* Fast response time for physical tap feel */
+}
+
+/* CSS MATH TIMELINE FOR IDLE WIGGLING */
+@keyframes gentleWiggle {
+    0% {
+        /* Start at your exact random JavaScript generation points */
+        transform: translateX(var(--base-shift)) rotate(var(--base-tilt)) scale(1);
+    }
+    50% {
+        /* Softly drift right and add 3 degrees of rotation mid-way */
+        transform: translateX(calc(var(--base-shift) + 8px)) rotate(calc(var(--base-tilt) + 3deg)) scale(1.02);
+    }
+    100% {
+        /* Softly drift left and subtract 2 degrees of rotation */
+        transform: translateX(calc(var(--base-shift) - 8px)) rotate(calc(var(--base-tilt) - 2deg)) scale(0.99);
+    }
+}
+
+/* Mobile responsive optimization */
 @media (max-width: 600px) {
     #site-header {
         height: 130px;
     }
     #button-stack {
-        gap: 25px; /* Tighter gap configuration for short mobile screens */
+        gap: 25px;
     }
     .dog-btn {
         width: 90%;
