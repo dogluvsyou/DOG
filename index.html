@@ -24,35 +24,28 @@
         const dogImages = [
             '<img src="Pug.png" alt="pug">',
             '<img src="Poodle.png" alt="poodle">',
-            '<img src="Dalmation.png" alt="dalmation">',
-            '<img src="Germshep.png" alt="german shepard">',
-            '<img src="Greatdane.png" alt="great dane">'
+            '<img src="Dalmation.png" alt="dalmation">'
         ];
 
-        // Shuffle the array order completely on every refresh
         dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
 
-        // Loop through the shuffled list and build the rows
         dogImages.forEach((imageHtml) => {
-            // Create a full-width row wrapper
             const row = document.createElement('div');
             row.className = 'dog-row';
 
-            // Create the borderless button
             const button = document.createElement('button');
             button.className = 'dog-btn';
             button.innerHTML = imageHtml;
 
-            // Generate slight organic chaos (tilt between -8 and +8 degrees)
+            // Generate slight base offsets
             const randomTilt = Math.floor(Math.random() * 16) - 8;
-            
-            // Subtle horizontal shift (left or right by up to 15 pixels)
             const randomShift = Math.floor(Math.random() * 30) - 15;
 
-            // Apply style effects directly to the inner button
-            button.style.transform = `translateX(${randomShift}px) rotate(${randomTilt}deg)`;
+            // FIX: Pass the base offsets into custom CSS variables so the animation knows where to start and wiggle from!
+            button.style.setProperty('--base-tilt', `${randomTilt}deg`);
+            button.style.setProperty('--base-shift', `${randomShift}px`);
 
             row.appendChild(button);
             container.appendChild(row);
