@@ -12,6 +12,13 @@ body, html {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
+
+    /* THE GRADIENT SHIFTER ENGINE: 
+       Blows the background size up to 400% so the animation loop has room to travel, 
+       and tells it to run a smooth 20-second shifting cycle infinitely.
+    */
+    background-size: 400% 400% !important;
+    animation: flowGradient 20s ease infinite alternate;
 }
 
 /* SHAPE CANVAS BACKGROUND WRAPPER */
@@ -113,16 +120,12 @@ body, html {
     white-space: nowrap;
     pointer-events: none; 
     
-    /* THE REAL SECRET: This layer acts EXCLUSIVELY as the massive white background outline shield */
     color: #ffffff;
     -webkit-text-stroke: 8px #ffffff; 
     filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.2));
 }
 
-/* THE FLOATING FOREGROUND CLONE layer: 
-   This automatically reads the data attribute, aligns directly on top, 
-   forces zero stroke, and showcases your raw vibrant color unhindered.
-*/
+/* THE FLOATING FOREGROUND CLONE */
 .btn-text::after {
     content: attr(data-text);
     position: absolute;
@@ -134,7 +137,7 @@ body, html {
     -webkit-text-stroke: 0px transparent !important;
 }
 
-/* THE FONT ROUTER ENGINE (Maps down to both the base shadow element and clone element) */
+/* THE FONT ROUTER ENGINE */
 .dog-btn[style*="--btn-font-token: comicsans"] .btn-text {
     font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif !important;
 }
@@ -190,7 +193,17 @@ body, html {
     -webkit-text-stroke: 0px transparent !important;
 }
 
-/* CSS Hardware Engine Animation Mapping Loop */
+/* GRADIENT BACKGROUND KEYFRAME TIMELINE: 
+   Tells the browser coordinates where to slide across the gradient map over time 
+   so the colors appear to swirl around smoothly.
+*/
+@keyframes flowGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* CSS Button Hardware Engine Animation Mapping Loop */
 @keyframes gentleWiggle {
     0% { transform: translateX(var(--base-shift)) rotate(var(--base-tilt)) scale(1); }
     50% { transform: translateX(calc(var(--base-shift) + 6px)) rotate(calc(var(--base-tilt) + 2deg)) scale(1.02); }
@@ -210,83 +223,10 @@ body, html {
     }
     .btn-text { 
         font-size: 1.6rem; 
-        -webkit-text-stroke: 6px #ffffff; /* Slightly tighter backdrop shield footprint on tiny phone viewports */
+        -webkit-text-stroke: 6px #ffffff; 
     }
     .tagline {
         font-size: 1.25rem;
         -webkit-text-stroke: 3px #ffffff;
     }
-    /* =========================================================
-   UNIVERSAL BRAND POP-UP MODAL OVERLAYS 
-========================================================= */
-.modal-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(17, 17, 17, 0.4); /* Dark translucent layer */
-    backdrop-filter: blur(4px); /* Blurs out the dogs in the background */
-    z-index: 9999; /* Forces box to top of stack */
-    display: none; 
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-/* Snaps open instantly when class is called */
-.modal-layer.active {
-    display: flex;
-}
-
-/* The actual sticker info box card inside the window */
-.modal-card {
-    position: relative;
-    background: #ffffff;
-    width: 100%;
-    max-width: 400px;
-    padding: 40px 25px 30px 25px;
-    border: 4px solid #111111;
-    box-shadow: 8px 8px 0px #111111; /* Brutalist street art offset shadow block */
-    border-radius: 0px; /* Sharp corners for that poster vibe */
-    text-align: center;
-    animation: popScale 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* X Close handle at top right */
-#modal-close-btn {
-    position: absolute;
-    top: 5px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    font-weight: 900;
-    cursor: pointer;
-    color: #111111;
-}
-
-/* Typography styles inside your custom pop-up spaces */
-#modal-content-area h2 {
-    font-family: Impact, sans-serif;
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-    color: #111111;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-#modal-content-area p {
-    font-family: system-ui, sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.4;
-    color: #444444;
-}
-
-/* Quick pop entrance animation */
-@keyframes popScale {
-    0% { transform: scale(0.85); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
 }
