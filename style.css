@@ -90,20 +90,27 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
     
-    /* Dynamic assignments injected straight from JavaScript lottery */
     font-family: var(--btn-font), sans-serif;
     color: var(--btn-color);
     
-    font-size: 2.3rem; /* Boosted base size since stroke is gone */
+    font-size: 2.3rem; 
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none; 
     
-    /* STROKE IS REMOVED: Replaced with a sharp 90s comic-book offset shadow for legibility */
-    -webkit-text-stroke: 0px transparent !important;
-    text-shadow: 4px 4px 0px #111111; 
+    /* 
+      WHITE OUTLINE SHADOW ENGINE: 
+      Creates a tight, high-contrast border shield completely around the letters 
+      so neon fonts stay perfectly legible over any fur color.
+    */
+    text-shadow: 
+        -2px -2px 0 #ffffff,  
+         2px -2px 0 #ffffff,
+        -2px  2px 0 #ffffff,
+         2px  2px 0 #ffffff,
+         3px  3px 4px rgba(0,0,0,0.2); /* Soft depth blur underneath */
 }
 
 /* Dynamic Interaction Profiles */
@@ -136,7 +143,12 @@ body, html {
         width: 85%; 
     }
     .btn-text { 
-        font-size: 1.7rem; 
-        text-shadow: 3px 3px 0px #111111; /* Slightly tighter text block shadows on phone screens */
+        font-size: 1.6rem; 
+        text-shadow: 
+            -1.5px -1.5px 0 #ffffff,  
+             1.5px -1.5px 0 #ffffff,
+            -1.5px  1.5px 0 #ffffff,
+             1.5px  1.5px 0 #ffffff,
+             2px  2px 3px rgba(0,0,0,0.2);
     }
 }
