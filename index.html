@@ -10,129 +10,107 @@
 
     <div id="shape-canvas"></div>
 
-    <header id="site-header"></header>
+    <header id="site-header">
+        <img src="IMG_6742.png" alt="DOG" class="header-logo">
+    </header>
 
     <div id="button-stack"></div>
 
-    <div id="popup-overlay" class="modal-layer">
-        <div class="modal-card">
-            <button id="modal-close-btn">&times;</button>
-            <div id="modal-content-area"></div>
-        </div>
-    </div>
-
-    <footer id="site-footer"></footer>
+    <footer id="site-footer">
+        <p class="tagline" data-text="your new best friend™">your new best friend&trade;</p>
+    </footer>
 
     <script>
-        // =========================================================
-        // 1. THE BRAND DASHBOARD (Change anything here to update everywhere)
-        // =========================================================
-        const BrandConfig = {
-            logoImage: "IMG_6742.png",
-            taglineText: "your new best friend™",
-            bgColors: ['#b8d7e9', '#d1f3c5', '#ffc9d7', '#fffbc8'],
-            textColors: ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'],
-            textFonts: ['comicsans', 'times', 'impact'],
-            
-            // YOUR LINKS DASHBOARD: Set what each button actually DOES here
-            menuLinks: [
-                { label: 'SWAG', type: 'link', value: 'https://yourshop.com' },
-                { label: 'PROPAGANDA', type: 'popup', value: '<h2>PROPAGANDA</h2><p>Welcome to the inner circle. Subversive dog culture starts here.</p>' },
-                { label: 'DOGTUBE', type: 'link', value: 'https://youtube.com' },
-                { label: 'BARK', type: 'popup', value: '<h2>BARK RADIO</h2><p>Audio player framework coming soon...</p>' },
-                { label: 'EXCLUSIVE', type: 'popup', value: '<h2>EXCLUSIVE</h2><p>Drop your email to get early access to the next cartridge release.</p>' }
-            ]
+        // 1. FOUR RANDOM BACKGROUND COLORS GENERATOR
+        // We pick 4 completely random pastel/muted shades so they blend together beautifully
+        const getRandomPastel = () => {
+            const r = Math.floor(Math.random() * 70) + 160; // 160-230 range keeps it pastel/light
+            const g = Math.floor(Math.random() * 70) + 160;
+            const b = Math.floor(Math.random() * 70) + 160;
+            return `rgb(${r}, ${g}, ${b})`;
         };
 
-        // =========================================================
-        // 2. INITIALIZE ENGINE & BACKGROUND
-        // =========================================================
-        const randomBg = BrandConfig.bgColors[Math.floor(Math.random() * BrandConfig.bgColors.length)];
-        document.body.style.backgroundColor = randomBg;
+        const c1 = getRandomPastel();
+        const c2 = getRandomPastel();
+        const c3 = getRandomPastel();
+        const c4 = getRandomPastel();
 
-        // Build Global Header & Footer from Dashboard
-        document.getElementById('site-header').innerHTML = `<img src="${BrandConfig.logoImage}" alt="DOG" class="header-logo">`;
-        document.getElementById('site-footer').innerHTML = `<p class="tagline" data-text="${BrandConfig.taglineText}">${BrandConfig.taglineText}</p>`;
+        // Inject the 4 random colors into a massive 400% gradient map on the body element
+        document.body.style.backgroundImage = `linear-gradient(-45deg, ${c1}, ${c2}, ${c3}, ${c4})`;
 
-        // =========================================================
-        // 3. BACKGROUND VECTOR GENERATOR (STARS & HEARTS)
-        // =========================================================
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (STARS & HEARTS)
         const canvas = document.getElementById('shape-canvas');
+        const shapeCount = 35; 
+
         const starPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
         const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
 
-        for (let i = 0; i < 35; i++) {
-            const size = Math.floor(Math.random() * 73) + 12;
+        for (let i = 0; i < shapeCount; i++) {
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const size = Math.floor(Math.random() * 73) + 12; 
+            const rotation = Math.floor(Math.random() * 360);
+            const opacity = (Math.random() * 0.35) + 0.15;
+
+            const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
+
             const svgElement = `
-                <svg style="position: absolute; left: ${Math.random() * 100}vw; top: ${Math.random() * 100}vh; width: ${size}px; height: ${size}px; transform: rotate(${Math.floor(Math.random() * 360)}deg); opacity: ${(Math.random() * 0.35) + 0.15};" viewBox="0 0 24 24">
-                    <path d="${Math.random() > 0.5 ? starPath : heartPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+                <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 24 24">
+                    <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
                 </svg>
             `;
             canvas.innerHTML += svgElement;
         }
 
-        // =========================================================
-        // 4. BUILD MENU & ATTACH ROUTER EVENTS
-        // =========================================================
+        // 3. VIBRANT FONT TEXT COLORS
+        const textColors = ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'];
+
+        // 4. FIXED FONTS LOTTERY
+        const textFonts = ['comicsans', 'times', 'impact'];
+
+        // 5. EXPANDED DOG POOL
         const dogImages = [
             '<img src="Pug.png" alt="Pug">',
             '<img src="Poodle.png" alt="Poodle">',
             '<img src="Dalmation.png" alt="Dalmation">',
             '<img src="Germshep.png" alt="German Shepherd">',
             '<img src="Greatdane.png" alt="Great Dane">'
-        ].sort(() => Math.random() - 0.5);
+        ];
+
+        // 6. NAV LINKS
+        const menuLinks = ['SWAG', 'PROPAGANDA', 'DOGTUBE', 'BARK', 'EXCLUSIVE'];
+
+        dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
 
-        BrandConfig.menuLinks.forEach((linkObj, index) => {
+        menuLinks.forEach((textLabel, index) => {
             const row = document.createElement('div');
             row.className = 'dog-row';
 
             const button = document.createElement('button');
             button.className = 'dog-btn';
+
+            const assignedDogHtml = dogImages[index % dogImages.length];
+
             button.innerHTML = `
-                ${dogImages[index % dogImages.length]}
-                <span class="btn-text" data-text="${linkObj.label}">${linkObj.label}</span>
+                ${assignedDogHtml}
+                <span class="btn-text" data-text="${textLabel}">${textLabel}</span>
             `;
 
-            // Set styling states randomly
-            button.style.setProperty('--base-tilt', `${Math.floor(Math.random() * 12) - 6}deg`);
-            button.style.setProperty('--base-shift', `${Math.floor(Math.random() * 24) - 12}px`);
-            button.style.setProperty('--btn-font-token', BrandConfig.textFonts[Math.floor(Math.random() * BrandConfig.textFonts.length)]);
-            button.style.setProperty('--btn-color', BrandConfig.textColors[Math.floor(Math.random() * BrandConfig.textColors.length)]);
+            const randomFont = textFonts[Math.floor(Math.random() * textFonts.length)];
+            const randomColor = textColors[Math.floor(Math.random() * textColors.length)];
 
-            // CLICK ROUTER: Checks the type from the dashboard and acts accordingly
-            button.addEventListener('click', () => {
-                if (linkObj.type === 'link') {
-                    window.open(linkObj.value, '_blank');
-                } else if (linkObj.type === 'popup') {
-                    openPopup(linkObj.value);
-                }
-            });
+            const randomTilt = Math.floor(Math.random() * 12) - 6; 
+            const randomShift = Math.floor(Math.random() * 24) - 12;
+
+            button.style.setProperty('--base-tilt', `${randomTilt}deg`);
+            button.style.setProperty('--base-shift', `${randomShift}px`);
+            button.style.setProperty('--btn-font-token', randomFont);
+            button.style.setProperty('--btn-color', randomColor);
 
             row.appendChild(button);
             container.appendChild(row);
-        });
-
-        // =========================================================
-        // 5. POP-UP CORE LOGIC ENGINE
-        // =========================================================
-        const overlay = document.getElementById('popup-overlay');
-        const contentArea = document.getElementById('modal-content-area');
-
-        function openPopup(htmlContent) {
-            contentArea.innerHTML = htmlContent;
-            overlay.classList.add('active');
-        }
-
-        function closePopup() {
-            overlay.classList.remove('active');
-            contentArea.innerHTML = '';
-        }
-
-        document.getElementById('modal-close-btn').addEventListener('click', closePopup);
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) closePopup(); // Closes modal if you click the background space
         });
     </script>
 </body>
