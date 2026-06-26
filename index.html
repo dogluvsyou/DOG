@@ -26,24 +26,22 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (FIXED PERFECT GEOMETRY)
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR
         const canvas = document.getElementById('shape-canvas');
         const shapeCount = 35; 
 
-        // Mathematically flawless, symmetrical 24x24 icon grids
         const starPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
         const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
 
         for (let i = 0; i < shapeCount; i++) {
             const posX = Math.random() * 100;
             const posY = Math.random() * 100;
-            const size = Math.floor(Math.random() * 73) + 12; // Tightened scaling parameters
+            const size = Math.floor(Math.random() * 73) + 12; // Dynamic wide sizing spectrum
             const rotation = Math.floor(Math.random() * 360);
             const opacity = (Math.random() * 0.35) + 0.15;
 
             const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
 
-            // Updated viewbox to 0 0 24 24 to lock in the clean structural shape proportions
             const svgElement = `
                 <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 24 24">
                     <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
@@ -55,12 +53,8 @@
         // 3. VIBRANT FONT TEXT COLORS
         const textColors = ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'];
 
-        // 4. RANDOM FONTS
-        const textFonts = [
-            '"Comic Sans MS", "Comic Sans", cursive, sans-serif',
-            '"Times New Roman", Times, serif',
-            'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
-        ];
+        // 4. FIXED FONTS LOTTERY (Cleaned up string tokens to fix the Comic Sans bug)
+        const textFonts = ['comicsans', 'times', 'impact'];
 
         // 5. EXPANDED DOG POOL
         const dogImages = [
@@ -100,7 +94,7 @@
 
             button.style.setProperty('--base-tilt', `${randomTilt}deg`);
             button.style.setProperty('--base-shift', `${randomShift}px`);
-            button.style.setProperty('--btn-font', randomFont);
+            button.style.setProperty('--btn-font-token', randomFont);
             button.style.setProperty('--btn-color', randomColor);
 
             row.appendChild(button);
