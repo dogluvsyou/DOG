@@ -55,7 +55,7 @@
         .zine-subtitle {
             font-family: "Times New Roman", Times, serif;
             font-style: italic;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #ff003c;
             margin-top: 15px;
             padding: 0 10px;
@@ -108,6 +108,35 @@
             letter-spacing: 2px;
         }
 
+        /* LOW OPACITY BACK TO TOP ARROW */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.15); /* Soft, barely-there background */
+            color: rgba(255, 255, 255, 0.4); /* Faded arrow */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9999;
+            opacity: 0; /* Hidden initially */
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Subtle glow on tap or hover */
+        #back-to-top:active {
+            background: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         @keyframes postFadeIn {
             0% { transform: scale(0.95); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
@@ -126,8 +155,10 @@
     <main id="propaganda-stream"></main>
     <div id="infinite-sentinel">generating transmission...</div>
 
+    <button id="back-to-top" aria-label="Scroll to top">↑</button>
+
     <script>
-        // CHRONOLOGICAL MASTER REPO MATRIX
+        // CHRONOLOGICAL MASTER POOL MATRIX (Fixed 2353 extension to .jpeg!)
         const memeImages = [
             'IMG_2353.jpeg',
             'IMG_3395.png',
@@ -148,11 +179,11 @@
 
         const stream = document.getElementById('propaganda-stream');
         const sentinel = document.getElementById('infinite-sentinel');
+        const topBtn = document.getElementById('back-to-top');
 
         const sizes = ['size-medium', 'size-large'];
         const alignments = ['align-left', 'align-right', 'align-center'];
 
-        // Chronological pointer variable tracking
         let currentImageIndex = 0;
 
         // =========================================================
@@ -161,12 +192,10 @@
         function generateMemeBlock() {
             let selectedImg;
 
-            // Step 1: Play through the images in order first
             if (currentImageIndex < memeImages.length) {
                 selectedImg = memeImages[currentImageIndex];
                 currentImageIndex++;
             } else {
-                // Step 2: Once pool is drained, drop into an infinite loop of random choices
                 selectedImg = memeImages[Math.floor(Math.random() * memeImages.length)];
             }
             
@@ -184,7 +213,7 @@
             stream.appendChild(postCard);
         }
 
-        // Initial Seed Batch: Displays the first 5 images in chronological order right away
+        // Initial Seed Batch
         for (let i = 0; i < 5; i++) {
             generateMemeBlock();
         }
@@ -195,7 +224,6 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Spawns next batch sequentially or chaotic fallback
                     setTimeout(() => {
                         generateMemeBlock();
                         generateMemeBlock();
@@ -206,6 +234,28 @@
         }, { rootMargin: '300px' }); 
 
         observer.observe(sentinel);
+
+        // =========================================================
+        // BACK-TO-TOP DYNAMIC ROUTER CONTROLS
+        // =========================================================
+        window.addEventListener('scroll', () => {
+            // Show the button only after scrolling past 400px down the page
+            if (window.scrollY > 400) {
+                topBtn.style.opacity = '1';
+                topBtn.style.visibility = 'visible';
+            } else {
+                topBtn.style.opacity = '0';
+                topBtn.style.visibility = 'hidden';
+            }
+        });
+
+        // Smoothly glide the viewport back to the top coordinates
+        topBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 
 </body>
