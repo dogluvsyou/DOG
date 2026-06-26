@@ -105,22 +105,36 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--btn-color);
     
-    font-size: 2.5rem; /* Slightly upsized for desktop spacing */
+    font-size: 2.5rem; 
     font-weight: 900;
     letter-spacing: 3px;
     text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none; 
     
-    /* DESKTOP FIXED STROKE: Thinned out to 3px so it leaves plenty of room for neon color fill */
-    -webkit-text-stroke: 3px #ffffff;
-    paint-order: stroke fill;
+    /* THE REAL SECRET: This layer acts EXCLUSIVELY as the massive white background outline shield */
+    color: #ffffff;
+    -webkit-text-stroke: 8px #ffffff; 
     filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.2));
 }
 
-/* THE FONT ROUTER ENGINE */
+/* THE FLOATING FOREGROUND CLONE layer: 
+   This automatically reads the data attribute, aligns directly on top, 
+   forces zero stroke, and showcases your raw vibrant color unhindered.
+*/
+.btn-text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--btn-color);
+    -webkit-text-stroke: 0px transparent !important;
+}
+
+/* THE FONT ROUTER ENGINE (Maps down to both the base shadow element and clone element) */
 .dog-btn[style*="--btn-font-token: comicsans"] .btn-text {
     font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif !important;
 }
@@ -155,16 +169,25 @@ body, html {
 }
 
 .tagline {
+    position: relative;
     font-family: "Times New Roman", Times, serif;
     font-size: 1.6rem;
     font-weight: 700;
     font-style: italic; 
-    color: #111111; 
     text-align: center;
     letter-spacing: 1px;
-    
-    -webkit-text-stroke: 2px #ffffff; /* Thinned slightly for desktop crispness */
-    paint-order: stroke fill;
+    color: #ffffff;
+    -webkit-text-stroke: 4px #ffffff;
+}
+
+.tagline::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: #111111;
+    -webkit-text-stroke: 0px transparent !important;
 }
 
 /* CSS Hardware Engine Animation Mapping Loop */
@@ -174,7 +197,7 @@ body, html {
     100% { transform: translateX(calc(var(--base-shift) - 6px)) rotate(calc(var(--base-tilt) - 1deg)) scale(0.99); }
 }
 
-/* MOBILE DISPLAY OVERRIDES (Where screens are smaller and pixels are denser) */
+/* Compact Smartphone Display Overrides */
 @media (max-width: 600px) {
     #site-header { 
         height: 130px; 
@@ -187,11 +210,10 @@ body, html {
     }
     .btn-text { 
         font-size: 1.6rem; 
-        /* MOBILE BALANCE: Kept thicker here because small screens need a stronger border barrier */
-        -webkit-text-stroke: 4.5px #ffffff; 
+        -webkit-text-stroke: 6px #ffffff; /* Slightly tighter backdrop shield footprint on tiny phone viewports */
     }
     .tagline {
         font-size: 1.25rem;
-        -webkit-text-stroke: 2.5px #ffffff;
+        -webkit-text-stroke: 3px #ffffff;
     }
 }
