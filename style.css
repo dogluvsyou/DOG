@@ -16,13 +16,13 @@ body, html {
 
 /* SHAPE CANVAS BACKGROUND WRAPPER */
 #shape-canvas {
-    position: fixed; /* Locks layer in position behind scrolling elements */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0; /* Forces layer behind everything else */
-    pointer-events: none; /* Allows taps to click right past them down to buttons */
+    z-index: 0; 
+    pointer-events: none; 
 }
 
 /* Header Base Grid Layout */
@@ -48,7 +48,7 @@ body, html {
 /* Full Width Stack Container */
 #button-stack {
     position: relative;
-    z-index: 1; /* Places cards over top of background vector stars */
+    z-index: 1; 
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -105,8 +105,6 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    font-family: var(--btn-font), sans-serif;
     color: var(--btn-color);
     
     font-size: 2.3rem; 
@@ -120,6 +118,20 @@ body, html {
     -webkit-text-stroke: 5.5px #ffffff;
     paint-order: stroke fill;
     filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.15));
+}
+
+/* THE FONT ROUTER ENGINE: 
+   Translates raw text tokens from JavaScript into fully compatible CSS family stacks 
+   bypassing browser inline quote injection glitches.
+*/
+.dog-btn[style*="--btn-font-token: comicsans"] .btn-text {
+    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif !important;
+}
+.dog-btn[style*="--btn-font-token: times"] .btn-text {
+    font-family: "Times New Roman", Times, serif !important;
+}
+.dog-btn[style*="--btn-font-token: impact"] .btn-text {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif !important;
 }
 
 /* Dynamic Interaction Profiles */
