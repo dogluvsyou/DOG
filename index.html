@@ -21,24 +21,12 @@
     </footer>
 
     <script>
-        // 1. FOUR RANDOM BACKGROUND COLORS GENERATOR
-        // We pick 4 completely random pastel/muted shades so they blend together beautifully
-        const getRandomPastel = () => {
-            const r = Math.floor(Math.random() * 70) + 160; // 160-230 range keeps it pastel/light
-            const g = Math.floor(Math.random() * 70) + 160;
-            const b = Math.floor(Math.random() * 70) + 160;
-            return `rgb(${r}, ${g}, ${b})`;
-        };
+        // 1. BACKGROUND PALETTE
+        const bgColors = ['#b8d7e9', '#d1f3c5', '#ffc9d7', '#fffbc8'];
+        const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
+        document.body.style.backgroundColor = randomBg;
 
-        const c1 = getRandomPastel();
-        const c2 = getRandomPastel();
-        const c3 = getRandomPastel();
-        const c4 = getRandomPastel();
-
-        // Inject the 4 random colors into a massive 400% gradient map on the body element
-        document.body.style.backgroundImage = `linear-gradient(-45deg, ${c1}, ${c2}, ${c3}, ${c4})`;
-
-        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (STARS & HEARTS)
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR
         const canvas = document.getElementById('shape-canvas');
         const shapeCount = 35; 
 
@@ -93,6 +81,7 @@
 
             const assignedDogHtml = dogImages[index % dogImages.length];
 
+            // Injects the clean text string into a pseudo-clonable data attribute container
             button.innerHTML = `
                 ${assignedDogHtml}
                 <span class="btn-text" data-text="${textLabel}">${textLabel}</span>
