@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <!-- Dynamic SVG shape backdrop layer -->
+    <div id="shape-canvas"></div>
+
     <header id="site-header">
         <img src="IMG_6742.png" alt="DOG" class="header-logo">
     </header>
@@ -26,17 +29,51 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. VIBRANT FONT TEXT COLORS
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (HEARTS & STARS)
+        const canvas = document.getElementById('shape-canvas');
+        const shapeCount = 35; // How many shapes you want scattered in the background
+
+        // Mathematical string blueprints for a perfect Star and perfect Heart vector map
+        const starPath = "M 10 0 L 13 7 L 20 7 L 15 11 L 17 18 L 10 14 L 3 18 L 5 11 L 0 7 L 7 7 Z";
+        const heartPath = "M 10,3 C 10,3 7.5,0 4,0 C 1,0 0,2.5 0,5.5 C 0,10 5,14 10,18.5 C 15,14 20,10 20,5.5 C 20,2.5 19,0 16,0 C 12.5,0 10,3 10,3 Z";
+
+        for (let i = 0; i < shapeCount; i++) {
+            // Randomize position across the viewport screen dimensions
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            
+            // Randomize size scale (from tiny 15px accents to big 50px shapes)
+            const size = Math.floor(Math.random() * 35) + 15;
+            
+            // Randomize subtle rotations so they look organic
+            const rotation = Math.floor(Math.random() * 360);
+            
+            // Randomize opacity so some hide deep in the background
+            const opacity = (Math.random() * 0.4) + 0.15;
+
+            // Coin flip to decide if this individual node gets a Star or a Heart path blueprint
+            const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
+
+            // Build out an individual vector template block
+            const svgElement = `
+                <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 20 20">
+                    <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            `;
+            canvas.innerHTML += svgElement;
+        }
+
+        // 3. VIBRANT FONT TEXT COLORS
         const textColors = ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'];
 
-        // 3. RANDOM FONTS
+        // 4. RANDOM FONTS
         const textFonts = [
             '"Comic Sans MS", "Comic Sans", cursive, sans-serif',
             '"Times New Roman", Times, serif',
             'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
         ];
 
-        // 4. EXPANDED DOG POOL
+        // 5. EXPANDED DOG POOL
         const dogImages = [
             '<img src="Pug.png" alt="Pug">',
             '<img src="Poodle.png" alt="Poodle">',
@@ -45,7 +82,7 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 5. NAV LINKS
+        // 6. NAV LINKS
         const menuLinks = ['SWAG', 'PROPAGANDA', 'DOGTUBE', 'BARK', 'EXCLUSIVE'];
 
         dogImages.sort(() => Math.random() - 0.5);
