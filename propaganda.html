@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROPAGANDA // DogLuvsYou</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #111111; /* Aggressive dark mode background */
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 30px 15px 100px 15px;
+            overflow-x: hidden;
+        }
+
+        /* BACK FEED HANDLE */
+        .back-home {
+            display: inline-block;
+            font-family: 'Impact', sans-serif;
+            font-size: 1.1rem;
+            color: #ff003c;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 3px solid #ff003c;
+            padding: 6px 12px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            box-shadow: 4px 4px 0px #ff003c;
+        }
+        .back-home:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #ff003c;
+        }
+
+        /* HEADER */
+        .zine-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .zine-title {
+            font-family: 'Impact', sans-serif;
+            font-size: 5rem;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 0.85;
+            color: #ffffff;
+            -webkit-text-stroke: 2px #ffffff;
+        }
+        .zine-subtitle {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #ff003c;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* ASYMMETRICAL MESSY STREAM */
+        #propaganda-stream {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            gap: 60px; /* Big gaps between massive images */
+        }
+
+        /* MASSIVE STICKER MEME POSTS */
+        .meme-post {
+            background: #1a1a1a;
+            border: 4px solid #ffffff;
+            box-shadow: 10px 10px 0px #ffffff; /* Heavy brutalist shadow block */
+            padding: 8px;
+            width: 100%; /* Default huge scale */
+            transition: transform 0.3s ease;
+        }
+
+        .meme-post img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%); /* Gives it an underground editorial zine tint */
+        }
+
+        /* MESSY PLACEMENT FILTERS 
+           These variables are generated randomly by JS on load to force the messy layout 
+        */
+        .meme-post.size-medium { max-width: 85%; }
+        .meme-post.size-large { max-width: 100%; }
+        
+        .meme-post.align-left { align-self: flex-start; }
+        .meme-post.align-right { align-self: flex-end; }
+        .meme-post.align-center { align-self: center; }
+
+        /* LOADING TRIGGER FOOTER BAR */
+        #infinite-sentinel {
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            font-family: monospace;
+            color: #444444;
+            margin-top: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes postFadeIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-home">← back to feed</a>
+
+    <header class="zine-header">
+        <h1 class="zine-title">PROPAGANDA</h1>
+        <p class="zine-subtitle">eternal scroll archive</p>
+    </header>
+
+    <main id="propaganda-stream"></main>
+
+    <div id="infinite-sentinel">generating transmission...</div>
+
+    <script>
+        // =========================================================
+        // 1. YOUR MEME IMAGE POOL
+        // Add all your custom meme filenames here!
+        // =========================================================
+        const memeImages = [
+            'Pug.png',      // Placeholder from your current assets
+            'Germshep.png', // Placeholder
+            'Poodle.png'    // Placeholder
+            // Add your 'meme1.png', 'meme2.jpg' files here as you make them!
+        ];
+
+        const stream = document.getElementById('propaganda-stream');
+        const sentinel = document.getElementById('infinite-sentinel');
+
+        // Layout attribute buckets to keep the generation messy and dynamic
+        const sizes = ['size-medium', 'size-large'];
+        const alignments = ['align-left', 'align-right', 'align-center'];
+
+        // =========================================================
+        // 2. STICKER FACTORY ENGINE
+        // Creates a randomized HTML frame block for an individual meme
+        // =========================================================
+        function generateMemeBlock() {
+            // Pick a random meme from your pool
+            const randomImg = memeImages[Math.floor(Math.random() * memeImages.length)];
+            
+            // Randomize layout parameters
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            const randomAlign = alignments[Math.floor(Math.random() * alignments.length)];
+            const randomTilt = (Math.random() * 5 - 2.5).toFixed(2); // Random angle between -2.5deg and 2.5deg
+
+            // Build out the dynamic node structure
+            const postCard = document.createElement('div');
+            postCard.className = `meme-post ${randomSize} ${randomAlign}`;
+            postCard.style.transform = `rotate(${randomTilt}deg)`;
+            postCard.style.animation = `postFadeIn 0.4s ease forwards`;
+
+            postCard.innerHTML = `<img src="${randomImg}" alt="propaganda allocation">`;
+            
+            stream.appendChild(postCard);
+        }
+
+        // Initial launch seed batch (Spawns 6 huge elements straight away on page load)
+        for (let i = 0; i < 6; i++) {
+            generateMemeBlock();
+        }
+
+        // =========================================================
+        // 3. INFINITE SCROLL HARDWARE ROUTER
+        // Uses the high-performance browser IntersectionObserver API 
+        // to watch the bottom sentinel and spawn batches forever
+        // =========================================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // When the user hits the bottom, spawn 4 more memes instantly
+                    setTimeout(() => {
+                        generateMemeBlock();
+                        generateMemeBlock();
+                        generateMemeBlock();
+                        generateMemeBlock();
+                    }, 150); // Small delay to allow fluid browser animation frames
+                }
+            });
+        }, { rootMargin: '200px' }); // Triggers 200px *before* the user even hits the absolute bottom
+
+        observer.observe(sentinel);
+    </script>
+
+</body>
+</html>
