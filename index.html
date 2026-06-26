@@ -15,12 +15,27 @@
     <div id="button-stack"></div>
 
     <script>
-        // 1. BACKGROUND PALETTE
+        // 1. BACKGROUND PALETTE (Pastel/Muted tones)
         const bgColors = ['#b8d7e9', '#d1f3c5', '#ffc9d7', '#fffbc8'];
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. EXPANDED DOG POOL
+        // 2. VIBRANT FONT TEXT COLOR PALETTE (Neon/High-saturation versions of the 4 colors)
+        const textColors = [
+            '#ff003c', // Ultra vibrant Red
+            '#0044ff', // Ultra vibrant Blue
+            '#00cc44', // Ultra vibrant Green
+            '#ffcc00'  // Ultra vibrant Yellow
+        ];
+
+        // 3. AVAILABLE FONTS FOR RANDOM LOTTERY
+        const textFonts = [
+            '"Comic Sans MS", "Comic Sans", cursive, sans-serif',
+            '"Times New Roman", Times, serif',
+            'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif'
+        ];
+
+        // 4. EXPANDED DOG POOL
         const dogImages = [
             '<img src="Pug.png" alt="Pug">',
             '<img src="Poodle.png" alt="Poodle">',
@@ -29,7 +44,7 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 3. FINAL CHEEKY LINK LIST (Updated to single-word "WOOFERS")
+        // 5. CHEEKY NAV LINKS ORDER (Featuring 'BARK'!)
         const menuLinks = ['SWAG', 'PROPAGANDA', 'DOGTUBE', 'BARK', 'EXCLUSIVE'];
 
         // Shuffle the dog pool completely
@@ -46,18 +61,25 @@
 
             const assignedDogHtml = dogImages[index % dogImages.length];
 
-            // Render
+            // Render elements
             button.innerHTML = `
                 ${assignedDogHtml}
                 <span class="btn-text">${textLabel}</span>
             `;
 
-            // Controlled design structural shifts
+            // Pick a random vibrant color and font stack independently for EACH individual button
+            const randomFont = textFonts[Math.floor(Math.random() * textFonts.length)];
+            const randomColor = textColors[Math.floor(Math.random() * textColors.length)];
+
+            // Controlled design shifts
             const randomTilt = Math.floor(Math.random() * 12) - 6; 
             const randomShift = Math.floor(Math.random() * 24) - 12;
 
+            // Pass everything to the CSS engine via custom properties
             button.style.setProperty('--base-tilt', `${randomTilt}deg`);
             button.style.setProperty('--base-shift', `${randomShift}px`);
+            button.style.setProperty('--btn-font', randomFont);
+            button.style.setProperty('--btn-color', randomColor);
 
             row.appendChild(button);
             container.appendChild(row);
