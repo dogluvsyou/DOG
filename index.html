@@ -8,17 +8,14 @@
 </head>
 <body>
 
-    <!-- Dynamic SVG shape backdrop layer -->
     <div id="shape-canvas"></div>
 
     <header id="site-header">
         <img src="IMG_6742.png" alt="DOG" class="header-logo">
     </header>
 
-    <!-- Clean vertical menu stack -->
     <div id="button-stack"></div>
 
-    <!-- The brand tagline at the bottom -->
     <footer id="site-footer">
         <p class="tagline">your new best friend</p>
     </footer>
@@ -29,35 +26,27 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (HEARTS & STARS)
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (FIXED PERFECT GEOMETRY)
         const canvas = document.getElementById('shape-canvas');
-        const shapeCount = 35; // How many shapes you want scattered in the background
+        const shapeCount = 35; 
 
-        // Mathematical string blueprints for a perfect Star and perfect Heart vector map
-        const starPath = "M 10 0 L 13 7 L 20 7 L 15 11 L 17 18 L 10 14 L 3 18 L 5 11 L 0 7 L 7 7 Z";
-        const heartPath = "M 10,3 C 10,3 7.5,0 4,0 C 1,0 0,2.5 0,5.5 C 0,10 5,14 10,18.5 C 15,14 20,10 20,5.5 C 20,2.5 19,0 16,0 C 12.5,0 10,3 10,3 Z";
+        // Mathematically flawless, symmetrical 24x24 icon grids
+        const starPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
+        const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
 
         for (let i = 0; i < shapeCount; i++) {
-            // Randomize position across the viewport screen dimensions
             const posX = Math.random() * 100;
             const posY = Math.random() * 100;
-            
-            // Randomize size scale (from tiny 15px accents to big 50px shapes)
-            const size = Math.floor(Math.random() * 35) + 15;
-            
-            // Randomize subtle rotations so they look organic
+            const size = Math.floor(Math.random() * 30) + 15; // Tightened scaling parameters
             const rotation = Math.floor(Math.random() * 360);
-            
-            // Randomize opacity so some hide deep in the background
-            const opacity = (Math.random() * 0.4) + 0.15;
+            const opacity = (Math.random() * 0.35) + 0.15;
 
-            // Coin flip to decide if this individual node gets a Star or a Heart path blueprint
             const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
 
-            // Build out an individual vector template block
+            // Updated viewbox to 0 0 24 24 to lock in the clean structural shape proportions
             const svgElement = `
-                <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 20 20">
-                    <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+                <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 24 24">
+                    <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
                 </svg>
             `;
             canvas.innerHTML += svgElement;
