@@ -5,8 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DogLuvsYou</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* FIXED BRUTALIST PAW MUSIC PLAYER (Top Left) */
+        #music-player {
+            position: fixed; 
+            top: 20px; 
+            left: 20px; 
+            z-index: 9999;
+        }
+        #paw-trigger {
+            background: #ffffff; 
+            border: 3px solid #111111; 
+            font-size: 24px; 
+            cursor: pointer; 
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 4px 4px 0px #111111;
+            transition: transform 0.1s, box-shadow 0.1s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #paw-trigger:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #111111;
+        }
+
+        /* LEASH DYNAMIC LINKTREE DRAWER */
+        .leash-drawer {
+            width: 90%;
+            max-width: 420px;
+            background: #ffffff;
+            border: 4px solid #111111;
+            box-shadow: 8px 8px 0px #111111;
+            margin-top: -20px; /* Snaps it right under the shifting dog cartridge */
+            margin-bottom: 20px;
+            padding: 20px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 12px;
+            z-index: 2;
+            animation: drawerSlideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+        }
+        .leash-drawer.active {
+            display: flex;
+        }
+        .leash-link {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #111111;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            font-family: Impact, sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid #111111;
+        }
+        .leash-link:active {
+            background: #ffffff;
+            color: #111111;
+        }
+        
+        /* Drawer Mailing List Input Interface */
+        .leash-mail-box {
+            display: flex;
+            margin-top: 5px;
+            border: 3px solid #111111;
+        }
+        .leash-mail-box input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            font-family: monospace;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .leash-mail-box button {
+            background: #0044ff; /* Vibrant Link Blue */
+            color: #ffffff;
+            border: none;
+            font-family: Impact, sans-serif;
+            padding: 0 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        @keyframes drawerSlideDown {
+            0% { transform: scaleY(0.8); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Integrated Paw Music Player Component Layer -->
+    <div id="music-player">
+        <button id="paw-trigger">🐾</button>
+        <audio id="audio-track" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div id="shape-canvas"></div>
 
@@ -14,6 +117,7 @@
         <img src="IMG_6742.png" alt="DOG" class="header-logo">
     </header>
 
+    <!-- Menu stack wrapper where rows get appended -->
     <div id="button-stack"></div>
 
     <footer id="site-footer">
@@ -65,14 +169,22 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 6. NAV LINKS
-        const menuLinks = ['SWAG', 'PROPAGANDA', 'DOGTUBE', 'BARK', 'EXCLUSIVE'];
+        // 6. BRAND NEW ALIGNED NAV MENU POOL
+        const menuLinks = ['SWAG', 'ASTRAY', 'DOGTUBE', 'BARK', 'LEASH'];
 
         dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
 
         menuLinks.forEach((textLabel, index) => {
+            // Container block that wraps the individual button and its possible sub-menu dropdown
+            const stackGroup = document.createElement('div');
+            stackGroup.className = 'button-group-wrapper';
+            stackGroup.style.width = '100%';
+            stackGroup.style.display = 'flex';
+            stackGroup.style.flexDirection = 'column';
+            stackGroup.style.alignItems = 'center';
+
             const row = document.createElement('div');
             row.className = 'dog-row';
 
@@ -97,25 +209,75 @@
             button.style.setProperty('--btn-font-token', randomFont);
             button.style.setProperty('--btn-color', randomColor);
 
+            row.appendChild(button);
+            stackGroup.appendChild(row);
+
+            // IF THE ELEMENT IS "LEASH", SPAWN THE LINKTREE ACCORDION INTERFACE DRAWER
+            if (textLabel === 'LEASH') {
+                const drawer = document.createElement('div');
+                drawer.id = 'leash-dropdown-drawer';
+                drawer.className = 'leash-drawer';
+                drawer.innerHTML = `
+                    <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#ff424d;">Patreon</a>
+                    <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#111111; border-color:#ff003c; color:#ff003c;">Hidden (18+)</a>
+                    <a href="https://telegram.org" target="_blank" class="leash-link" style="background:#0088cc;">Telegram</a>
+                    <a href="#" class="leash-link" style="background:#00c300;" onclick="alert('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat</a>
+                    
+                    <form onsubmit="alert('Subscribed!'); this.reset(); return false;" style="margin-top:5px;">
+                        <label style="font-family:Impact,sans-serif; color:#111111; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px;">Join Mailing List:</label>
+                        <div class="leash-mail-box">
+                            <input type="email" placeholder="your email..." required>
+                            <button type="submit">Join</button>
+                        </div>
+                    </form>
+                `;
+                
+                // Add age validation warning router handle to the adult link element
+                drawer.querySelector('#nsfw-gate-link').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (confirm("WARNING: This section contains 18+ content. Do you confirm you are of legal age to view this content?")) {
+                        window.open('https://yournsfwlink.com', '_blank'); // Swap with real URL later
+                    }
+                });
+
+                stackGroup.appendChild(drawer);
+            }
+
             // =========================================================
-            // CLICK EVENTS ENGINE (Wired up right here!)
+            // CORE INTERACTION ALIGNMENT ENGINE
             // =========================================================
             button.addEventListener('click', () => {
-                if (textLabel === 'PROPAGANDA') {
-                    // Jumps straight to your brand new infinite meme scroll page
+                if (textLabel === 'ASTRAY') {
                     window.location.href = 'propaganda.html';
-                } else if (textLabel === 'SWAG') {
-                    window.open('https://yourshop.com', '_blank');
+                } else if (textLabel === 'LEASH') {
+                    const targetDrawer = document.getElementById('leash-dropdown-drawer');
+                    targetDrawer.classList.toggle('active');
+                } else if (textLabel === 'SWAG' || textLabel === 'BARK') {
+                    alert('coming soon');
                 } else if (textLabel === 'DOGTUBE') {
                     window.open('https://youtube.com', '_blank');
-                } else {
-                    // Fallback alert for buttons without pages yet so they don't feel broken
-                    alert(`${textLabel} channel loading soon...`);
                 }
             });
 
-            row.appendChild(button);
-            container.appendChild(row);
+            container.appendChild(stackGroup);
+        });
+
+        // =========================================================
+        // 7. INTEGRATED PAW MUSIC HARDWARE CONTROLLER
+        // =========================================================
+        const paw = document.getElementById('paw-trigger');
+        const audio = document.getElementById('audio-track');
+
+        paw.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(err => console.log("Audio play blocked until user gesture sequence: ", err));
+                paw.innerText = '🔊';
+                paw.style.transform = 'scale(1.1)';
+            } else {
+                audio.pause();
+                paw.innerText = '🐾';
+                paw.style.transform = 'scale(1)';
+            }
         });
     </script>
 </body>
