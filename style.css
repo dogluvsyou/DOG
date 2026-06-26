@@ -36,7 +36,7 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px 10px 80px 10px;
+    padding: 20px 10px 40px 10px;
     gap: 40px;
     align-items: center;
 }
@@ -100,17 +100,10 @@ body, html {
     white-space: nowrap;
     pointer-events: none; 
     
-    /* 
-      WHITE OUTLINE SHADOW ENGINE: 
-      Creates a tight, high-contrast border shield completely around the letters 
-      so neon fonts stay perfectly legible over any fur color.
-    */
-    text-shadow: 
-        -2px -2px 0 #ffffff,  
-         2px -2px 0 #ffffff,
-        -2px  2px 0 #ffffff,
-         2px  2px 0 #ffffff,
-         3px  3px 4px rgba(0,0,0,0.2); /* Soft depth blur underneath */
+    /* THE GLITCH CURE: Medium-sized white stroke outline using hardware-safe pathways */
+    -webkit-text-stroke: 5.5px #ffffff;
+    paint-order: stroke fill;
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.15));
 }
 
 /* Dynamic Interaction Profiles */
@@ -122,6 +115,30 @@ body, html {
     transform: scale(0.9) rotate(calc(var(--base-tilt) + 4deg)) !important;
     filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));
     transition: transform 0.05s ease;
+}
+
+/* BRAND TAGLINE FOOTER CONTAINER */
+#site-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px 60px 10px; /* Safe padding spacing on mobile home bars */
+    background: transparent;
+}
+
+.tagline {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-style: italic; /* Gives it that classic editorial aesthetic */
+    color: #111111; /* Dark text fill */
+    text-align: center;
+    letter-spacing: 1px;
+    
+    /* Clean white stroke wrapper matching your look */
+    -webkit-text-stroke: 3px #ffffff;
+    paint-order: stroke fill;
 }
 
 /* CSS Hardware Engine Animation Mapping Loop */
@@ -144,11 +161,10 @@ body, html {
     }
     .btn-text { 
         font-size: 1.6rem; 
-        text-shadow: 
-            -1.5px -1.5px 0 #ffffff,  
-             1.5px -1.5px 0 #ffffff,
-            -1.5px  1.5px 0 #ffffff,
-             1.5px  1.5px 0 #ffffff,
-             2px  2px 3px rgba(0,0,0,0.2);
+        -webkit-text-stroke: 4.5px #ffffff; /* Slightly scales outline density down for phone resolutions */
+    }
+    .tagline {
+        font-size: 1.25rem;
+        -webkit-text-stroke: 2.5px #ffffff;
     }
 }
