@@ -83,26 +83,27 @@ body, html {
     pointer-events: none;
 }
 
-/* DEAD CENTER OVERLAID STICKER BADGE TEXT */
+/* DEAD CENTER OVERLAID TEXT STICKER STYLE */
 .btn-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     
-    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
+    /* Dynamic assignments injected straight from JavaScript lottery */
+    font-family: var(--btn-font), sans-serif;
+    color: var(--btn-color);
     
-    font-size: 1.8rem; /* Brought back up slightly now that the layout uses single words */
+    font-size: 2.3rem; /* Boosted base size since stroke is gone */
     font-weight: 900;
-    color: #ffffff; 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none; 
     
-    -webkit-text-stroke: 4.5px #111111;
-    paint-order: stroke fill; 
-    filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.15));
+    /* STROKE IS REMOVED: Replaced with a sharp 90s comic-book offset shadow for legibility */
+    -webkit-text-stroke: 0px transparent !important;
+    text-shadow: 4px 4px 0px #111111; 
 }
 
 /* Dynamic Interaction Profiles */
@@ -135,7 +136,7 @@ body, html {
         width: 85%; 
     }
     .btn-text { 
-        font-size: 1.35rem; 
-        -webkit-text-stroke: 1px #111111; 
+        font-size: 1.7rem; 
+        text-shadow: 3px 3px 0px #111111; /* Slightly tighter text block shadows on phone screens */
     }
 }
