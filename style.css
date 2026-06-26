@@ -11,10 +11,24 @@ body, html {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative;
+}
+
+/* SHAPE CANVAS BACKGROUND WRAPPER */
+#shape-canvas {
+    position: fixed; /* Locks layer in position behind scrolling elements */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* Forces layer behind everything else */
+    pointer-events: none; /* Allows taps to click right past them down to buttons */
 }
 
 /* Header Base Grid Layout */
 #site-header {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 180px;
     display: flex;
@@ -33,6 +47,8 @@ body, html {
 
 /* Full Width Stack Container */
 #button-stack {
+    position: relative;
+    z-index: 1; /* Places cards over top of background vector stars */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -100,7 +116,7 @@ body, html {
     white-space: nowrap;
     pointer-events: none; 
     
-    /* THE GLITCH CURE: Medium-sized white stroke outline using hardware-safe pathways */
+    /* Smooth, crisp medium white outline */
     -webkit-text-stroke: 5.5px #ffffff;
     paint-order: stroke fill;
     filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.15));
@@ -119,11 +135,13 @@ body, html {
 
 /* BRAND TAGLINE FOOTER CONTAINER */
 #site-footer {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 10px 60px 10px; /* Safe padding spacing on mobile home bars */
+    padding: 30px 10px 60px 10px; 
     background: transparent;
 }
 
@@ -131,12 +149,11 @@ body, html {
     font-family: "Times New Roman", Times, serif;
     font-size: 1.6rem;
     font-weight: 700;
-    font-style: italic; /* Gives it that classic editorial aesthetic */
-    color: #111111; /* Dark text fill */
+    font-style: italic; 
+    color: #111111; 
     text-align: center;
     letter-spacing: 1px;
     
-    /* Clean white stroke wrapper matching your look */
     -webkit-text-stroke: 3px #ffffff;
     paint-order: stroke fill;
 }
@@ -161,7 +178,7 @@ body, html {
     }
     .btn-text { 
         font-size: 1.6rem; 
-        -webkit-text-stroke: 4.5px #ffffff; /* Slightly scales outline density down for phone resolutions */
+        -webkit-text-stroke: 4.5px #ffffff; 
     }
     .tagline {
         font-size: 1.25rem;
