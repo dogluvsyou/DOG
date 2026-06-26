@@ -81,7 +81,6 @@
 
             const assignedDogHtml = dogImages[index % dogImages.length];
 
-            // Injects the clean text string into a pseudo-clonable data attribute container
             button.innerHTML = `
                 ${assignedDogHtml}
                 <span class="btn-text" data-text="${textLabel}">${textLabel}</span>
@@ -97,6 +96,23 @@
             button.style.setProperty('--base-shift', `${randomShift}px`);
             button.style.setProperty('--btn-font-token', randomFont);
             button.style.setProperty('--btn-color', randomColor);
+
+            // =========================================================
+            // CLICK EVENTS ENGINE (Wired up right here!)
+            // =========================================================
+            button.addEventListener('click', () => {
+                if (textLabel === 'PROPAGANDA') {
+                    // Jumps straight to your brand new infinite meme scroll page
+                    window.location.href = 'propaganda.html';
+                } else if (textLabel === 'SWAG') {
+                    window.open('https://yourshop.com', '_blank');
+                } else if (textLabel === 'DOGTUBE') {
+                    window.open('https://youtube.com', '_blank');
+                } else {
+                    // Fallback alert for buttons without pages yet so they don't feel broken
+                    alert(`${textLabel} channel loading soon...`);
+                }
+            });
 
             row.appendChild(button);
             container.appendChild(row);
