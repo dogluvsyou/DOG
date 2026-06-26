@@ -17,7 +17,7 @@
     <div id="button-stack"></div>
 
     <footer id="site-footer">
-        <p class="tagline">your new best friend&trade;</p>
+        <p class="tagline" data-text="your new best friend™">your new best friend&trade;</p>
     </footer>
 
     <script>
@@ -36,7 +36,7 @@
         for (let i = 0; i < shapeCount; i++) {
             const posX = Math.random() * 100;
             const posY = Math.random() * 100;
-            const size = Math.floor(Math.random() * 73) + 12; // Dynamic wide sizing spectrum
+            const size = Math.floor(Math.random() * 73) + 12; 
             const rotation = Math.floor(Math.random() * 360);
             const opacity = (Math.random() * 0.35) + 0.15;
 
@@ -53,7 +53,7 @@
         // 3. VIBRANT FONT TEXT COLORS
         const textColors = ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'];
 
-        // 4. FIXED FONTS LOTTERY (Cleaned up string tokens to fix the Comic Sans bug)
+        // 4. FIXED FONTS LOTTERY
         const textFonts = ['comicsans', 'times', 'impact'];
 
         // 5. EXPANDED DOG POOL
@@ -81,9 +81,10 @@
 
             const assignedDogHtml = dogImages[index % dogImages.length];
 
+            // Injects the clean text string into a pseudo-clonable data attribute container
             button.innerHTML = `
                 ${assignedDogHtml}
-                <span class="btn-text">${textLabel}</span>
+                <span class="btn-text" data-text="${textLabel}">${textLabel}</span>
             `;
 
             const randomFont = textFonts[Math.floor(Math.random() * textFonts.length)];
