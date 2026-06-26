@@ -6,104 +6,116 @@
     <title>DogLuvsYou</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* FIXED BRUTALIST PAW MUSIC PLAYER (Top Left) */
+        /* PURE CUTE FLOATING PAW (Top Left) */
         #music-player {
             position: fixed; 
-            top: 20px; 
-            left: 20px; 
+            top: 25px; 
+            left: 25px; 
             z-index: 9999;
         }
         #paw-trigger {
-            background: #ffffff; 
-            border: 3px solid #111111; 
-            font-size: 24px; 
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 30px; 
             cursor: pointer; 
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 4px 4px 0px #111111;
-            transition: transform 0.1s, box-shadow 0.1s;
+            transition: transform 0.1s ease;
             -webkit-tap-highlight-color: transparent;
         }
-        #paw-trigger:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #111111;
-        }
 
-        /* LEASH DYNAMIC LINKTREE DRAWER */
+        /* FLUFFY PASTEL LINKTREE DRAWER */
         .leash-drawer {
             width: 90%;
-            max-width: 420px;
-            background: #ffffff;
-            border: 4px solid #111111;
-            box-shadow: 8px 8px 0px #111111;
-            margin-top: -20px; /* Snaps it right under the shifting dog cartridge */
-            margin-bottom: 20px;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.5); /* Soft white glass pane */
+            backdrop-filter: blur(10px); /* Blurs out the stars underneath */
+            border-radius: 24px; /* Smooth rounded pill corners to match the dogs */
+            margin-top: -15px; 
+            margin-bottom: 25px;
             padding: 20px;
-            display: none; /* Hidden by default */
+            display: none; 
             flex-direction: column;
             gap: 12px;
             z-index: 2;
-            animation: drawerSlideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+            animation: drawerSlideDown 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
         }
         .leash-drawer.active {
             display: flex;
         }
+        
+        /* Pastel Accordion Pill Buttons */
         .leash-link {
             display: block;
             width: 100%;
-            padding: 12px;
-            background: #111111;
-            color: #ffffff;
+            padding: 14px;
+            color: #111111;
             text-align: center;
             text-decoration: none;
-            font-family: Impact, sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: 2px solid #111111;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border-radius: 16px;
+            border: none;
+            transition: transform 0.1s ease;
         }
         .leash-link:active {
-            background: #ffffff;
-            color: #111111;
+            transform: scale(0.97);
         }
         
-        /* Drawer Mailing List Input Interface */
+        /* Soft Mailing List Layout */
+        .leash-mail-form {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .leash-mail-form label {
+            font-family: system-ui, sans-serif;
+            font-weight: 700;
+            color: #444444;
+            font-size: 0.9rem;
+            padding-left: 5px;
+        }
         .leash-mail-box {
             display: flex;
-            margin-top: 5px;
-            border: 3px solid #111111;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 4px;
+            overflow: hidden;
         }
         .leash-mail-box input {
             flex: 1;
-            padding: 10px;
+            padding: 10px 14px;
             border: none;
-            font-family: monospace;
-            font-size: 0.9rem;
+            font-family: system-ui, sans-serif;
+            font-size: 1rem;
             outline: none;
+            background: transparent;
         }
         .leash-mail-box button {
-            background: #0044ff; /* Vibrant Link Blue */
+            background: #111111; 
             color: #ffffff;
             border: none;
-            font-family: Impact, sans-serif;
-            padding: 0 15px;
+            font-family: system-ui, sans-serif;
+            font-weight: 700;
+            padding: 0 20px;
+            border-radius: 10px;
             cursor: pointer;
-            text-transform: uppercase;
         }
 
         @keyframes drawerSlideDown {
-            0% { transform: scaleY(0.8); opacity: 0; }
-            100% { transform: scaleY(1); opacity: 1; }
+            0% { transform: translateY(-10px) scale(0.95); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Integrated Paw Music Player Component Layer -->
     <div id="music-player">
         <button id="paw-trigger">🐾</button>
         <audio id="audio-track" loop>
@@ -117,7 +129,6 @@
         <img src="IMG_6742.png" alt="DOG" class="header-logo">
     </header>
 
-    <!-- Menu stack wrapper where rows get appended -->
     <div id="button-stack"></div>
 
     <footer id="site-footer">
@@ -169,7 +180,7 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 6. BRAND NEW ALIGNED NAV MENU POOL
+        // 6. LINKS POOL (Updated ASTRAY placeholder name)
         const menuLinks = ['SWAG', 'ASTRAY', 'DOGTUBE', 'BARK', 'LEASH'];
 
         dogImages.sort(() => Math.random() - 0.5);
@@ -177,7 +188,6 @@
         const container = document.getElementById('button-stack');
 
         menuLinks.forEach((textLabel, index) => {
-            // Container block that wraps the individual button and its possible sub-menu dropdown
             const stackGroup = document.createElement('div');
             stackGroup.className = 'button-group-wrapper';
             stackGroup.style.width = '100%';
@@ -212,19 +222,21 @@
             row.appendChild(button);
             stackGroup.appendChild(row);
 
-            // IF THE ELEMENT IS "LEASH", SPAWN THE LINKTREE ACCORDION INTERFACE DRAWER
+            // SPECIAL INJECTION PROFILE: THE LEASH DRAWER (Soft Pastel Version)
             if (textLabel === 'LEASH') {
                 const drawer = document.createElement('div');
                 drawer.id = 'leash-dropdown-drawer';
                 drawer.className = 'leash-drawer';
+                
+                // We pick soft pastels that blend smoothly with the background palettes
                 drawer.innerHTML = `
-                    <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#ff424d;">Patreon</a>
-                    <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#111111; border-color:#ff003c; color:#ff003c;">Hidden (18+)</a>
-                    <a href="https://telegram.org" target="_blank" class="leash-link" style="background:#0088cc;">Telegram</a>
-                    <a href="#" class="leash-link" style="background:#00c300;" onclick="alert('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat</a>
+                    <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#ffc9d7;">Patreon</a>
+                    <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#fffbc8;">Hidden (18+)</a>
+                    <a href="https://telegram.org" target="_blank" class="leash-link" style="background:#b8d7e9;">Telegram</a>
+                    <a href="#" class="leash-link" style="background:#d1f3c5;" onclick="alert('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat</a>
                     
-                    <form onsubmit="alert('Subscribed!'); this.reset(); return false;" style="margin-top:5px;">
-                        <label style="font-family:Impact,sans-serif; color:#111111; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px;">Join Mailing List:</label>
+                    <form onsubmit="alert('Subscribed!'); this.reset(); return false;" class="leash-mail-form">
+                        <label>Join Mailing List</label>
                         <div class="leash-mail-box">
                             <input type="email" placeholder="your email..." required>
                             <button type="submit">Join</button>
@@ -232,11 +244,10 @@
                     </form>
                 `;
                 
-                // Add age validation warning router handle to the adult link element
                 drawer.querySelector('#nsfw-gate-link').addEventListener('click', (e) => {
                     e.preventDefault();
                     if (confirm("WARNING: This section contains 18+ content. Do you confirm you are of legal age to view this content?")) {
-                        window.open('https://yournsfwlink.com', '_blank'); // Swap with real URL later
+                        window.open('https://yournsfwlink.com', '_blank'); 
                     }
                 });
 
@@ -244,7 +255,7 @@
             }
 
             // =========================================================
-            // CORE INTERACTION ALIGNMENT ENGINE
+            // ACTION EVENT MANAGEMENT ROUTER
             // =========================================================
             button.addEventListener('click', () => {
                 if (textLabel === 'ASTRAY') {
@@ -263,16 +274,16 @@
         });
 
         // =========================================================
-        // 7. INTEGRATED PAW MUSIC HARDWARE CONTROLLER
+        // PAW MUSIC SYSTEM CONTROLLER
         // =========================================================
         const paw = document.getElementById('paw-trigger');
         const audio = document.getElementById('audio-track');
 
         paw.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().catch(err => console.log("Audio play blocked until user gesture sequence: ", err));
+                audio.play().catch(err => console.log("Playback delay handle activation context: ", err));
                 paw.innerText = '🔊';
-                paw.style.transform = 'scale(1.1)';
+                paw.style.transform = 'scale(1.15)';
             } else {
                 audio.pause();
                 paw.innerText = '🐾';
