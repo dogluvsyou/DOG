@@ -152,15 +152,27 @@
 </head>
 <body>
 
+      <!-- UPDATED: CHUNKY Y2K GLITTER FILTER SYSTEM -->
     <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
         <filter id="glitter-shimmer">
-            <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="4" result="glitterStatic">
-                <animate attributeName="seed" from="1" to="100" dur="1.2s" repeatCount="indefinite" />
+            <!-- Lowering baseFrequency to 0.15 makes the glitter flakes MUCH larger and distinct -->
+            <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="3" result="glitterStatic">
+                <!-- Slowed down significantly (from 1.2s to 3.5s) to let the glitter breathe and shimmer -->
+                <animate attributeName="seed" from="1" to="40" dur="3.5s" repeatCount="indefinite" />
             </feTurbulence>
-            <feColorMatrix type="matrix" values="1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 0.8 0" result="brightGlitter"/>
+            
+            <!-- This bumps up the contrast dramatically so the flakes look like shiny metallic foil -->
+            <feComponentTransfer in="glitterStatic" result="highContrastNoise">
+                <feFuncR type="linear" slope="2" intercept="-0.5"/>
+                <feFuncG type="linear" slope="2" intercept="-0.5"/>
+                <feFuncB type="linear" slope="2" intercept="-0.5"/>
+            </feComponentTransfer>
+
+            <feColorMatrix type="matrix" values="1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 0.9 0" result="brightGlitter"/>
             <feComposite operator="in" in2="SourceGraphic" />
         </filter>
     </svg>
+
 
     <a href="index.html" class="back-home">← HOME</a>
 
