@@ -194,21 +194,22 @@
         // MATHEMATICAL 4-POINT RETRO SPARKLE GENERATOR
         // =========================================================
         // =========================================================
-// HYPER-SPEED THIN-STROKE WHITE SPARKLE GENERATOR
+// =========================================================
+// REFINED CUTE WHITE SPARKLE GENERATOR (Slower & Fewer)
 // =========================================================
 const glitterBox = document.getElementById('glitter-container');
-const totalSparkles = 18; 
+const totalSparkles = 9; // Cut in half for a perfectly balanced, clean sparkle layer
 
 const sparklePath = "M12 2 C12 7.5 16.5 12 22 12 C16.5 12 12 16.5 12 22 C12 16.5 7.5 12 2 12 C7.5 12 12 7.5 12 2 Z";
 
 for (let i = 0; i < totalSparkles; i++) {
-    const size = Math.floor(Math.random() * 14) + 12; 
+    const size = Math.floor(Math.random() * 12) + 12; // 12px to 24px subtle sizes
     const posX = Math.random() * 95; 
     const posY = Math.random() * 85; 
     
-    // Keeping that rapid-fire MySpace strobe speed
-    const animDelay = (Math.random() * 1.0).toFixed(2); 
-    const animDuration = (Math.random() * 0.4 + 0.5).toFixed(2); 
+    // Eased tempo loop: Slowed down by 25% to let the sparkles float gracefully
+    const animDelay = (Math.random() * 1.5).toFixed(2); 
+    const animDuration = (Math.random() * 0.5 + 0.9).toFixed(2); 
 
     const sparkleSvg = `
         <svg class="retro-sparkle" style="
@@ -228,6 +229,7 @@ for (let i = 0; i < totalSparkles; i++) {
     `;
     glitterBox.innerHTML += sparkleSvg;
 }
+
 
 
         // =========================================================
