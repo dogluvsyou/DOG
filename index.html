@@ -121,7 +121,7 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 24px;
-            text-align: center; /* PERFECTLY CENTERED */
+            text-align: center;
             width: 85%;
             max-width: 340px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -159,14 +159,11 @@
 </head>
 <body>
 
-    <!-- Naked Paw Music Trigger Layer -->
-        <div id="music-player">
+    <div id="music-player">
         <button id="paw-trigger">🐾</button>
         <audio id="audio-track"></audio>
     </div>
 
-
-    <!-- Custom Center-Aligned Popup Structure -->
     <div id="cute-popup-overlay">
         <div class="cute-popup-box">
             <p class="cute-popup-text" id="popup-message-target"></p>
@@ -201,9 +198,10 @@
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
 
-        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR
+        // 2. BACKGROUND DYNAMIC VECTOR GENERATOR (FIXED: Uses a single string batch injection)
         const canvas = document.getElementById('shape-canvas');
         const shapeCount = 35; 
+        let canvasHtmlBatch = "";
 
         const starPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
         const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
@@ -214,16 +212,15 @@
             const size = Math.floor(Math.random() * 73) + 12; 
             const rotation = Math.floor(Math.random() * 360);
             const opacity = (Math.random() * 0.35) + 0.15;
-
             const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
 
-            const svgElement = `
+            canvasHtmlBatch += `
                 <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 24 24">
                     <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
                 </svg>
             `;
-            canvas.innerHTML += svgElement;
         }
+        canvas.innerHTML = canvasHtmlBatch;
 
         // 3. VIBRANT FONT TEXT COLORS
         const textColors = ['#ff003c', '#0044ff', '#00cc44', '#ffcc00'];
@@ -240,9 +237,8 @@
             '<img src="Greatdane.png" alt="Great Dane">'
         ];
 
-        // 6. NAV LINKS POOL (ASTRAY fully rebranded to KENNEL!)
+        // 6. NAV LINKS POOL
         const menuLinks = ['SWAG', 'KENNEL', 'DOGTUBE', 'BARK', 'LEASH'];
-
         dogImages.sort(() => Math.random() - 0.5);
 
         const container = document.getElementById('button-stack');
@@ -270,7 +266,6 @@
 
             const randomFont = textFonts[Math.floor(Math.random() * textFonts.length)];
             const randomColor = textColors[Math.floor(Math.random() * textColors.length)];
-
             const randomTilt = Math.floor(Math.random() * 12) - 6; 
             const randomShift = Math.floor(Math.random() * 24) - 12;
 
@@ -286,13 +281,11 @@
                 const drawer = document.createElement('div');
                 drawer.id = 'leash-dropdown-drawer';
                 drawer.className = 'leash-drawer';
-                
                 drawer.innerHTML = `
                     <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#ffc9d7;">Patreon</a>
                     <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#fffbc8;">Hidden (18+)</a>
                     <a href="https://telegram.org" target="_blank" class="leash-link" style="background:#b8d7e9;">Telegram</a>
                     <a href="#" class="leash-link" style="background:#d1f3c5;" onclick="openCutePopup('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat</a>
-                    
                     <form onsubmit="openCutePopup('Subscribed!'); this.reset(); return false;" class="leash-mail-form">
                         <label>Join Mailing List</label>
                         <div class="leash-mail-box">
@@ -301,20 +294,15 @@
                         </div>
                     </form>
                 `;
-                
                 drawer.querySelector('#nsfw-gate-link').addEventListener('click', (e) => {
                     e.preventDefault();
                     if (confirm("WARNING: This section contains 18+ content. Do you confirm you are of legal age to view this content?")) {
                         window.open('https://yournsfwlink.com', '_blank'); 
                     }
                 });
-
                 stackGroup.appendChild(drawer);
             }
 
-            // =========================================================
-            // ACTION ROUTING ENGINE (Updated with custom popup message)
-            // =========================================================
             button.addEventListener('click', () => {
                 if (textLabel === 'KENNEL') {
                     window.location.href = 'propaganda.html';
@@ -331,64 +319,58 @@
             container.appendChild(stackGroup);
         });
 
-      // =========================================================
-// RANDOMIZED TRACK JUKEBOX ENGINE
-// =========================================================
-// Add the exact filenames of your tracks here (All caps to match your repo!)
-const playlist = [
-    'COUP.MP3',
-    'moon.MP3',
-    'EGYEL.MP3'
-];
+        // =========================================================
+        // RANDOMIZED TRACK JUKEBOX ENGINE (FIXED CASE STRINGS & INTERFACE)
+        // =========================================================
+        // double check file names on your github repo! (e.g. moon.mp3 vs moon.MP3)
+        const playlist = [
+            'COUP.mp3',
+            'moon.mp3',
+            'EGYEL.mp3'
+        ];
 
-const paw = document.getElementById('paw-trigger');
-const audio = document.getElementById('audio-track');
+        const paw = document.getElementById('paw-trigger');
+        const audio = document.getElementById('audio-track');
 
-// 1. Pick a completely random song right out of the gate
-let currentTrackIndex = Math.floor(Math.random() * playlist.length);
+        let currentTrackIndex = Math.floor(Math.random() * playlist.length);
 
-function loadTrack(index) {
-    audio.src = playlist[index];
-    audio.preload = "auto";
-}
+        function loadTrack(index) {
+            audio.src = playlist[index];
+            audio.load();
+        }
 
-// Initialize the first random song choice
-loadTrack(currentTrackIndex);
+        // Initialize first random song setup
+        loadTrack(currentTrackIndex);
 
-// 2. Play / Pause Click Handler
-paw.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play()
-            .then(() => {
+        paw.addEventListener('click', () => {
+            if (audio.paused) {
+                // UI changes immediately so player responds instantly to user tap
                 paw.innerText = '🔊';
                 paw.style.transform = 'scale(1.15)';
-            })
-            .catch(err => {
-                console.log("Audio interface engagement required: ", err);
-            });
-    } else {
-        audio.pause();
-        paw.innerText = '🐾';
-        paw.style.transform = 'scale(1)';
-    }
-});
+                
+                audio.play().catch(err => {
+                    console.log("Audio interface engagement blocked: ", err);
+                    // Reset UI if system prevents it entirely
+                    paw.innerText = '🐾';
+                    paw.style.transform = 'scale(1)';
+                });
+            } else {
+                audio.pause();
+                paw.innerText = '🐾';
+                paw.style.transform = 'scale(1)';
+            }
+        });
 
-// 3. Auto-Shuffle Handler: When a song ends, pick a new random one and keep rolling
-audio.addEventListener('ended', () => {
-    let nextTrackIndex;
-    
-    // Prevent the engine from accidentally picking the exact same song twice in a row
-    do {
-        nextTrackIndex = Math.floor(Math.random() * playlist.length);
-    } while (playlist.length > 1 && nextTrackIndex === currentTrackIndex);
-    
-    currentTrackIndex = nextTrackIndex;
-    loadTrack(currentTrackIndex);
-    
-    // Autoplay the next track seamlessly
-    audio.play().catch(err => console.log("Shuffle progression delayed: ", err));
-});
-
+        audio.addEventListener('ended', () => {
+            let nextTrackIndex;
+            do {
+                nextTrackIndex = Math.floor(Math.random() * playlist.length);
+            } while (playlist.length > 1 && nextTrackIndex === currentTrackIndex);
+            
+            currentTrackIndex = nextTrackIndex;
+            loadTrack(currentTrackIndex);
+            audio.play().catch(err => console.log("Shuffle progression delayed: ", err));
+        });
     </script>
 </body>
 </html>
