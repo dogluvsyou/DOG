@@ -43,6 +43,8 @@
             text-align: center;
             margin-bottom: 60px;
         }
+        
+        /* THE GLITTERED KENNEL HEADER */
         .zine-title {
             font-family: 'Impact', sans-serif;
             font-size: 5rem;
@@ -50,8 +52,14 @@
             text-transform: uppercase;
             line-height: 0.85;
             color: #ffffff;
-            -webkit-text-stroke: 2px #ffffff;
+            
+            /* Applies your zero-kilobyte digital glitter mask */
+            filter: url(#glitter-shimmer); 
+            
+            /* Subtle text stroke underneath the glitter layer to hold the form shape */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
         }
+        
         .zine-subtitle {
             font-family: "Times New Roman", Times, serif;
             font-style: italic;
@@ -115,8 +123,8 @@
             right: 25px;
             width: 45px;
             height: 45px;
-            background: rgba(255, 255, 255, 0.15); /* Soft, barely-there background */
-            color: rgba(255, 255, 255, 0.4); /* Faded arrow */
+            background: rgba(255, 255, 255, 0.15); 
+            color: rgba(255, 255, 255, 0.4); 
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             font-size: 20px;
@@ -125,13 +133,12 @@
             justify-content: center;
             cursor: pointer;
             z-index: 9999;
-            opacity: 0; /* Hidden initially */
+            opacity: 0; 
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease;
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* Subtle glow on tap or hover */
         #back-to-top:active {
             background: rgba(255, 255, 255, 0.3);
             color: rgba(255, 255, 255, 0.8);
@@ -145,11 +152,21 @@
 </head>
 <body>
 
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <filter id="glitter-shimmer">
+            <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="4" result="glitterStatic">
+                <animate attributeName="seed" from="1" to="100" dur="1.2s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feColorMatrix type="matrix" values="1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 0.8 0" result="brightGlitter"/>
+            <feComposite operator="in" in2="SourceGraphic" />
+        </filter>
+    </svg>
+
     <a href="index.html" class="back-home">← HOME</a>
 
     <header class="zine-header">
         <h1 class="zine-title">KENNEL</h1>
-        <p class="zine-subtitle">lock me up before I make a mess</p>
+        <p class="zine-subtitle">lock me up before I hurt myself</p>
     </header>
 
     <main id="propaganda-stream"></main>
@@ -158,7 +175,6 @@
     <button id="back-to-top" aria-label="Scroll to top">↑</button>
 
     <script>
-        // CHRONOLOGICAL MASTER POOL MATRIX (Fixed 2353 extension to .jpeg!)
         const memeImages = [
             'IMG_2353.jpeg',
             'IMG_3395.png',
@@ -186,9 +202,6 @@
 
         let currentImageIndex = 0;
 
-        // =========================================================
-        // SEQUENCED / RANDOMIZED SPAWNER ENGINE
-        // =========================================================
         function generateMemeBlock() {
             let selectedImg;
 
@@ -218,9 +231,7 @@
             generateMemeBlock();
         }
 
-        // =========================================================
         // INFINITE SCROLL SYSTEM
-        // =========================================================
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -235,11 +246,8 @@
 
         observer.observe(sentinel);
 
-        // =========================================================
         // BACK-TO-TOP DYNAMIC ROUTER CONTROLS
-        // =========================================================
         window.addEventListener('scroll', () => {
-            // Show the button only after scrolling past 400px down the page
             if (window.scrollY > 400) {
                 topBtn.style.opacity = '1';
                 topBtn.style.visibility = 'visible';
@@ -249,7 +257,6 @@
             }
         });
 
-        // Smoothly glide the viewport back to the top coordinates
         topBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
