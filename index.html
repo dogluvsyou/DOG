@@ -332,21 +332,64 @@
             container.appendChild(stackGroup);
         });
 
-        // PAW SYSTEM CONTROLLER
-        const paw = document.getElementById('paw-trigger');
-        const audio = document.getElementById('audio-track');
+      // =========================================================
+// RANDOMIZED TRACK JUKEBOX ENGINE
+// =========================================================
+// Add the exact filenames of your tracks here (All caps to match your repo!)
+const playlist = [
+    'COUP.MP3',
+    'moon.MP3',
+    'EGYEL.MP3'
+];
 
-        paw.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().catch(err => console.log("Playback connection delay: ", err));
+const paw = document.getElementById('paw-trigger');
+const audio = document.getElementById('audio-track');
+
+// 1. Pick a completely random song right out of the gate
+let currentTrackIndex = Math.floor(Math.random() * playlist.length);
+
+function loadTrack(index) {
+    audio.src = playlist[index];
+    audio.preload = "auto";
+}
+
+// Initialize the first random song choice
+loadTrack(currentTrackIndex);
+
+// 2. Play / Pause Click Handler
+paw.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play()
+            .then(() => {
                 paw.innerText = '🔊';
                 paw.style.transform = 'scale(1.15)';
-            } else {
-                audio.pause();
-                paw.innerText = '🐾';
-                paw.style.transform = 'scale(1)';
-            }
-        });
+            })
+            .catch(err => {
+                console.log("Audio interface engagement required: ", err);
+            });
+    } else {
+        audio.pause();
+        paw.innerText = '🐾';
+        paw.style.transform = 'scale(1)';
+    }
+});
+
+// 3. Auto-Shuffle Handler: When a song ends, pick a new random one and keep rolling
+audio.addEventListener('ended', () => {
+    let nextTrackIndex;
+    
+    // Prevent the engine from accidentally picking the exact same song twice in a row
+    do {
+        nextTrackIndex = Math.floor(Math.random() * playlist.length);
+    } while (playlist.length > 1 && nextTrackIndex === currentTrackIndex);
+    
+    currentTrackIndex = nextTrackIndex;
+    loadTrack(currentTrackIndex);
+    
+    // Autoplay the next track seamlessly
+    audio.play().catch(err => console.log("Shuffle progression delayed: ", err));
+});
+
     </script>
 </body>
 </html>
