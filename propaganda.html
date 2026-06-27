@@ -193,35 +193,42 @@
         // =========================================================
         // MATHEMATICAL 4-POINT RETRO SPARKLE GENERATOR
         // =========================================================
-        const glitterBox = document.getElementById('glitter-container');
-        const totalSparkles = 14; // Number of stars dancing over the word
+        // =========================================================
+// HYPER-SPEED THIN-STROKE WHITE SPARKLE GENERATOR
+// =========================================================
+const glitterBox = document.getElementById('glitter-container');
+const totalSparkles = 18; 
 
-        // Clean mathematical path for an ultra-sharp 4-point flared Y2K star
-        const sparklePath = "M12 2 C12 7.5 16.5 12 22 12 C16.5 12 12 16.5 12 22 C12 16.5 7.5 12 2 12 C7.5 12 12 7.5 12 2 Z";
-        const sparkleColors = ['#ffffff', '#fffbc8', '#ffc9d7', '#b8d7e9']; // Mostly white/pastel mixes
+const sparklePath = "M12 2 C12 7.5 16.5 12 22 12 C16.5 12 12 16.5 12 22 C12 16.5 7.5 12 2 12 C7.5 12 12 7.5 12 2 Z";
 
-        for (let i = 0; i < totalSparkles; i++) {
-            const size = Math.floor(Math.random() * 16) + 12; // 12px to 28px stars
-            const posX = Math.random() * 95; // Scatter across length
-            const posY = Math.random() * 85; // Scatter across height
-            const animDelay = (Math.random() * 1.8).toFixed(2); // Staggered delay loop
-            const animDuration = (Math.random() * 0.8 + 1.2).toFixed(2); // Varied blinking tempos
-            const randomColor = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+for (let i = 0; i < totalSparkles; i++) {
+    const size = Math.floor(Math.random() * 14) + 12; 
+    const posX = Math.random() * 95; 
+    const posY = Math.random() * 85; 
+    
+    // Keeping that rapid-fire MySpace strobe speed
+    const animDelay = (Math.random() * 1.0).toFixed(2); 
+    const animDuration = (Math.random() * 0.4 + 0.5).toFixed(2); 
 
-            const sparkleSvg = `
-                <svg class="retro-sparkle" style="
-                    left: ${posX}%; 
-                    top: ${posY}%; 
-                    width: ${size}px; 
-                    height: ${size}px; 
-                    animation-delay: ${animDelay}s;
-                    animation-duration: ${animDuration}s;" 
-                    viewBox="0 0 24 24">
-                    <path d="${sparklePath}" fill="${randomColor}" />
-                </svg>
-            `;
-            glitterBox.innerHTML += sparkleSvg;
-        }
+    const sparkleSvg = `
+        <svg class="retro-sparkle" style="
+            left: ${posX}%; 
+            top: ${posY}%; 
+            width: ${size}px; 
+            height: ${size}px; 
+            animation-delay: ${animDelay}s;
+            animation-duration: ${animDuration}s;" 
+            viewBox="0 0 24 24">
+            <path d="${sparklePath}" 
+                  fill="#ffffff" 
+                  stroke="#111111" 
+                  stroke-width="1" 
+                  stroke-linejoin="round" />
+        </svg>
+    `;
+    glitterBox.innerHTML += sparkleSvg;
+}
+
 
         // =========================================================
         // STREAM CHRONOLOGICAL ALLOCATION INDEX
