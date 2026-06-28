@@ -74,9 +74,9 @@
 
         /* INLINE SPIKED COLLAR N CONTAINER */
         .collar-n-svg {
-            width: 3.5rem;  /* Explicitly matches the width profile of an Impact 'N' */
-            height: 4.45rem; /* Form-matched to snap flush to the baseline of the other text letters */
-            margin: 0 1px;  /* Compensates for negative letter-spacing tracking */
+            width: 3.5rem;  /* Matches Impact width profile */
+            height: 4.45rem; /* Form-matched to snap flush to baseline */
+            margin: 0 1px;  /* Compensates for letter-spacing tracking */
             display: inline-block;
             vertical-align: middle;
         }
@@ -196,27 +196,30 @@
 
     <header class="zine-header">
         <div class="title-glitter-wrapper" id="glitter-container">
-            <!-- Split text into inline elements to insert the custom SVG right at the second N position -->
             <h1 class="zine-title">
-                <span>KE</span>
-                <!-- Custom SVG 'N' featuring your exact red collar layout and gray spikes -->
+                <span>KENN</span>
                 <svg class="collar-n-svg" viewBox="0 0 74 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- The heavy, blocky raw font shape matching Impact structure -->
                     <path d="M0,0 L24,0 L50,62 L50,0 L74,0 L74,100 L50,100 L24,38 L24,100 L0,100 Z" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="miter"/>
                     
-                    <!-- Red Dog Collar Band positioned over the middle waist section -->
                     <rect x="-3" y="42" width="80" height="16" fill="#ff003c" rx="1"/>
                     
-                    <!-- Silver/Grey Spikes derived directly from your hand sketch layout -->
-                    <!-- Outermost left spike hanging off the edge -->
-                    <polygon points="-2,42 4,50 -2,58" fill="#a6a6a6" stroke="#111111" stroke-width="1"/>
-                    <!-- Inner collar spikes -->
-                    <polygon points="12,42 17,52 10,58" fill="#d4d4d4" stroke="#111111" stroke-width="1"/>
-                    <polygon points="27,42 32,52 25,58" fill="#d4d4d4" stroke="#111111" stroke-width="1"/>
-                    <polygon points="42,42 47,52 40,58" fill="#d4d4d4" stroke="#111111" stroke-width="1"/>
-                    <polygon points="57,42 62,52 55,58" fill="#d4d4d4" stroke="#111111" stroke-width="1"/>
-                    <!-- Outermost right spike hanging off the edge -->
-                    <polygon points="76,42 70,50 76,58" fill="#a6a6a6" stroke="#111111" stroke-width="1"/>
+                    <polygon points="-2,42 4,50 -2,50" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="-2,50 4,50 -2,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
+                    
+                    <polygon points="12,42 17,52 12,52" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="12,52 17,52 10,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
+                    
+                    <polygon points="27,42 32,52 27,52" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="27,52 32,52 25,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
+                    
+                    <polygon points="42,42 47,52 42,52" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="42,52 47,52 40,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
+                    
+                    <polygon points="57,42 62,52 57,52" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="57,52 62,52 55,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
+                    
+                    <polygon points="76,42 70,50 76,50" fill="#e0e0e0" stroke="#111111" stroke-width="0.5"/>
+                    <polygon points="76,50 70,50 76,58" fill="#888888" stroke="#111111" stroke-width="0.5"/>
                 </svg>
                 <span>EL</span>
             </h1>
