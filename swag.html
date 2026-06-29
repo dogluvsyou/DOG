@@ -62,7 +62,7 @@
         /* HERO LOOKBOOK DISPLAY BANNER */
         .hero-lookbook-wrap {
             max-width: 800px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
             width: 100%;
             border: 1px solid #000000;
         }
@@ -76,7 +76,7 @@
         /* TEXT VIBE SPLITTERS */
         .vibe-divider {
             text-align: center;
-            margin: 60px auto;
+            margin: 40px auto;
             max-width: 600px;
         }
         .vibe-divider .graphic-line {
@@ -96,36 +96,37 @@
             margin: 0 auto;
         }
 
-        /* ASCII SIDE-BY-SIDE GRID BOX */
+        /* ASCII CONTROLLER BOX - TIGHT MARGINS */
         .ascii-quote-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin: 60px auto;
+            gap: 10px;
+            margin: 25px auto;
             max-width: 1000px;
             padding: 0 10px;
         }
 
-        /* THE ASCII DOG RULES */
+        /* THE RE-ENGINEERED PERFECT ASCII DOG */
         .dog-ascii {
             font-family: monospace;
-            font-size: 9px;
-            line-height: 1.1;
+            font-size: 8px;
+            line-height: 1.15;
             color: #000000;
             white-space: pre;
             user-select: none;
+            text-align: left;
         }
 
         .ascii-quote-text {
             font-family: "Times New Roman", Times, serif;
             font-style: italic;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
             color: #000000;
             font-weight: bold;
-            min-width: 220px;
+            margin: 5px 0;
         }
 
         /* SHOP FEED ARCHITECTURE GRID */
@@ -134,7 +135,7 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 30px;
         }
 
         .product-row-grid {
@@ -230,7 +231,6 @@
             color: #ffffff;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             
-            /* Polka Dot CSS Generation Engine */
             background-color: #ffb6c1;
             background-image: radial-gradient(#ffffff 15%, transparent 16%),
                               radial-gradient(#ffffff 15%, transparent 16%);
@@ -246,7 +246,7 @@
         .intermission-lookbook {
             width: 100%;
             max-width: 700px;
-            margin: 40px auto;
+            margin: 30px auto 20px auto;
             border: 1px solid #000000;
         }
         .intermission-lookbook img {
@@ -277,7 +277,7 @@
             opacity: 1;
         }
 
-        /* Desktop media query expansions */
+        /* Tablet/Desktop Rescale Adjustments */
         @media(min-width: 700px) {
             .product-row-grid {
                 grid-template-columns: 1fr 1fr 1fr;
@@ -287,7 +287,8 @@
         @media(min-width: 850px) {
             .ascii-quote-container {
                 flex-direction: row;
-                gap: 30px;
+                gap: 25px;
+                margin: 35px auto;
             }
             .dog-ascii {
                 font-size: 11px;
@@ -319,7 +320,7 @@
         <!-- DROP BLOCK 1 -->
         <div class="product-row-grid">
             
-            <!-- Item 1: Barking at Nothing Shorts -->
+            <!-- Item 1 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Germshep.png" alt="item">
@@ -337,7 +338,7 @@
                 </div>
             </div>
 
-            <!-- Item 2: Heavy Chewer Collar -->
+            <!-- Item 2 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
@@ -364,7 +365,7 @@
         <!-- DROP BLOCK 2 -->
         <div class="product-row-grid">
             
-            <!-- Item 3: Postman Paranoia Tee -->
+            <!-- Item 3 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
@@ -382,7 +383,7 @@
                 </div>
             </div>
 
-            <!-- Item 4: Zoomies Work Jacket -->
+            <!-- Item 4 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Pug.png" alt="item">
@@ -407,17 +408,18 @@
             <img src="Germshep.png" alt="Lookbook Middle Page Scan Insertion">
         </div>
 
-        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 -->
+        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 (REFINED DOGS, NO MARGIN BLOAT, NO 'SK') -->
         <div class="ascii-quote-container">
             <!-- Left Dog -->
             <pre class="dog-ascii">
-     ____
-    /    \
- __/  __  \ .     ._""_._
- \_   \   |  \-I     /   ) \_')
-   "" )  ` " \       \  (( `""`
-     _Y     ,        .'7 / |
- (___,__/ /...-_`   (_/_/  sk
+       ____
+      /    \
+  ___/  __  \__      __II II II__
+ /   \     \   \--' /        ) \--' )
+ \_  /  /  |   | \  \       ((  `""`
+   ""  ""  )   |_/   \      / |
+         _Y    ,      .' 7 /  |
+  (_____,__/  / ... -_ (_/_/ /
             </pre>
 
             <!-- Center Quote -->
@@ -425,20 +427,21 @@
 
             <!-- Right Dog -->
             <pre class="dog-ascii">
-     ____
-    /    \
- __/  __  \ .     ._""_._
- \_   \   |  \-I     /   ) \_')
-   "" )  ` " \       \  (( `""`
-     _Y     ,        .'7 / |
- (___,__/ /...-_`   (_/_/  sk
+       ____
+      /    \
+  ___/  __  \__      __II II II__
+ /   \     \   \--' /        ) \--' )
+ \_  /  /  |   | \  \       ((  `""`
+   ""  ""  )   |_/   \      / |
+         _Y    ,      .' 7 /  |
+  (_____,__/  / ... -_ (_/_/ /
             </pre>
         </div>
 
         <!-- DROP BLOCK 3 -->
         <div class="product-row-grid">
             
-            <!-- Item 5: Vet Bill Trucker Hat -->
+            <!-- Item 5 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
@@ -453,7 +456,7 @@
                 </div>
             </div>
 
-            <!-- Item 6: Emotional Support Bag -->
+            <!-- Item 6 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
@@ -492,7 +495,6 @@
             itemsInBag += 1;
             cartCountText.innerText = itemsInBag;
 
-            // Flash toast notification system
             toast.innerText = `🐾 ${itemName.toUpperCase()} ADDED 🐾`;
             toast.classList.add('visible');
             
