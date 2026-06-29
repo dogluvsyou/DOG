@@ -121,7 +121,6 @@
             position: relative;
         }
 
-        /* NEW INTERNAL SCANLINE LOAD SCREEN LAYER */
         .static-overlay {
             position: absolute;
             top: 10px; left: 10px; right: 10px; bottom: 10px;
@@ -143,7 +142,6 @@
             letter-spacing: 2px;
         }
         
-        /* Triggered strictly inside the boundaries of the window box */
         .xp-window.switching .static-overlay {
             opacity: 1;
             pointer-events: auto;
@@ -459,15 +457,11 @@
             iframe.src = `https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`;
         });
 
-        // FIXED UN-SHIFTING TRANSITION TIMELINE
         function processVideoSelection(videoId, title, uploader) {
             activeVideoId = videoId;
             playerWindow.style.display = 'block';
-
-            // Instantly apply dark loading cover over the video square ONLY
             playerWindow.classList.add('switching');
 
-            // Swap metadata assets smoothly while screen is covered
             setTimeout(() => {
                 iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 displayTitle.innerText = title;
@@ -478,12 +472,10 @@
                 window.history.pushState({ path: newUrl }, '', newUrl);
             }, 200);
 
-            // Execute focus scroll position alignment
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
 
-            // Drop the cover box revealing the freshly rendered player
             setTimeout(() => {
                 playerWindow.classList.remove('switching');
             }, 550);
@@ -504,7 +496,7 @@
             iframe.src = "";
             playerWindow.style.display = 'none';
             const clearUrl = window.location.pathname;
-            window.history.history.pushState({ path: clearUrl }, '', clearUrl);
+            window.history.pushState({ path: clearUrl }, '', clearUrl);
         }
 
         function toggleLike(btn) {
