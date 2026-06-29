@@ -124,4 +124,296 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom:
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .item-photo-anchor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .item-meta {
+            text-align: center;
+            padding: 0 5px;
+        }
+        .item-title {
+            font-size: 1.05rem;
+            font-weight: normal;
+            color: #111111;
+            margin-bottom: 4px;
+        }
+        .item-price {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #444444;
+            margin-bottom: 10px;
+        }
+
+        /* SIZE MATRIX CHIPS */
+        .size-selector-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .size-chip {
+            font-size: 0.75rem;
+            font-family: "Tahoma", sans-serif;
+            color: #0000ee;
+            text-decoration: underline;
+            cursor: pointer;
+            user-select: none;
+        }
+        .size-chip.sold-out {
+            color: #aa0000;
+            text-decoration: line-through;
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .size-chip.selected {
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+            border: 1px solid #000000;
+            padding: 1px 4px;
+        }
+
+        /* PRAYING STYLE BUTTON INVERSION */
+        .btn-add-cart {
+            width: 100%;
+            max-width: 160px;
+            margin: 0 auto;
+            background: #3a8080;
+            color: #ffffff;
+            border: 1px solid #285a5a;
+            font-family: "Times New Roman", serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            padding: 6px 0;
+            cursor: pointer;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-add-cart:active {
+            background: #285a5a;
+        }
+
+        /* INLINE COMPACT LOOKBOOK INTERMISSIONS */
+        .intermission-lookbook {
+            width: 100%;
+            max-width: 700px;
+            margin: 40px auto;
+            border: 1px solid #000000;
+        }
+        .intermission-lookbook img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* MINI BOTTOM NOTIFICATION SYSTEM TOAST */
+        .cart-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            white-space: nowrap;
+        }
+        .cart-toast.visible {
+            opacity: 1;
+        }
+
+        @media(min-width: 700px) {
+            .product-row-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="shop-nav-bar">
+        <a href="index.html" class="back-home">← Home</a>
+        <div class="cart-status" onclick="alert('Checkout system currently running updates!')">Bag (<span id="cart-count">0</span>)</div>
+    </nav>
+
+    <header class="brand-header">
+        <h1>dog</h1>
+    </header>
+
+    <section class="hero-lookbook-wrap">
+        <img src="Pug.png" alt="Featured Drop Cover Preview">
+    </section>
+
+    <main class="shop-stream-container">
+
+        <div class="product-row-grid">
+            
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Germshep.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">Amen Break Athletic Shorts</h2>
+                    <div class="item-price">$89.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip" onclick="selectSize(this)">XS</span>
+                        <span class="size-chip" onclick="selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
+                        <span class="size-chip sold-out">Large</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('Amen Break Athletic Shorts')">Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Poodle.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">Amen Break Leather Belt</h2>
+                    <div class="item-price">$78.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip" onclick="selectSize(this)">S</span>
+                        <span class="size-chip" onclick="selectSize(this)">M</span>
+                        <span class="size-chip" onclick="selectSize(this)">L</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('Amen Break Leather Belt')">Add To Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="vibe-divider">
+            <span class="graphic-line">† ═════════ †</span>
+            <p>“Music is what feeling sounds like”</p>
+        </div>
+
+        <div class="product-row-grid">
+            
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Dalmation.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">Marching Band Polo Shirt</h2>
+                    <div class="item-price">$120.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip sold-out">XS</span>
+                        <span class="size-chip" onclick="selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
+                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('Marching Band Polo Shirt')">Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Pug.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">Marching Band Short Set</h2>
+                    <div class="item-price">$89.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip" onclick="selectSize(this)">XS</span>
+                        <span class="size-chip" onclick="selectSize(this)">Small</span>
+                        <span class="size-chip sold-out">Medium</span>
+                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('Marching Band Short Set')">Add To Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="intermission-lookbook">
+            <img src="Germshep.png" alt="Lookbook Middle Page Scan Insertion">
+        </div>
+
+        <div class="vibe-divider">
+            <span class="graphic-line">❀ ━━━━━━━━━━━━━━ ❀</span>
+            <p>The ones you know and love are back!</p>
+        </div>
+
+        <div class="product-row-grid">
+            
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Poodle.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">Financial Crisis Destroyed Hoodie</h2>
+                    <div class="item-price">$180.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip sold-out">XS</span>
+                        <span class="size-chip" onclick="selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
+                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('Financial Crisis Destroyed Hoodie')">Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-photo-anchor">
+                    <img src="Dalmation.png" alt="item">
+                </div>
+                <div class="item-meta">
+                    <h2 class="item-title">I Am Love Structural Bag</h2>
+                    <div class="item-price">$250.00 USD</div>
+                    <div class="size-selector-row">
+                        <span class="size-chip" onclick="selectSize(this)">O/S</span>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToBag('I Am Love Structural Bag')">Add To Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="cart-toast" id="shop-toast">🐾 ITEM ADDED TO BAG 🐾</div>
+
+    <script>
+        let itemsInBag = 0;
+        const cartCountText = document.getElementById('cart-count');
+        const toast = document.getElementById('shop-toast');
+
+        // CHIP SELECTION HANDLER
+        function selectSize(element) {
+            // Target elements strictly within parent container matrix row
+            const siblingChips = element.parentElement.querySelectorAll('.size-chip');
+            siblingChips.forEach(chip => chip.classList.remove('selected'));
+            
+            // Mark targeted chip active
+            element.classList.add('selected');
+        }
+
+        // SHOPPING UTILITY BAG FUNCTION
+        function addToBag(itemName) {
+            itemsInBag += 1;
+            cartCountText.innerText = itemsInBag;
+
+            // Flash toast notification system
+            toast.innerText = `🐾 ${itemName.toUpperCase()} ADDED 🐾`;
+            toast.classList.add('visible');
+            
+            setTimeout(() => {
+                toast.classList.remove('visible');
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
