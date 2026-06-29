@@ -69,7 +69,6 @@
             display: inline-block;
         }
 
-        /* DYNAMIC WINDOW BOX */
         .xp-window {
             background: #1c1c1c;
             border: 2px solid #ff9900;
@@ -78,11 +77,6 @@
             margin: 0 auto 40px auto;
             width: 100%;
             position: relative;
-        }
-
-        /* RETRO GLITCH TRIGGER STYLES */
-        .xp-window.glitching {
-            animation: crt-static 0.4s ease-out;
         }
 
         .xp-title-bar {
@@ -127,18 +121,32 @@
             position: relative;
         }
 
-        /* CRT BLINK COVER PANEL */
-        .crt-shutter {
+        /* NEW INTERNAL SCANLINE LOAD SCREEN LAYER */
+        .static-overlay {
             position: absolute;
-            top: 10px; left: 10px;
-            right: 10px; bottom: 10px;
-            background: #ffffff;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            background: rgba(0, 0, 0, 0.9);
             z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             pointer-events: none;
+            transition: opacity 0.15s ease;
         }
-        .xp-window.glitching .crt-shutter {
-            animation: shutter-flash 0.35s ease-out;
+        .static-overlay::before {
+            content: "LOADING CODEC...";
+            font-family: monospace;
+            font-weight: bold;
+            color: #ff9900;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        
+        /* Triggered strictly inside the boundaries of the window box */
+        .xp-window.switching .static-overlay {
+            opacity: 1;
+            pointer-events: auto;
         }
         
         .video-responsive-wrap {
@@ -212,7 +220,6 @@
             color: #ffffff;
         }
 
-        /* POPUP SYSTEM COMPONENT TOAST DISPLAY */
         .share-toast {
             font-size: 0.8rem;
             color: #00ff66;
@@ -312,23 +319,6 @@
             color: #777777;
         }
 
-        /* RETRO WINDOW GLITCH ANIMATIONS */
-        @keyframes crt-static {
-            0% { transform: scaleY(1) cubic-bezier(0.215, 0.610, 0.355, 1); filter: brightness(1); }
-            30% { transform: scaleY(0.02) scaleX(1.1); filter: brightness(3); background: #ffffff; }
-            50% { transform: scaleY(0.001) scaleX(0); filter: brightness(5); }
-            70% { transform: scaleY(0.4) scaleX(0.9); filter: skewX(15deg) contrast(2); }
-            100% { transform: scaleY(1) skewX(0deg); filter: brightness(1); }
-        }
-
-        @keyframes shutter-flash {
-            0% { opacity: 0; }
-            20% { opacity: 0.9; background: #ff9900; }
-            40% { opacity: 0.4; background: #00ffff; }
-            60% { opacity: 0.8; background: #ffffff; }
-            100% { opacity: 0; }
-        }
-
         @media(min-width: 650px) {
             .suggestions-grid {
                 display: grid;
@@ -340,7 +330,7 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-nav">← Back to System Desktop</a>
+    <a href="index.html" class="back-nav">← Home</a>
 
     <header class="dogtube-header">
         <div class="dogtube-logo">
@@ -357,7 +347,7 @@
         </div>
         
         <div class="video-stage">
-            <div class="crt-shutter"></div>
+            <div class="static-overlay"></div>
             <div class="video-responsive-wrap">
                 <iframe 
                     id="main-video-iframe"
@@ -446,7 +436,6 @@
         const appTitle = document.getElementById('player-app-title');
         const toast = document.getElementById('toast-notify');
 
-        // VIDEO STORAGE DATABASE DIRECTORY MAP FOR ROUTING INCOMING LINKS
         const videoDatabase = {
             'konkQxEZe9w': { title: 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', uploader: 'DogLuvsYou' },
             'Bwhr1VSSTms': { title: 'PUG CORRUPT DETECTOR EMULATION', uploader: 'System_Operator' },
@@ -454,14 +443,12 @@
             'vVU72tfPUwk': { title: 'POODLE METRIC ANALYSIS LOOP', uploader: 'Zine_Core' }
         };
 
-        let activeVideoId = 'konkQxEZe9w'; // Defaults to your core target
+        let activeVideoId = 'konkQxEZe9w';
 
-        // READ OVER INCOMING LINK ON INITIAL BOOT UP
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const routeId = urlParams.get('v');
 
-            // If a valid shared ID is present in the browser bar, snap it immediately
             if (routeId && videoDatabase[routeId]) {
                 activeVideoId = routeId;
                 displayTitle.innerText = videoDatabase[routeId].title;
@@ -469,44 +456,39 @@
                 appTitle.innerText = `DogTube Player - [Streaming: ${videoDatabase[routeId].uploader}]`;
             }
             
-            // Render target into iframe anchor source point
             iframe.src = `https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`;
         });
 
-        // ANIMATED TRANSITION ENGINE
+        // FIXED UN-SHIFTING TRANSITION TIMELINE
         function processVideoSelection(videoId, title, uploader) {
             activeVideoId = videoId;
             playerWindow.style.display = 'block';
 
-            // Trigger the retro screen flicker classes
-            playerWindow.classList.remove('glitching');
-            void playerWindow.offsetWidth; // Force CSS engine reboot update loop
-            playerWindow.classList.add('glitching');
+            // Instantly apply dark loading cover over the video square ONLY
+            playerWindow.classList.add('switching');
 
-            // Hold execution for 150ms during the flash peak to swap content cleanly
+            // Swap metadata assets smoothly while screen is covered
             setTimeout(() => {
                 iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 displayTitle.innerText = title;
                 displayUploader.innerText = uploader;
                 appTitle.innerText = `DogTube Player - [Streaming: ${uploader}]`;
 
-                // Update system browser path state without forcing a heavy page reload
                 const newUrl = `${window.location.pathname}?v=${videoId}`;
                 window.history.pushState({ path: newUrl }, '', newUrl);
-            }, 150);
+            }, 200);
 
-            // Smooth scroll up after transition completes
+            // Execute focus scroll position alignment
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 250);
+            }, 300);
 
-            // Strip out CSS animation modifiers when loop concludes
+            // Drop the cover box revealing the freshly rendered player
             setTimeout(() => {
-                playerWindow.classList.remove('glitching');
-            }, 450);
+                playerWindow.classList.remove('switching');
+            }, 550);
         }
 
-        // GENERATING THE UNIVERSAL SHARE LINK WITH INJECTED PARAMETERS
         function copyShareLink() {
             const shareUrl = `${window.location.origin}${window.location.pathname}?v=${activeVideoId}`;
             
@@ -514,16 +496,15 @@
                 toast.classList.add('show');
                 setTimeout(() => { toast.classList.remove('show'); }, 2000);
             }).catch(err => {
-                console.error('Could not execute clip layout pass: ', err);
+                console.error('Could not copy link: ', err);
             });
         }
 
         function closePlayer() {
             iframe.src = "";
             playerWindow.style.display = 'none';
-            // Clear URL variables when app terminal closes
             const clearUrl = window.location.pathname;
-            window.history.pushState({ path: clearUrl }, '', clearUrl);
+            window.history.history.pushState({ path: clearUrl }, '', clearUrl);
         }
 
         function toggleLike(btn) {
