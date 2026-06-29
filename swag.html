@@ -44,10 +44,34 @@
         }
 
         /* BRAND MAIN HEADER CONTAINER */
+           /* BRAND MAIN HEADER CONTAINER */
         .brand-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* Reduced to bring lookbook banner up */
+            padding: 0 10px;
+            width: 100%;
         }
+
+        /* RE-ENGINEERED SCALING LOGO FOR "IMG_6857.png" */
+        .brand-header .brand-logo-img {
+            width: 100%;
+            max-width: 180px; /* Restricts giant growth on mobile */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+        /* Desktop upgrade: let the texture pop slightly more when screen expands */
+        @media(min-width: 750px) {
+            .brand-header {
+                margin-bottom: 35px;
+            }
+            .brand-header .brand-logo-img {
+                max-width: 260px; 
+            }
+        }
+
         .brand-header h1 {
             font-family: "Times New Roman", Times, serif;
             font-size: 4.5rem;
