@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,10 +8,9 @@
         * {
             box-sizing: border-box;
             margin: 0;
-            padding: 0; 
+            padding: 0;
         }
 
-        /* 2005 WINDOWS XP DESKTOP MEETS BLACKED-OUT HUB VIBE */
         body {
             background-color: #0b0b0b;
             background-image: 
@@ -24,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* HARDCORE RETRO BACK BUTTON */
         .back-nav {
             display: inline-block;
             font-family: 'Arial Black', sans-serif;
@@ -43,7 +41,6 @@
             border-color: #ff9900;
         }
 
-        /* HEADER DESIGN AREA */
         .dogtube-header {
             display: flex;
             justify-content: center;
@@ -51,7 +48,6 @@
             margin-bottom: 35px;
         }
 
-        /* THE CHUNKY MOCK LOGO BLOCK */
         .dogtube-logo {
             display: flex;
             align-items: center;
@@ -64,7 +60,7 @@
             user-select: none;
         }
         .dogtube-logo span {
-            background: #ff9900; /* Classic high-contrast Hub warning orange */
+            background: #ff9900; 
             color: #000000;
             padding: 2px 8px;
             border-radius: 6px;
@@ -73,7 +69,6 @@
             display: inline-block;
         }
 
-        /* WINDOWS XP WRAPPER CONTAINER */
         .xp-window {
             background: #1c1c1c;
             border: 2px solid #ff9900;
@@ -83,7 +78,6 @@
             width: 100%;
         }
 
-        /* XP TITLE BAR */
         .xp-title-bar {
             background: linear-gradient(180deg, #ff9900 0%, #cc7a00 100%);
             padding: 6px 10px;
@@ -101,32 +95,33 @@
         }
         .xp-window-controls {
             display: flex;
-            gap: 4px;
         }
-        .xp-btn {
-            width: 16px;
-            height: 16px;
+        .xp-btn-close {
+            width: 18px;
+            height: 18px;
             background: #111111;
             border: 1px solid #000000;
-            color: #ff9900;
-            font-size: 10px;
+            color: #ff3333;
+            font-size: 11px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
         }
+        .xp-btn-close:active {
+            background: #ff3333;
+            color: #111111;
+        }
 
-        /* MAIN VIDEO CONTAINER EMBED BODY */
         .video-stage {
             padding: 10px;
             background: #000000;
         }
         
-        /* ASPECT RATIO LOCKER (Responsive 16:9) */
         .video-responsive-wrap {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 dynamic fallback scale */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             background: #050505;
@@ -141,7 +136,6 @@
             border: none;
         }
 
-        /* XP MEDIA METADATA INFO PANEL */
         .video-meta-panel {
             padding: 15px;
             border-top: 1px solid #292929;
@@ -171,7 +165,6 @@
             font-size: 1.05rem;
         }
 
-        /* CHUNKY INTERACTION HUB SELECTION ROW */
         .action-button-row {
             display: flex;
             gap: 10px;
@@ -188,14 +181,14 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            user-select: none;
         }
-        .action-btn:active {
+        .action-btn:active, .action-btn.active {
             background: #333333;
             border-color: #ff9900;
             color: #ffffff;
         }
 
-        /* RETRO FEED SUGGESTIONS GRID SYSTEM */
         .feed-headline-section {
             font-family: "Arial Black", sans-serif;
             font-size: 1.1rem;
@@ -216,7 +209,6 @@
             width: 100%;
         }
 
-        /* INDIVIDUAL 2005 SIDEBAR LISTING CARD */
         .video-row-card {
             display: flex;
             background: #141414;
@@ -226,6 +218,7 @@
             text-decoration: none;
             color: #eeeeee;
             cursor: pointer;
+            user-select: none;
         }
         .video-row-card:active {
             border-color: #ff9900;
@@ -283,7 +276,6 @@
             color: #777777;
         }
 
-        /* RESPONSIVE UPGRADE VIEWPORTS */
         @media(min-width: 650px) {
             .suggestions-grid {
                 display: grid;
@@ -295,32 +287,30 @@
 </head>
 <body>
 
-    <!-- RETRO DEPLOY NAVIGATION -->
     <a href="index.html" class="back-nav">← Back to System Desktop</a>
 
-    <!-- CUSTOM THEMED HEAD HEADER -->
     <header class="dogtube-header">
         <div class="dogtube-logo">
             DOG<span>TUBE</span>
         </div>
     </header>
 
-    <!-- WINDOWS XP PLAYER APP BOX -->
-    <main class="xp-window">
+    <!-- MAIN MEDIA PLAYER HOUSING CONTAINER -->
+    <main class="xp-window" id="player-window">
         <div class="xp-title-bar">
-            <div class="xp-title-text">DogTube Media Player v1.04</div>
+            <div class="xp-title-text" id="player-app-title">DogTube Media Player v1.04</div>
             <div class="xp-window-controls">
-                <div class="xp-btn">_</div>
-                <div class="xp-btn">□</div>
-                <div class="xp-btn" style="color: #ff3333;">X</div>
+                <!-- Clean functional functional exit button -->
+                <div class="xp-btn-close" onclick="closePlayer()" title="Close Player">X</div>
             </div>
         </div>
         
         <div class="video-stage">
             <div class="video-responsive-wrap">
-                <!-- Embedded the core raw transmission link loop cleanly -->
+                <!-- Preloaded target initialization container -->
                 <iframe 
-                    src="https://www.youtube.com/embed/vVU72tfPUwk?autoplay=1&mute=1&rel=0" 
+                    id="main-video-iframe"
+                    src="https://www.youtube.com/embed/konkQxEZe9w?autoplay=0&rel=0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
@@ -328,31 +318,41 @@
         </div>
 
         <div class="video-meta-panel">
-            <h2 class="video-main-title">TRANSMISSION 01 // KENNEL ALLOCATION TEST POOL</h2>
+            <h2 class="video-main-title" id="main-display-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</h2>
             
             <div class="video-stats-row">
-                <div>Uploaded by <span style="color:#ffffff; font-weight:bold;">DogLuvsYou</span></div>
+                <div>Uploaded by <span id="main-display-uploader" style="color:#ffffff; font-weight:bold;">DogLuvsYou</span></div>
                 <div class="counter-views">69,420 views</div>
             </div>
 
             <div class="action-button-row">
-                <button class="action-btn">👍 1,312</button>
-                <button class="action-btn">👎 0</button>
-                <button class="action-btn">📥 Download Codec</button>
-                <button class="action-btn" onclick="alert('Link copied to dashboard clip!');">🔗 Share</button>
+                <button class="action-btn" onclick="toggleLike(this)">👍 1,312</button>
+                <button class="action-btn" onclick="alert('Link copied to system dashboard clip!');">🔗 Share</button>
             </div>
         </div>
     </main>
 
-    <!-- RECOMMENDATIONS / RELATED BROADCASTS FEED -->
     <h3 class="feed-headline-section">Recommended Transmissions</h3>
     
     <section class="suggestions-grid">
         
-        <!-- Video Item 1 -->
-        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+        <!-- Video Recommendation 1 (Preload Source Mirror) -->
+        <div class="video-row-card" onclick="swapVideo('konkQxEZe9w', 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', 'DogLuvsYou', '2005/12/01')">
             <div class="thumbnail-box">
                 <img src="Pug.png" alt="preview">
+                <div class="timestamp-badge">03:45</div>
+            </div>
+            <div class="card-details">
+                <h4 class="card-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</h4>
+                <div class="card-uploader">DogLuvsYou</div>
+                <div class="card-metrics">69K views • 2005/12/01</div>
+            </div>
+        </div>
+
+        <!-- Video Recommendation 2 -->
+        <div class="video-row-card" onclick="swapVideo('Bwhr1VSSTms', 'PUG CORRUPT DETECTOR EMULATION', 'System_Operator', '2005/08/23')">
+            <div class="thumbnail-box">
+                <img src="Germshep.png" alt="preview">
                 <div class="timestamp-badge">04:20</div>
             </div>
             <div class="card-details">
@@ -360,12 +360,12 @@
                 <div class="card-uploader">System_Operator</div>
                 <div class="card-metrics">12K views • 2005/08/23</div>
             </div>
-        </a>
+        </div>
 
-        <!-- Video Item 2 -->
-        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+        <!-- Video Recommendation 3 -->
+        <div class="video-row-card" onclick="swapVideo('maznhv72hBo', 'GERMAN SHEPHERD FIREWALL BYPASS', 'NetRun_99', '2005/09/11')">
             <div class="thumbnail-box">
-                <img src="Germshep.png" alt="preview">
+                <img src="Poodle.png" alt="preview">
                 <div class="timestamp-badge">11:05</div>
             </div>
             <div class="card-details">
@@ -373,12 +373,12 @@
                 <div class="card-uploader">NetRun_99</div>
                 <div class="card-metrics">8.4K views • 2005/09/11</div>
             </div>
-        </a>
+        </div>
 
-        <!-- Video Item 3 -->
-        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+        <!-- Video Recommendation 4 (Original loop link template) -->
+        <div class="video-row-card" onclick="swapVideo('vVU72tfPUwk', 'POODLE METRIC ANALYSIS LOOP', 'Zine_Core', '2005/10/02')">
             <div class="thumbnail-box">
-                <img src="Poodle.png" alt="preview">
+                <img src="Dalmation.png" alt="preview">
                 <div class="timestamp-badge">02:14</div>
             </div>
             <div class="card-details">
@@ -386,22 +386,56 @@
                 <div class="card-uploader">Zine_Core</div>
                 <div class="card-metrics">104K views • 2005/10/02</div>
             </div>
-        </a>
-
-        <!-- Video Item 4 -->
-        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
-            <div class="thumbnail-box">
-                <img src="Dalmation.png" alt="preview">
-                <div class="timestamp-badge">08:44</div>
-            </div>
-            <div class="card-details">
-                <h4 class="card-title">101 ALLOCATIONS REACHED MAX EDGE</h4>
-                <div class="card-uploader">DogLuvsYou</div>
-                <div class="card-metrics">452K views • 2005/11/14</div>
-            </div>
-        </a>
+        </div>
 
     </section>
 
+    <script>
+        const playerWindow = document.getElementById('player-window');
+        const iframe = document.getElementById('main-video-iframe');
+        const displayTitle = document.getElementById('main-display-title');
+        const displayUploader = document.getElementById('main-display-uploader');
+        const appTitle = document.getElementById('player-app-title');
+
+        // RE-OPEN / RE-ROUTE LOGIC INJECTION SWAPPER
+        function swapVideo(videoId, title, uploader, dateStr) {
+            // If window was exited out, bring it right back into view
+            playerWindow.style.display = 'block';
+            
+            // Re-mount the YouTube standard path using the modern embed syntax
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            
+            // Dynamic node swapping for structural metadata text
+            displayTitle.innerText = title;
+            displayUploader.innerText = uploader;
+            appTitle.innerText = `DogTube Player - [Streaming: ${uploader}]`;
+            
+            // Smoothly snap focus back up to the desktop console player area
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // DESTRUCT ARCHITECTURE METHOD ON THE 'X' EVENT CLICK
+        function closePlayer() {
+            // Nullify target link completely to hard-kill background ambient audio playing
+            iframe.src = "";
+            // Collapses display visibility structure away cleanly
+            playerWindow.style.display = 'none';
+        }
+
+        // BASE FRONT-END TOGGLE PLACEHOLDER FOR THE UPVOTE SYSTEMS
+        function toggleLike(btn) {
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                btn.innerText = "👍 1,313";
+                btn.style.borderColor = "#ff9900";
+            } else {
+                btn.innerText = "👍 1,312";
+                btn.style.borderColor = "#444444";
+            }
+        }
+    </script>
 </body>
 </html>
