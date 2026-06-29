@@ -69,6 +69,7 @@
             display: inline-block;
         }
 
+        /* DYNAMIC WINDOW BOX */
         .xp-window {
             background: #1c1c1c;
             border: 2px solid #ff9900;
@@ -76,6 +77,12 @@
             max-width: 800px;
             margin: 0 auto 40px auto;
             width: 100%;
+            position: relative;
+        }
+
+        /* RETRO GLITCH TRIGGER STYLES */
+        .xp-window.glitching {
+            animation: crt-static 0.4s ease-out;
         }
 
         .xp-title-bar {
@@ -117,6 +124,21 @@
         .video-stage {
             padding: 10px;
             background: #000000;
+            position: relative;
+        }
+
+        /* CRT BLINK COVER PANEL */
+        .crt-shutter {
+            position: absolute;
+            top: 10px; left: 10px;
+            right: 10px; bottom: 10px;
+            background: #ffffff;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .xp-window.glitching .crt-shutter {
+            animation: shutter-flash 0.35s ease-out;
         }
         
         .video-responsive-wrap {
@@ -169,6 +191,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            align-items: center;
         }
         .action-btn {
             background: #262626;
@@ -187,6 +210,19 @@
             background: #333333;
             border-color: #ff9900;
             color: #ffffff;
+        }
+
+        /* POPUP SYSTEM COMPONENT TOAST DISPLAY */
+        .share-toast {
+            font-size: 0.8rem;
+            color: #00ff66;
+            font-family: monospace;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .share-toast.show {
+            opacity: 1;
         }
 
         .feed-headline-section {
@@ -276,6 +312,23 @@
             color: #777777;
         }
 
+        /* RETRO WINDOW GLITCH ANIMATIONS */
+        @keyframes crt-static {
+            0% { transform: scaleY(1) cubic-bezier(0.215, 0.610, 0.355, 1); filter: brightness(1); }
+            30% { transform: scaleY(0.02) scaleX(1.1); filter: brightness(3); background: #ffffff; }
+            50% { transform: scaleY(0.001) scaleX(0); filter: brightness(5); }
+            70% { transform: scaleY(0.4) scaleX(0.9); filter: skewX(15deg) contrast(2); }
+            100% { transform: scaleY(1) skewX(0deg); filter: brightness(1); }
+        }
+
+        @keyframes shutter-flash {
+            0% { opacity: 0; }
+            20% { opacity: 0.9; background: #ff9900; }
+            40% { opacity: 0.4; background: #00ffff; }
+            60% { opacity: 0.8; background: #ffffff; }
+            100% { opacity: 0; }
+        }
+
         @media(min-width: 650px) {
             .suggestions-grid {
                 display: grid;
@@ -295,22 +348,20 @@
         </div>
     </header>
 
-    <!-- MAIN MEDIA PLAYER HOUSING CONTAINER -->
     <main class="xp-window" id="player-window">
         <div class="xp-title-bar">
             <div class="xp-title-text" id="player-app-title">DogTube Media Player v1.04</div>
             <div class="xp-window-controls">
-                <!-- Clean functional functional exit button -->
                 <div class="xp-btn-close" onclick="closePlayer()" title="Close Player">X</div>
             </div>
         </div>
         
         <div class="video-stage">
+            <div class="crt-shutter"></div>
             <div class="video-responsive-wrap">
-                <!-- Preloaded target initialization container -->
                 <iframe 
                     id="main-video-iframe"
-                    src="https://www.youtube.com/embed/konkQxEZe9w?autoplay=0&rel=0" 
+                    src="" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
@@ -327,7 +378,8 @@
 
             <div class="action-button-row">
                 <button class="action-btn" onclick="toggleLike(this)">👍 1,312</button>
-                <button class="action-btn" onclick="alert('Link copied to system dashboard clip!');">🔗 Share</button>
+                <button class="action-btn" onclick="copyShareLink()">🔗 Share</button>
+                <span class="share-toast" id="toast-notify">SYSTEM URL COPIED SYSTEM</span>
             </div>
         </div>
     </main>
@@ -336,8 +388,7 @@
     
     <section class="suggestions-grid">
         
-        <!-- Video Recommendation 1 (Preload Source Mirror) -->
-        <div class="video-row-card" onclick="swapVideo('konkQxEZe9w', 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', 'DogLuvsYou', '2005/12/01')">
+        <div class="video-row-card" onclick="processVideoSelection('konkQxEZe9w', 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', 'DogLuvsYou')">
             <div class="thumbnail-box">
                 <img src="Pug.png" alt="preview">
                 <div class="timestamp-badge">03:45</div>
@@ -349,8 +400,7 @@
             </div>
         </div>
 
-        <!-- Video Recommendation 2 -->
-        <div class="video-row-card" onclick="swapVideo('Bwhr1VSSTms', 'PUG CORRUPT DETECTOR EMULATION', 'System_Operator', '2005/08/23')">
+        <div class="video-row-card" onclick="processVideoSelection('Bwhr1VSSTms', 'PUG CORRUPT DETECTOR EMULATION', 'System_Operator')">
             <div class="thumbnail-box">
                 <img src="Germshep.png" alt="preview">
                 <div class="timestamp-badge">04:20</div>
@@ -362,8 +412,7 @@
             </div>
         </div>
 
-        <!-- Video Recommendation 3 -->
-        <div class="video-row-card" onclick="swapVideo('maznhv72hBo', 'GERMAN SHEPHERD FIREWALL BYPASS', 'NetRun_99', '2005/09/11')">
+        <div class="video-row-card" onclick="processVideoSelection('maznhv72hBo', 'GERMAN SHEPHERD FIREWALL BYPASS', 'NetRun_99')">
             <div class="thumbnail-box">
                 <img src="Poodle.png" alt="preview">
                 <div class="timestamp-badge">11:05</div>
@@ -375,8 +424,7 @@
             </div>
         </div>
 
-        <!-- Video Recommendation 4 (Original loop link template) -->
-        <div class="video-row-card" onclick="swapVideo('vVU72tfPUwk', 'POODLE METRIC ANALYSIS LOOP', 'Zine_Core', '2005/10/02')">
+        <div class="video-row-card" onclick="processVideoSelection('vVU72tfPUwk', 'POODLE METRIC ANALYSIS LOOP', 'Zine_Core')">
             <div class="thumbnail-box">
                 <img src="Dalmation.png" alt="preview">
                 <div class="timestamp-badge">02:14</div>
@@ -396,36 +444,88 @@
         const displayTitle = document.getElementById('main-display-title');
         const displayUploader = document.getElementById('main-display-uploader');
         const appTitle = document.getElementById('player-app-title');
+        const toast = document.getElementById('toast-notify');
 
-        // RE-OPEN / RE-ROUTE LOGIC INJECTION SWAPPER
-        function swapVideo(videoId, title, uploader, dateStr) {
-            // If window was exited out, bring it right back into view
+        // VIDEO STORAGE DATABASE DIRECTORY MAP FOR ROUTING INCOMING LINKS
+        const videoDatabase = {
+            'konkQxEZe9w': { title: 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', uploader: 'DogLuvsYou' },
+            'Bwhr1VSSTms': { title: 'PUG CORRUPT DETECTOR EMULATION', uploader: 'System_Operator' },
+            'maznhv72hBo': { title: 'GERMAN SHEPHERD FIREWALL BYPASS', uploader: 'NetRun_99' },
+            'vVU72tfPUwk': { title: 'POODLE METRIC ANALYSIS LOOP', uploader: 'Zine_Core' }
+        };
+
+        let activeVideoId = 'konkQxEZe9w'; // Defaults to your core target
+
+        // READ OVER INCOMING LINK ON INITIAL BOOT UP
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const routeId = urlParams.get('v');
+
+            // If a valid shared ID is present in the browser bar, snap it immediately
+            if (routeId && videoDatabase[routeId]) {
+                activeVideoId = routeId;
+                displayTitle.innerText = videoDatabase[routeId].title;
+                displayUploader.innerText = videoDatabase[routeId].uploader;
+                appTitle.innerText = `DogTube Player - [Streaming: ${videoDatabase[routeId].uploader}]`;
+            }
+            
+            // Render target into iframe anchor source point
+            iframe.src = `https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`;
+        });
+
+        // ANIMATED TRANSITION ENGINE
+        function processVideoSelection(videoId, title, uploader) {
+            activeVideoId = videoId;
             playerWindow.style.display = 'block';
+
+            // Trigger the retro screen flicker classes
+            playerWindow.classList.remove('glitching');
+            void playerWindow.offsetWidth; // Force CSS engine reboot update loop
+            playerWindow.classList.add('glitching');
+
+            // Hold execution for 150ms during the flash peak to swap content cleanly
+            setTimeout(() => {
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                displayTitle.innerText = title;
+                displayUploader.innerText = uploader;
+                appTitle.innerText = `DogTube Player - [Streaming: ${uploader}]`;
+
+                // Update system browser path state without forcing a heavy page reload
+                const newUrl = `${window.location.pathname}?v=${videoId}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }, 150);
+
+            // Smooth scroll up after transition completes
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 250);
+
+            // Strip out CSS animation modifiers when loop concludes
+            setTimeout(() => {
+                playerWindow.classList.remove('glitching');
+            }, 450);
+        }
+
+        // GENERATING THE UNIVERSAL SHARE LINK WITH INJECTED PARAMETERS
+        function copyShareLink() {
+            const shareUrl = `${window.location.origin}${window.location.pathname}?v=${activeVideoId}`;
             
-            // Re-mount the YouTube standard path using the modern embed syntax
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-            
-            // Dynamic node swapping for structural metadata text
-            displayTitle.innerText = title;
-            displayUploader.innerText = uploader;
-            appTitle.innerText = `DogTube Player - [Streaming: ${uploader}]`;
-            
-            // Smoothly snap focus back up to the desktop console player area
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 2000);
+            }).catch(err => {
+                console.error('Could not execute clip layout pass: ', err);
             });
         }
 
-        // DESTRUCT ARCHITECTURE METHOD ON THE 'X' EVENT CLICK
         function closePlayer() {
-            // Nullify target link completely to hard-kill background ambient audio playing
             iframe.src = "";
-            // Collapses display visibility structure away cleanly
             playerWindow.style.display = 'none';
+            // Clear URL variables when app terminal closes
+            const clearUrl = window.location.pathname;
+            window.history.pushState({ path: clearUrl }, '', clearUrl);
         }
 
-        // BASE FRONT-END TOGGLE PLACEHOLDER FOR THE UPVOTE SYSTEMS
         function toggleLike(btn) {
             btn.classList.toggle('active');
             if(btn.classList.contains('active')) {
