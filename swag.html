@@ -90,8 +90,42 @@
         .vibe-divider p {
             font-style: italic;
             font-size: 1.4rem;
-            line-height: 1.3;
+            line-height: 1.4;
             color: #000000;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ASCII SIDE-BY-SIDE GRID BOX */
+        .ascii-quote-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 60px auto;
+            max-width: 1000px;
+            padding: 0 10px;
+        }
+
+        /* THE ASCII DOG RULES */
+        .dog-ascii {
+            font-family: monospace;
+            font-size: 9px;
+            line-height: 1.1;
+            color: #000000;
+            white-space: pre;
+            user-select: none;
+        }
+
+        .ascii-quote-text {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            text-align: center;
+            color: #000000;
+            font-weight: bold;
+            min-width: 220px;
         }
 
         /* SHOP FEED ARCHITECTURE GRID */
@@ -180,23 +214,32 @@
             padding: 1px 4px;
         }
 
-        /* PRAYING STYLE BUTTON INVERSION */
+        /* PINK WITH WHITE POLKA DOT BUTTON */
         .btn-add-cart {
             width: 100%;
             max-width: 160px;
             margin: 0 auto;
-            background: #3a8080;
-            color: #ffffff;
-            border: 1px solid #285a5a;
-            font-family: "Times New Roman", serif;
-            font-size: 0.95rem;
-            font-style: italic;
-            padding: 6px 0;
+            border: 1px solid #ff8ebb;
+            font-family: "Impact", sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 8px 0;
             cursor: pointer;
-            box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            
+            /* Polka Dot CSS Generation Engine */
+            background-color: #ffb6c1;
+            background-image: radial-gradient(#ffffff 15%, transparent 16%),
+                              radial-gradient(#ffffff 15%, transparent 16%);
+            background-size: 12px 12px;
+            background-position: 0 0, 6px 6px;
         }
         .btn-add-cart:active {
-            background: #285a5a;
+            transform: scale(0.98);
+            filter: brightness(0.95);
         }
 
         /* INLINE COMPACT LOOKBOOK INTERMISSIONS */
@@ -218,8 +261,9 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #000000;
+            background: #ffb6c1;
             color: #ffffff;
+            border: 1px solid #ff8ebb;
             padding: 10px 20px;
             font-family: monospace;
             font-size: 0.85rem;
@@ -233,150 +277,194 @@
             opacity: 1;
         }
 
+        /* Desktop media query expansions */
         @media(min-width: 700px) {
             .product-row-grid {
                 grid-template-columns: 1fr 1fr 1fr;
                 gap: 30px 20px;
             }
         }
+        @media(min-width: 850px) {
+            .ascii-quote-container {
+                flex-direction: row;
+                gap: 30px;
+            }
+            .dog-ascii {
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- TOP CONTROL NAVIGATION LINK SEPARATORS -->
     <nav class="shop-nav-bar">
         <a href="index.html" class="back-home">← Home</a>
         <div class="cart-status" onclick="alert('Checkout system currently running updates!')">Bag (<span id="cart-count">0</span>)</div>
     </nav>
 
+    <!-- CORE BRAND TITLE -->
     <header class="brand-header">
         <h1>dog</h1>
     </header>
 
+    <!-- INCOMING INITIAL HERO IMAGE BANNER LOOKBOOK -->
     <section class="hero-lookbook-wrap">
         <img src="Pug.png" alt="Featured Drop Cover Preview">
     </section>
 
+    <!-- MAIN PRODUCT STREAM -->
     <main class="shop-stream-container">
 
+        <!-- DROP BLOCK 1 -->
         <div class="product-row-grid">
             
+            <!-- Item 1: Barking at Nothing Shorts -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Germshep.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">Amen Break Athletic Shorts</h2>
-                    <div class="item-price">$89.00 USD</div>
+                    <h2 class="item-title">"Barking At Nothin" Mesh Shorts</h2>
+                    <div class="item-price">$65.00 USD</div>
                     <div class="size-selector-row">
                         <span class="size-chip" onclick="selectSize(this)">XS</span>
                         <span class="size-chip" onclick="selectSize(this)">Small</span>
                         <span class="size-chip" onclick="selectSize(this)">Medium</span>
                         <span class="size-chip sold-out">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Amen Break Athletic Shorts')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('Barking At Nothin Mesh Shorts')">Add To Cart</button>
                 </div>
             </div>
 
+            <!-- Item 2: Heavy Chewer Collar -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">Amen Break Leather Belt</h2>
-                    <div class="item-price">$78.00 USD</div>
+                    <h2 class="item-title">Heavy Chewer Studded Leash</h2>
+                    <div class="item-price">$45.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">S</span>
-                        <span class="size-chip" onclick="selectSize(this)">M</span>
-                        <span class="size-chip" onclick="selectSize(this)">L</span>
+                        <span class="size-chip" onclick="selectSize(this)">4ft</span>
+                        <span class="size-chip" onclick="selectSize(this)">6ft</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Amen Break Leather Belt')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('Heavy Chewer Studded Leash')">Add To Cart</button>
                 </div>
             </div>
 
         </div>
 
+        <!-- TYPOGRAPHIC QUOTE VIBE INTERMISSION 1 -->
         <div class="vibe-divider">
             <span class="graphic-line">† ═════════ †</span>
-            <p>“Music is what feeling sounds like”</p>
+            <p>“The dyslexic agnostic insomniac lays awake at night wondering if there is a dog”</p>
         </div>
 
+        <!-- DROP BLOCK 2 -->
         <div class="product-row-grid">
             
+            <!-- Item 3: Postman Paranoia Tee -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">Marching Band Polo Shirt</h2>
-                    <div class="item-price">$120.00 USD</div>
+                    <h2 class="item-title">Postman Paranoia Heavy Tee</h2>
+                    <div class="item-price">$75.00 USD</div>
                     <div class="size-selector-row">
                         <span class="size-chip sold-out">XS</span>
                         <span class="size-chip" onclick="selectSize(this)">Small</span>
                         <span class="size-chip" onclick="selectSize(this)">Medium</span>
                         <span class="size-chip" onclick="selectSize(this)">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Marching Band Polo Shirt')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('Postman Paranoia Heavy Tee')">Add To Cart</button>
                 </div>
             </div>
 
+            <!-- Item 4: Zoomies Work Jacket -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Pug.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">Marching Band Short Set</h2>
-                    <div class="item-price">$89.00 USD</div>
+                    <h2 class="item-title">3AM Zoomies Work Jacket</h2>
+                    <div class="item-price">$160.00 USD</div>
                     <div class="size-selector-row">
                         <span class="size-chip" onclick="selectSize(this)">XS</span>
                         <span class="size-chip" onclick="selectSize(this)">Small</span>
                         <span class="size-chip sold-out">Medium</span>
                         <span class="size-chip" onclick="selectSize(this)">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Marching Band Short Set')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('3AM Zoomies Work Jacket')">Add To Cart</button>
                 </div>
             </div>
 
         </div>
 
+        <!-- LOOKBOOK IMAGE ROW INTERMISSION BREAK -->
         <div class="intermission-lookbook">
             <img src="Germshep.png" alt="Lookbook Middle Page Scan Insertion">
         </div>
 
-        <div class="vibe-divider">
-            <span class="graphic-line">❀ ━━━━━━━━━━━━━━ ❀</span>
-            <p>The ones you know and love are back!</p>
+        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 -->
+        <div class="ascii-quote-container">
+            <!-- Left Dog -->
+            <pre class="dog-ascii">
+     ____
+    /    \
+ __/  __  \ .     ._""_._
+ \_   \   |  \-I     /   ) \_')
+   "" )  ` " \       \  (( `""`
+     _Y     ,        .'7 / |
+ (___,__/ /...-_`   (_/_/  sk
+            </pre>
+
+            <!-- Center Quote -->
+            <p class="ascii-quote-text">“dogs love knows no bounds”</p>
+
+            <!-- Right Dog -->
+            <pre class="dog-ascii">
+     ____
+    /    \
+ __/  __  \ .     ._""_._
+ \_   \   |  \-I     /   ) \_')
+   "" )  ` " \       \  (( `""`
+     _Y     ,        .'7 / |
+ (___,__/ /...-_`   (_/_/  sk
+            </pre>
         </div>
 
+        <!-- DROP BLOCK 3 -->
         <div class="product-row-grid">
             
+            <!-- Item 5: Vet Bill Trucker Hat -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">Financial Crisis Destroyed Hoodie</h2>
-                    <div class="item-price">$180.00 USD</div>
+                    <h2 class="item-title">Unpaid Vet Bill Trucker Hat</h2>
+                    <div class="item-price">$40.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip sold-out">XS</span>
-                        <span class="size-chip" onclick="selectSize(this)">Small</span>
-                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
-                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                        <span class="size-chip" onclick="selectSize(this)">O/S</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Financial Crisis Destroyed Hoodie')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('Unpaid Vet Bill Trucker Hat')">Add To Cart</button>
                 </div>
             </div>
 
+            <!-- Item 6: Emotional Support Bag -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
                 </div>
                 <div class="item-meta">
-                    <h2 class="item-title">I Am Love Structural Bag</h2>
-                    <div class="item-price">$250.00 USD</div>
+                    <h2 class="item-title">Emotional Support Tote Bag</h2>
+                    <div class="item-price">$55.00 USD</div>
                     <div class="size-selector-row">
                         <span class="size-chip" onclick="selectSize(this)">O/S</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('I Am Love Structural Bag')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="addToBag('Emotional Support Tote Bag')">Add To Cart</button>
                 </div>
             </div>
 
@@ -384,6 +472,7 @@
 
     </main>
 
+    <!-- LIVE INTERACTION TOAST NOTICE -->
     <div class="cart-toast" id="shop-toast">🐾 ITEM ADDED TO BAG 🐾</div>
 
     <script>
@@ -393,11 +482,8 @@
 
         // CHIP SELECTION HANDLER
         function selectSize(element) {
-            // Target elements strictly within parent container matrix row
             const siblingChips = element.parentElement.querySelectorAll('.size-chip');
             siblingChips.forEach(chip => chip.classList.remove('selected'));
-            
-            // Mark targeted chip active
             element.classList.add('selected');
         }
 
