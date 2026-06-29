@@ -304,18 +304,20 @@
             }
 
             button.addEventListener('click', () => {
-                if (textLabel === 'KENNEL') {
-                    window.location.href = 'propaganda.html';
-                } else if (textLabel === 'LEASH') {
-                    const targetDrawer = document.getElementById('leash-dropdown-drawer');
-                    targetDrawer.classList.toggle('active');
-                } else if (textLabel === 'SWAG' || textLabel === 'BARK') {
-                    openCutePopup('🐶🐾COMING SOON🐾🐶');
-                } else if (textLabel === 'DOGTUBE') {
-window.location.href = 'dogtube.html';
+    if (textLabel === 'KENNEL') {
+        window.location.href = 'propaganda.html';
+    } else if (textLabel === 'SWAG') {
+        window.location.href = 'swag.html';
+    } else if (textLabel === 'LEASH') {
+        const targetDrawer = document.getElementById('leash-dropdown-drawer');
+        targetDrawer.classList.toggle('active');
+    } else if (textLabel === 'BARK') {
+        openCutePopup('🐶🐾COMING SOON🐾🐶');
+    } else if (textLabel === 'DOGTUBE') {
+        window.location.href = 'dogtube.html';
+    }
+});
 
-                }
-            });
 
             container.appendChild(stackGroup);
         });
