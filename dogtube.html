@@ -1,1 +1,407 @@
-// placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DOGTUBE // DogLuvsYou</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 2005 WINDOWS XP DESKTOP MEETS BLACKED-OUT HUB VIBE */
+        body {
+            background-color: #0b0b0b;
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0.92) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(18, 18, 18, 0.92) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #eeeeee;
+            font-family: "Tahoma", "Arial", sans-serif;
+            padding: 15px 15px 80px 15px;
+            overflow-x: hidden;
+        }
+
+        /* HARDCORE RETRO BACK BUTTON */
+        .back-nav {
+            display: inline-block;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 0.85rem;
+            color: #ffffff;
+            background: #222222;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 1px solid #444444;
+            padding: 5px 10px;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+        .back-nav:active {
+            background: #111111;
+            border-color: #ff9900;
+        }
+
+        /* HEADER DESIGN AREA */
+        .dogtube-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        /* THE CHUNKY MOCK LOGO BLOCK */
+        .dogtube-logo {
+            display: flex;
+            align-items: center;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-weight: 900;
+            font-size: 2.3rem;
+            letter-spacing: -1.5px;
+            color: #ffffff;
+            text-transform: uppercase;
+            user-select: none;
+        }
+        .dogtube-logo span {
+            background: #ff9900; /* Classic high-contrast Hub warning orange */
+            color: #000000;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 4px;
+            letter-spacing: -1px;
+            display: inline-block;
+        }
+
+        /* WINDOWS XP WRAPPER CONTAINER */
+        .xp-window {
+            background: #1c1c1c;
+            border: 2px solid #ff9900;
+            box-shadow: 6px 6px 0px #111111;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            width: 100%;
+        }
+
+        /* XP TITLE BAR */
+        .xp-title-bar {
+            background: linear-gradient(180deg, #ff9900 0%, #cc7a00 100%);
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ff9900;
+        }
+        .xp-title-text {
+            font-family: "Tahoma", sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+        .xp-window-controls {
+            display: flex;
+            gap: 4px;
+        }
+        .xp-btn {
+            width: 16px;
+            height: 16px;
+            background: #111111;
+            border: 1px solid #000000;
+            color: #ff9900;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* MAIN VIDEO CONTAINER EMBED BODY */
+        .video-stage {
+            padding: 10px;
+            background: #000000;
+        }
+        
+        /* ASPECT RATIO LOCKER (Responsive 16:9) */
+        .video-responsive-wrap {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 dynamic fallback scale */
+            height: 0;
+            overflow: hidden;
+            background: #050505;
+            border: 1px solid #222222;
+        }
+        .video-responsive-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* XP MEDIA METADATA INFO PANEL */
+        .video-meta-panel {
+            padding: 15px;
+            border-top: 1px solid #292929;
+            background: #161616;
+        }
+        .video-main-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .video-stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #292929;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: #888888;
+        }
+        .counter-views {
+            color: #ff9900;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        /* CHUNKY INTERACTION HUB SELECTION ROW */
+        .action-button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            background: #262626;
+            border: 1px solid #444444;
+            color: #dddddd;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-family: "Tahoma", sans-serif;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .action-btn:active {
+            background: #333333;
+            border-color: #ff9900;
+            color: #ffffff;
+        }
+
+        /* RETRO FEED SUGGESTIONS GRID SYSTEM */
+        .feed-headline-section {
+            font-family: "Arial Black", sans-serif;
+            font-size: 1.1rem;
+            color: #ff9900;
+            text-transform: uppercase;
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+            border-bottom: 2px solid #222222;
+            padding-bottom: 5px;
+        }
+
+        .suggestions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* INDIVIDUAL 2005 SIDEBAR LISTING CARD */
+        .video-row-card {
+            display: flex;
+            background: #141414;
+            border: 1px solid #222222;
+            padding: 6px;
+            gap: 12px;
+            text-decoration: none;
+            color: #eeeeee;
+            cursor: pointer;
+        }
+        .video-row-card:active {
+            border-color: #ff9900;
+            background: #1c1c1c;
+        }
+
+        .thumbnail-box {
+            position: relative;
+            width: 120px;
+            height: 75px;
+            background: #000000;
+            flex-shrink: 0;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .thumbnail-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .timestamp-badge {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            background: #000000;
+            color: #ff9900;
+            font-family: monospace;
+            font-size: 10px;
+            padding: 1px 3px;
+            font-weight: bold;
+        }
+
+        .card-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+        .card-uploader {
+            font-size: 0.75rem;
+            color: #ff9900;
+            margin-bottom: 2px;
+        }
+        .card-metrics {
+            font-size: 0.75rem;
+            color: #777777;
+        }
+
+        /* RESPONSIVE UPGRADE VIEWPORTS */
+        @media(min-width: 650px) {
+            .suggestions-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- RETRO DEPLOY NAVIGATION -->
+    <a href="index.html" class="back-nav">← Back to System Desktop</a>
+
+    <!-- CUSTOM THEMED HEAD HEADER -->
+    <header class="dogtube-header">
+        <div class="dogtube-logo">
+            DOG<span>TUBE</span>
+        </div>
+    </header>
+
+    <!-- WINDOWS XP PLAYER APP BOX -->
+    <main class="xp-window">
+        <div class="xp-title-bar">
+            <div class="xp-title-text">DogTube Media Player v1.04</div>
+            <div class="xp-window-controls">
+                <div class="xp-btn">_</div>
+                <div class="xp-btn">□</div>
+                <div class="xp-btn" style="color: #ff3333;">X</div>
+            </div>
+        </div>
+        
+        <div class="video-stage">
+            <div class="video-responsive-wrap">
+                <!-- Embedded the core raw transmission link loop cleanly -->
+                <iframe 
+                    src="https://www.youtube.com/embed/vVU72tfPUwk?autoplay=1&mute=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="video-meta-panel">
+            <h2 class="video-main-title">TRANSMISSION 01 // KENNEL ALLOCATION TEST POOL</h2>
+            
+            <div class="video-stats-row">
+                <div>Uploaded by <span style="color:#ffffff; font-weight:bold;">DogLuvsYou</span></div>
+                <div class="counter-views">69,420 views</div>
+            </div>
+
+            <div class="action-button-row">
+                <button class="action-btn">👍 1,312</button>
+                <button class="action-btn">👎 0</button>
+                <button class="action-btn">📥 Download Codec</button>
+                <button class="action-btn" onclick="alert('Link copied to dashboard clip!');">🔗 Share</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- RECOMMENDATIONS / RELATED BROADCASTS FEED -->
+    <h3 class="feed-headline-section">Recommended Transmissions</h3>
+    
+    <section class="suggestions-grid">
+        
+        <!-- Video Item 1 -->
+        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+            <div class="thumbnail-box">
+                <img src="Pug.png" alt="preview">
+                <div class="timestamp-badge">04:20</div>
+            </div>
+            <div class="card-details">
+                <h4 class="card-title">PUG CORRUPT DETECTOR EMULATION</h4>
+                <div class="card-uploader">System_Operator</div>
+                <div class="card-metrics">12K views • 2005/08/23</div>
+            </div>
+        </a>
+
+        <!-- Video Item 2 -->
+        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+            <div class="thumbnail-box">
+                <img src="Germshep.png" alt="preview">
+                <div class="timestamp-badge">11:05</div>
+            </div>
+            <div class="card-details">
+                <h4 class="card-title">GERMAN SHEPHERD FIREWALL BYPASS</h4>
+                <div class="card-uploader">NetRun_99</div>
+                <div class="card-metrics">8.4K views • 2005/09/11</div>
+            </div>
+        </a>
+
+        <!-- Video Item 3 -->
+        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+            <div class="thumbnail-box">
+                <img src="Poodle.png" alt="preview">
+                <div class="timestamp-badge">02:14</div>
+            </div>
+            <div class="card-details">
+                <h4 class="card-title">POODLE METRIC ANALYSIS LOOP</h4>
+                <div class="card-uploader">Zine_Core</div>
+                <div class="card-metrics">104K views • 2005/10/02</div>
+            </div>
+        </a>
+
+        <!-- Video Item 4 -->
+        <a class="video-row-card" href="https://www.youtube.com/watch?v=vVU72tfPUwk" target="_blank">
+            <div class="thumbnail-box">
+                <img src="Dalmation.png" alt="preview">
+                <div class="timestamp-badge">08:44</div>
+            </div>
+            <div class="card-details">
+                <h4 class="card-title">101 ALLOCATIONS REACHED MAX EDGE</h4>
+                <div class="card-uploader">DogLuvsYou</div>
+                <div class="card-metrics">452K views • 2005/11/14</div>
+            </div>
+        </a>
+
+    </section>
+
+</body>
+</html>
