@@ -234,7 +234,7 @@
             font-family: "Arial Black", sans-serif;
             font-size: 1.1rem;
             color: #ff9900;
-            text-transform: lowercase;
+            text-transform: none; /* Removed lowercase forcing */
             max-width: 800px;
             margin: 0 auto 15px auto;
             border-bottom: 2px solid #222222;
@@ -338,7 +338,7 @@
 
     <main class="xp-window" id="player-window">
         <div class="xp-title-bar">
-            <div class="xp-title-text" id="player-app-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</div>
+            <div class="xp-title-text" id="player-app-title">All Best Dog Memes</div>
             <div class="xp-window-controls">
                 <div class="xp-btn-close" onclick="closePlayer()" title="Close Player">X</div>
             </div>
@@ -357,7 +357,7 @@
         </div>
 
         <div class="video-meta-panel">
-            <h2 class="video-main-title" id="main-display-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</h2>
+            <h2 class="video-main-title" id="main-display-title">All Best Dog Memes</h2>
             
             <div class="video-stats-row">
                 <div>Uploaded by <span id="main-display-uploader" style="color:#ffffff; font-weight:bold;">DogLuvsYou</span></div>
@@ -372,54 +372,60 @@
         </div>
     </main>
 
-    <h3 class="feed-headline-section">RECOMENDED</h3>
+    <!-- Capitalization fixed here -->
+    <h3 class="feed-headline-section">Recommended</h3>
     
     <section class="suggestions-grid">
         
+        <!-- Video Item 1 -->
         <div class="video-row-card" onclick="processVideoSelection('konkQxEZe9w', 'All Best Dog Memes', 'DogLuvsYou')">
             <div class="thumbnail-box">
-                <img src="Pug.png" alt="preview">
+                <!-- Live YouTube Thumbnail Pulling -->
+                <img src="https://img.youtube.com/vi/konkQxEZe9w/mqdefault.jpg" alt="preview">
                 <div class="timestamp-badge">03:45</div>
             </div>
             <div class="card-details">
-                <h4 class="card-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</h4>
+                <h4 class="card-title">All Best Dog Memes</h4>
                 <div class="card-uploader">DogLuvsYou</div>
                 <div class="card-metrics">69K views • 2005/12/01</div>
             </div>
         </div>
 
-        <div class="video-row-card" onclick="processVideoSelection('Bwhr1VSSTms', 'PUG CORRUPT DETECTOR EMULATION', 'System_Operator')">
+        <!-- Video Item 2 -->
+        <div class="video-row-card" onclick="processVideoSelection('Bwhr1VSSTms', 'DOG MEMES AND FUNNY VIDEOS', 'DogLuvsYou')">
             <div class="thumbnail-box">
-                <img src="Germshep.png" alt="preview">
+                <img src="https://img.youtube.com/vi/Bwhr1VSSTms/mqdefault.jpg" alt="preview">
                 <div class="timestamp-badge">04:20</div>
             </div>
             <div class="card-details">
-                <h4 class="card-title">PUG CORRUPT DETECTOR EMULATION</h4>
-                <div class="card-uploader">System_Operator</div>
+                <h4 class="card-title">DOG MEMES AND FUNNY VIDEOS</h4>
+                <div class="card-uploader">DogLuvsYou</div>
                 <div class="card-metrics">12K views • 2005/08/23</div>
             </div>
         </div>
 
-        <div class="video-row-card" onclick="processVideoSelection('maznhv72hBo', 'GERMAN SHEPHERD FIREWALL BYPASS', 'NetRun_99')">
+        <!-- Video Item 3 -->
+        <div class="video-row-card" onclick="processVideoSelection('maznhv72hBo', 'DOG MEMES AND FUNNY VIDEOS 2', 'DogLuvsYou')">
             <div class="thumbnail-box">
-                <img src="Poodle.png" alt="preview">
+                <img src="https://img.youtube.com/vi/maznhv72hBo/mqdefault.jpg" alt="preview">
                 <div class="timestamp-badge">11:05</div>
             </div>
             <div class="card-details">
-                <h4 class="card-title">GERMAN SHEPHERD FIREWALL BYPASS</h4>
-                <div class="card-uploader">NetRun_99</div>
+                <h4 class="card-title">DOG MEMES AND FUNNY VIDEOS 2</h4>
+                <div class="card-uploader">DogLuvsYou</div>
                 <div class="card-metrics">8.4K views • 2005/09/11</div>
             </div>
         </div>
 
-        <div class="video-row-card" onclick="processVideoSelection('vVU72tfPUwk', 'POODLE METRIC ANALYSIS LOOP', 'Zine_Core')">
+        <!-- Video Item 4 -->
+        <div class="video-row-card" onclick="processVideoSelection('vVU72tfPUwk', 'CUTE PUPPIES BEING DRAMATIC', 'DogLuvsYou')">
             <div class="thumbnail-box">
-                <img src="Dalmation.png" alt="preview">
+                <img src="https://img.youtube.com/vi/vVU72tfPUwk/mqdefault.jpg" alt="preview">
                 <div class="timestamp-badge">02:14</div>
             </div>
             <div class="card-details">
-                <h4 class="card-title">POODLE METRIC ANALYSIS LOOP</h4>
-                <div class="card-uploader">Zine_Core</div>
+                <h4 class="card-title">CUTE PUPPIES BEING DRAMATIC</h4>
+                <div class="card-uploader">DogLuvsYou</div>
                 <div class="card-metrics">104K views • 2005/10/02</div>
             </div>
         </div>
@@ -434,12 +440,12 @@
         const appTitle = document.getElementById('player-app-title');
         const toast = document.getElementById('toast-notify');
 
-        // Central dictionary mapping IDs to hardcoded titles/uploaders
+        // Main database updated with corrected titles and uniform uploader
         const videoDatabase = {
-            'konkQxEZe9w': { title: 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', uploader: 'DogLuvsYou' },
-            'Bwhr1VSSTms': { title: 'PUG CORRUPT DETECTOR EMULATION', uploader: 'System_Operator' },
-            'maznhv72hBo': { title: 'GERMAN SHEPHERD FIREWALL BYPASS', uploader: 'NetRun_99' },
-            'vVU72tfPUwk': { title: 'POODLE METRIC ANALYSIS LOOP', uploader: 'Zine_Core' }
+            'konkQxEZe9w': { title: 'All Best Dog Memes', uploader: 'DogLuvsYou' },
+            'Bwhr1VSSTms': { title: 'DOG MEMES AND FUNNY VIDEOS', uploader: 'DogLuvsYou' },
+            'maznhv72hBo': { title: 'DOG MEMES AND FUNNY VIDEOS 2', uploader: 'DogLuvsYou' },
+            'vVU72tfPUwk': { title: 'CUTE PUPPIES BEING DRAMATIC', uploader: 'DogLuvsYou' }
         };
 
         let activeVideoId = 'konkQxEZe9w';
@@ -467,7 +473,7 @@
                 iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 displayTitle.innerText = title;
                 displayUploader.innerText = uploader;
-                appTitle.innerText = title; // Cleared completely to show just the raw video name
+                appTitle.innerText = title;
 
                 const newUrl = `${window.location.pathname}?v=${videoId}`;
                 window.history.pushState({ path: newUrl }, '', newUrl);
