@@ -234,7 +234,7 @@
             font-family: "Arial Black", sans-serif;
             font-size: 1.1rem;
             color: #ff9900;
-            text-transform: uppercase;
+            text-transform: lowercase;
             max-width: 800px;
             margin: 0 auto 15px auto;
             border-bottom: 2px solid #222222;
@@ -338,7 +338,7 @@
 
     <main class="xp-window" id="player-window">
         <div class="xp-title-bar">
-            <div class="xp-title-text" id="player-app-title">DogTube Media Player v1.04</div>
+            <div class="xp-title-text" id="player-app-title">INITIAL TRANSMISSION // PRELOAD CORE TARGET</div>
             <div class="xp-window-controls">
                 <div class="xp-btn-close" onclick="closePlayer()" title="Close Player">X</div>
             </div>
@@ -372,7 +372,7 @@
         </div>
     </main>
 
-    <h3 class="feed-headline-section">Recommended Transmissions</h3>
+    <h3 class="feed-headline-section">recomended</h3>
     
     <section class="suggestions-grid">
         
@@ -434,6 +434,7 @@
         const appTitle = document.getElementById('player-app-title');
         const toast = document.getElementById('toast-notify');
 
+        // Central dictionary mapping IDs to hardcoded titles/uploaders
         const videoDatabase = {
             'konkQxEZe9w': { title: 'INITIAL TRANSMISSION // PRELOAD CORE TARGET', uploader: 'DogLuvsYou' },
             'Bwhr1VSSTms': { title: 'PUG CORRUPT DETECTOR EMULATION', uploader: 'System_Operator' },
@@ -451,7 +452,7 @@
                 activeVideoId = routeId;
                 displayTitle.innerText = videoDatabase[routeId].title;
                 displayUploader.innerText = videoDatabase[routeId].uploader;
-                appTitle.innerText = `DogTube Player - [Streaming: ${videoDatabase[routeId].uploader}]`;
+                appTitle.innerText = videoDatabase[routeId].title;
             }
             
             iframe.src = `https://www.youtube.com/embed/${activeVideoId}?autoplay=0&rel=0`;
@@ -466,7 +467,7 @@
                 iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
                 displayTitle.innerText = title;
                 displayUploader.innerText = uploader;
-                appTitle.innerText = `DogTube Player - [Streaming: ${uploader}]`;
+                appTitle.innerText = title; // Cleared completely to show just the raw video name
 
                 const newUrl = `${window.location.pathname}?v=${videoId}`;
                 window.history.pushState({ path: newUrl }, '', newUrl);
