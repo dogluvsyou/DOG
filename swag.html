@@ -257,28 +257,23 @@
             display: block;
         }
 
-        /* DYNAMIC RHYTHMIC PORTRAIT/LANDSCAPE GRID */
+        /* VERTICAL FULL-WIDTH EDITORIAL LOOKBOOK STACK */
         .editorial-stack {
             max-width: 800px;
+            width: 100%;
             margin: 40px auto 20px auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            padding: 0 5px;
-        }
-        .editorial-row-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            align-items: center;
+            gap: 25px; /* Clean spacing between vertically stacked images */
+            padding: 0;
         }
         .editorial-stack img {
             width: 100%;
             height: auto;
             display: block;
-            border: 1px solid #000000;
+            border: none; /* No border stroke */
         }
-        /* Lock specific aspect ratios based on image orientations */
+        /* Strict framing aspect ratios */
         .img-portrait {
             aspect-ratio: 3 / 4;
             object-fit: cover;
@@ -332,9 +327,6 @@
             .product-row-grid {
                 grid-template-columns: 1fr 1fr 1fr;
                 gap: 30px 20px;
-            }
-            .editorial-row-split {
-                gap: 25px;
             }
         }
         @media(min-width: 750px) {
@@ -534,20 +526,19 @@
 
         </div>
 
-        <!-- EDITORIAL PORTRAIT / LANDSCAPE LOOKBOOK JPEGS SEQUENCE -->
+        <!-- FULL WIDTH EDITORIAL IMAGE STACK VERTICALLY DOWN THE PAGE -->
         <section class="editorial-stack">
-            <div class="editorial-row-split">
-                <!-- 1. Portrait -->
-                <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
-                <!-- 2. Landscape -->
-                <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-landscape">
-            </div>
-            <div class="editorial-row-split">
-                <!-- 3. Portrait -->
-                <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-portrait">
-                <!-- 4. Landscape -->
-                <img src="IMG_5483.jpeg" alt="Lookbook Panel" class="img-landscape">
-            </div>
+            <!-- 1. Full Width Portrait -->
+            <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
+            
+            <!-- 2. Full Width Landscape -->
+            <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-landscape">
+            
+            <!-- 3. Full Width Portrait -->
+            <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-portrait">
+            
+            <!-- 4. Full Width Landscape -->
+            <img src="IMG_5483.jpeg" alt="Lookbook Panel" class="img-landscape">
         </section>
 
     </main>
