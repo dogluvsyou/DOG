@@ -15,7 +15,7 @@
             background-color: #ffffff;
             color: #000000;
             font-family: "Times New Roman", Times, serif;
-            padding: 20px 10px 100px 10px;
+            padding: 20px 10px 60px 10px;
             overflow-x: hidden;
         }
 
@@ -44,10 +44,9 @@
         }
 
         /* BRAND MAIN HEADER CONTAINER */
-           /* BRAND MAIN HEADER CONTAINER */
         .brand-header {
             text-align: center;
-            margin-bottom: 20px; /* Reduced to bring lookbook banner up */
+            margin-bottom: 20px;
             padding: 0 10px;
             width: 100%;
         }
@@ -55,32 +54,11 @@
         /* RE-ENGINEERED SCALING LOGO FOR "IMG_6857.png" */
         .brand-header .brand-logo-img {
             width: 100%;
-            max-width: 180px; /* Restricts giant growth on mobile */
+            max-width: 180px;
             height: auto;
             display: block;
             margin: 0 auto;
             object-fit: contain;
-        }
-
-        /* Desktop upgrade: let the texture pop slightly more when screen expands */
-        @media(min-width: 750px) {
-            .brand-header {
-                margin-bottom: 35px;
-            }
-            .brand-header .brand-logo-img {
-                max-width: 260px; 
-            }
-        }
-
-        .brand-header h1 {
-            font-family: "Times New Roman", Times, serif;
-            font-size: 4.5rem;
-            font-weight: normal;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 15px;
-            user-select: none;
         }
 
         /* HERO LOOKBOOK DISPLAY BANNER */
@@ -279,6 +257,54 @@
             display: block;
         }
 
+        /* DYNAMIC RHYTHMIC PORTRAIT/LANDSCAPE GRID */
+        .editorial-stack {
+            max-width: 800px;
+            margin: 40px auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 5px;
+        }
+        .editorial-row-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+        .editorial-stack img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #000000;
+        }
+        /* Lock specific aspect ratios based on image orientations */
+        .img-portrait {
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+        }
+        .img-landscape {
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        /* MATCHING SITE FOOTER STYLE */
+        #site-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px 0;
+            border-top: 1px dashed #000000;
+            width: 100%;
+        }
+        .tagline {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: 900;
+            font-size: 1.3rem;
+            text-transform: lowercase;
+            letter-spacing: -0.5px;
+            color: #111111;
+        }
+
         /* MINI BOTTOM NOTIFICATION SYSTEM TOAST */
         .cart-toast {
             position: fixed;
@@ -307,6 +333,17 @@
                 grid-template-columns: 1fr 1fr 1fr;
                 gap: 30px 20px;
             }
+            .editorial-row-split {
+                gap: 25px;
+            }
+        }
+        @media(min-width: 750px) {
+            .brand-header {
+                margin-bottom: 35px;
+            }
+            .brand-header .brand-logo-img {
+                max-width: 260px; 
+            }
         }
         @media(min-width: 850px) {
             .ascii-quote-container {
@@ -329,11 +366,9 @@
     </nav>
 
     <!-- CORE BRAND TITLE -->
-    <!-- CORE BRAND TITLE -->
     <header class="brand-header">
-        <img src="IMG_3413.png" alt="dog logo" class="brand-logo-img">
+        <img src="IMG_6857.png" alt="dog logo" class="brand-logo-img">
     </header>
-
 
     <!-- INCOMING INITIAL HERO IMAGE BANNER LOOKBOOK -->
     <section class="hero-lookbook-wrap">
@@ -434,7 +469,7 @@
             <img src="Germshep.png" alt="Lookbook Middle Page Scan Insertion">
         </div>
 
-        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 (REFINED DOGS, NO MARGIN BLOAT, NO 'SK') -->
+        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 -->
         <div class="ascii-quote-container">
             <!-- Left Dog -->
             <pre class="dog-ascii">
@@ -499,7 +534,28 @@
 
         </div>
 
+        <!-- EDITORIAL PORTRAIT / LANDSCAPE LOOKBOOK JPEGS SEQUENCE -->
+        <section class="editorial-stack">
+            <div class="editorial-row-split">
+                <!-- 1. Portrait -->
+                <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
+                <!-- 2. Landscape -->
+                <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-landscape">
+            </div>
+            <div class="editorial-row-split">
+                <!-- 3. Portrait -->
+                <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-portrait">
+                <!-- 4. Landscape -->
+                <img src="IMG_5483.jpeg" alt="Lookbook Panel" class="img-landscape">
+            </div>
+        </section>
+
     </main>
+
+    <!-- MATCHING LOGO FOOTER COMPONENT -->
+    <footer id="site-footer">
+        <p class="tagline">your new best friend&trade;</p>
+    </footer>
 
     <!-- LIVE INTERACTION TOAST NOTICE -->
     <div class="cart-toast" id="shop-toast">🐾 ITEM ADDED TO BAG 🐾</div>
