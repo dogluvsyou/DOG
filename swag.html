@@ -264,14 +264,14 @@
             margin: 40px auto 20px auto;
             display: flex;
             flex-direction: column;
-            gap: 25px; /* Clean spacing between vertically stacked images */
+            gap: 25px;
             padding: 0;
         }
         .editorial-stack img {
             width: 100%;
             height: auto;
             display: block;
-            border: none; /* No border stroke */
+            border: none;
         }
         /* Strict framing aspect ratios */
         .img-portrait {
@@ -351,29 +351,23 @@
 </head>
 <body>
 
-    <!-- TOP CONTROL NAVIGATION LINK SEPARATORS -->
     <nav class="shop-nav-bar">
         <a href="index.html" class="back-home">← Home</a>
         <div class="cart-status" onclick="alert('Checkout system currently running updates!')">Bag (<span id="cart-count">0</span>)</div>
     </nav>
 
-    <!-- CORE BRAND TITLE -->
     <header class="brand-header">
         <img src="IMG_6857.png" alt="dog logo" class="brand-logo-img">
     </header>
 
-    <!-- INCOMING INITIAL HERO IMAGE BANNER LOOKBOOK -->
     <section class="hero-lookbook-wrap">
         <img src="Pug.png" alt="Featured Drop Cover Preview">
     </section>
 
-    <!-- MAIN PRODUCT STREAM -->
     <main class="shop-stream-container">
 
-        <!-- DROP BLOCK 1 -->
         <div class="product-row-grid">
             
-            <!-- Item 1 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Germshep.png" alt="item">
@@ -391,7 +385,6 @@
                 </div>
             </div>
 
-            <!-- Item 2 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
@@ -409,16 +402,13 @@
 
         </div>
 
-        <!-- TYPOGRAPHIC QUOTE VIBE INTERMISSION 1 -->
         <div class="vibe-divider">
             <span class="graphic-line">† ═════════ †</span>
             <p>“The dyslexic agnostic insomniac lays awake at night wondering if there is a dog”</p>
         </div>
 
-        <!-- DROP BLOCK 2 -->
         <div class="product-row-grid">
             
-            <!-- Item 3 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
@@ -436,7 +426,6 @@
                 </div>
             </div>
 
-            <!-- Item 4 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Pug.png" alt="item">
@@ -456,14 +445,11 @@
 
         </div>
 
-        <!-- LOOKBOOK IMAGE ROW INTERMISSION BREAK -->
         <div class="intermission-lookbook">
             <img src="Germshep.png" alt="Lookbook Middle Page Scan Insertion">
         </div>
 
-        <!-- TYPOGRAPHIC ASCII INTERMISSION 2 -->
         <div class="ascii-quote-container">
-            <!-- Left Dog -->
             <pre class="dog-ascii">
        ____
       /    \
@@ -475,10 +461,8 @@
   (_____,__/  / ... -_ (_/_/ /
             </pre>
 
-            <!-- Center Quote -->
             <p class="ascii-quote-text">“dogs love knows no bounds”</p>
 
-            <!-- Right Dog -->
             <pre class="dog-ascii">
        ____
       /    \
@@ -491,10 +475,8 @@
             </pre>
         </div>
 
-        <!-- DROP BLOCK 3 -->
         <div class="product-row-grid">
             
-            <!-- Item 5 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
@@ -509,7 +491,6 @@
                 </div>
             </div>
 
-            <!-- Item 6 -->
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
@@ -526,29 +507,22 @@
 
         </div>
 
-        <!-- FULL WIDTH EDITORIAL IMAGE STACK VERTICALLY DOWN THE PAGE -->
         <section class="editorial-stack">
-            <!-- 1. Full Width Portrait -->
             <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
             
-            <!-- 2. Full Width Landscape -->
-            <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-landscape">
-            
-            <!-- 3. Full Width Portrait -->
             <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-portrait">
             
-            <!-- 4. Full Width Landscape -->
+            <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-landscape">
+            
             <img src="IMG_5483.jpeg" alt="Lookbook Panel" class="img-landscape">
         </section>
 
     </main>
 
-    <!-- MATCHING LOGO FOOTER COMPONENT -->
     <footer id="site-footer">
         <p class="tagline">your new best friend&trade;</p>
     </footer>
 
-    <!-- LIVE INTERACTION TOAST NOTICE -->
     <div class="cart-toast" id="shop-toast">🐾 ITEM ADDED TO BAG 🐾</div>
 
     <script>
