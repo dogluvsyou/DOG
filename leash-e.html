@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LEASH // Global East</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #111111;
+            padding: 40px 20px 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mascot-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .mascot-bubble {
+            background: #ffffff;
+            padding: 10px 20px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #111111;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .mascot-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+        .mascot-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .leash-standalone-card {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(10px); 
+            border-radius: 24px; 
+            padding: 20px;
+            display: flex; 
+            flex-direction: column;
+            gap: 12px;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .leash-link {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            color: #111111;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border-radius: 16px;
+            transition: transform 0.1s ease;
+        }
+        .leash-link:active {
+            transform: scale(0.97);
+        }
+        
+        .leash-mail-form {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .leash-mail-form label {
+            font-weight: 700;
+            color: #444444;
+            font-size: 0.9rem;
+            padding-left: 5px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .leash-mail-box {
+            display: flex;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .leash-mail-box input {
+            flex: 1;
+            padding: 10px 14px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+        }
+        .leash-mail-box button {
+            background: #111111; 
+            color: #ffffff;
+            border: none;
+            font-weight: 700;
+            padding: 0 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #cute-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .cute-popup-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+            width: 85%;
+            max-width: 340px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .cute-popup-text {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #111111;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .cute-popup-btn {
+            background: #111111;
+            color: #ffffff;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #site-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cute-popup-overlay">
+        <div class="cute-popup-box">
+            <p class="cute-popup-text" id="popup-message-target"></p>
+            <button class="cute-popup-btn" onclick="closeCutePopup()">OK</button>
+        </div>
+    </div>
+
+    <div id="shape-canvas"></div>
+
+    <div class="mascot-container">
+        <div class="mascot-bubble">keep in touch!</div>
+        <img src="Pug.png" alt="Mascot Dog" class="mascot-img">
+    </div>
+
+    <main class="leash-standalone-card">
+        
+        <form onsubmit="openCutePopup('Subscribed!'); this.reset(); return false;" class="leash-mail-form">
+            <label>Join Global Mailing List</label>
+            <div class="leash-mail-box">
+                <input type="email" placeholder="your email..." required>
+                <button type="submit">Join</button>
+            </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px dashed rgba(0,0,0,0.15); margin: 5px 0;">
+
+        <!-- Clean Eastern Channels Matrix -->
+        <a href="swag.html" class="leash-link" style="background:#b8d7e9;">Shop Collection</a>
+        <a href="https://line.me/" target="_blank" class="leash-link" style="background:#d1f3c5;">LINE Official Account</a>
+        <a href="#" class="leash-link" style="background:#ffc9d7;" onclick="openCutePopup('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat Account</a>
+        <a href="archive.html" class="leash-link" style="background:#fffbc8;">🔒 Password Design Archive</a>
+    </main>
+
+    <footer id="site-footer">
+        <p class="tagline" style="font-style: italic; font-size: 0.95rem; font-weight: bold; color: #444444;">your new best friend&trade;</p>
+    </footer>
+
+    <script>
+        function openCutePopup(msg) {
+            document.getElementById('popup-message-target').innerText = msg;
+            document.getElementById('cute-popup-overlay').style.display = 'flex';
+        }
+        function closeCutePopup() {
+            document.getElementById('cute-popup-overlay').style.display = 'none';
+        }
+
+        const bgColors = ['#b8d7e9', '#d1f3c5', '#ffc9d7', '#fffbc8'];
+        const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
+        document.body.style.backgroundColor = randomBg;
+
+        const canvas = document.getElementById('shape-canvas');
+        const shapeCount = 35; 
+        let canvasHtmlBatch = "";
+
+        const starPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
+        const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+
+        for (let i = 0; i < shapeCount; i++) {
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const size = Math.floor(Math.random() * 73) + 12; 
+            const rotation = Math.floor(Math.random() * 360);
+            const opacity = (Math.random() * 0.35) + 0.15;
+            const selectedPath = Math.random() > 0.5 ? starPath : heartPath;
+
+            canvasHtmlBatch += `
+                <svg style="position: absolute; left: ${posX}vw; top: ${posY}vh; width: ${size}px; height: ${size}px; transform: rotate(${rotation}deg); opacity: ${opacity};" viewBox="0 0 24 24">
+                    <path d="${selectedPath}" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+                </svg>
+            `;
+        }
+        canvas.innerHTML = canvasHtmlBatch;
+    </script>
+</body>
+</html>
