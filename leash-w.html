@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LEASH // Global West</title>
+    <title>LEASH // West</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CORE ALIGNMENT TO MATCH THE AESTHETIC BUFFER */
         body {
             font-family: system-ui, -apple-system, sans-serif;
             color: #111111;
@@ -18,7 +17,6 @@
             overflow-x: hidden;
         }
 
-        /* MASCOT ILLUSTRATION BOX WITH SPEECH BUBBLE */
         .mascot-container {
             display: flex;
             flex-direction: column;
@@ -38,7 +36,6 @@
             margin-bottom: 12px;
             position: relative;
         }
-        /* Tiny tail for the chat bubble */
         .mascot-bubble::after {
             content: '';
             position: absolute;
@@ -57,9 +54,8 @@
             object-fit: contain;
         }
 
-        /* LINKTREE CONTAINER STRUCTURE MAPPED FROM HOME DRAWER */
         .leash-standalone-card {
-            width: 90%;
+            width: 100%;
             max-width: 450px;
             background: rgba(255, 255, 255, 0.5); 
             backdrop-filter: blur(10px); 
@@ -111,6 +107,7 @@
             padding: 4px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            align-items: center;
         }
         .leash-mail-box input {
             flex: 1;
@@ -119,18 +116,26 @@
             font-size: 1rem;
             outline: none;
             background: transparent;
+            color: #111111;
         }
+        /* Fixed & Standardized Custom Reset Button Styles */
         .leash-mail-box button {
+            -webkit-appearance: none;
+            appearance: none;
             background: #111111; 
             color: #ffffff;
             border: none;
             font-weight: 700;
-            padding: 0 20px;
+            font-size: 0.95rem;
+            padding: 10px 20px;
             border-radius: 10px;
             cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .leash-mail-box button:active {
+            background: #333333;
         }
 
-        /* CUSTOM POPUP FOR NOTIFICATION DISPLAYS */
         #cute-popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -168,10 +173,21 @@
             cursor: pointer;
         }
 
+        /* Perfect replication of the homepage black italic footer */
         #site-footer {
             margin-top: auto;
             padding-top: 40px;
             z-index: 2;
+            text-align: center;
+        }
+        #site-footer .tagline {
+            font-family: "Times New Roman", Times, serif !important;
+            font-size: 1.2rem !important;
+            font-style: italic !important;
+            font-weight: normal !important;
+            color: #000000 !important;
+            letter-spacing: normal !important;
+            text-transform: none !important;
         }
     </style>
 </head>
@@ -184,20 +200,14 @@
         </div>
     </div>
 
-    <!-- Background Layer Canvas Wrapper for random shapes -->
     <div id="shape-canvas"></div>
 
-    <!-- Mascot Segment -->
     <div class="mascot-container">
         <div class="mascot-bubble">keep in touch!</div>
-        <!-- Using your pool-standard Pug image as default, change if needed -->
         <img src="Pug.png" alt="Mascot Dog" class="mascot-img">
     </div>
 
-    <!-- Main Stack Aggregate Card -->
     <main class="leash-standalone-card">
-        
-        <!-- Priority 1 Email Capturer Box -->
         <form onsubmit="openCutePopup('Subscribed!'); this.reset(); return false;" class="leash-mail-form">
             <label>Join Mailing List</label>
             <div class="leash-mail-box">
@@ -208,16 +218,16 @@
 
         <hr style="border: none; border-top: 1px dashed rgba(0,0,0,0.15); margin: 5px 0;">
 
-        <!-- Links Core Destination Matrix -->
+        <!-- Defluffed Clean Minimal Layout Links -->
         <a href="swag.html" class="leash-link" style="background:#b8d7e9;">Shop Collection</a>
-        <a href="https://t.me/+tCN0jOkpJ3g2ZTdh" target="_blank" class="leash-link" style="background:#ffc9d7;">Telegram Wire Feed</a>
-        <a href="https://whatsapp.com" target="_blank" class="leash-link" style="background:#d1f3c5;">WhatsApp Broadcast</a>
-        <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#b8d7e9;">Patreon Archive</a>
-        <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#fffbc8;">Hidden Vault (18+)</a>
+        <a href="https://t.me/+tCN0jOkpJ3g2ZTdh" target="_blank" class="leash-link" style="background:#ffc9d7;">Telegram</a>
+        <a href="https://whatsapp.com" target="_blank" class="leash-link" style="background:#d1f3c5;">WhatsApp</a>
+        <a href="https://patreon.com" target="_blank" class="leash-link" style="background:#b8d7e9;">Patreon</a>
+        <a href="#" id="nsfw-gate-link" class="leash-link" style="background:#fffbc8;">Hidden (18+)</a>
     </main>
 
     <footer id="site-footer">
-        <p class="tagline" style="font-style: italic; font-size: 0.95rem; font-weight: bold; color: #444444;">your new best friend&trade;</p>
+        <p class="tagline">your new best friend&trade;</p>
     </footer>
 
     <script>
@@ -229,7 +239,6 @@
             document.getElementById('cute-popup-overlay').style.display = 'none';
         }
 
-        // Apply background vector logic exactly from master index
         const bgColors = ['#b8d7e9', '#d1f3c5', '#ffc9d7', '#fffbc8'];
         const randomBg = bgColors[Math.floor(Math.random() * bgColors.length)];
         document.body.style.backgroundColor = randomBg;
@@ -257,7 +266,6 @@
         }
         canvas.innerHTML = canvasHtmlBatch;
 
-        // Strict Western 18+ Warning Confirmation Gate
         document.getElementById('nsfw-gate-link').addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm("WARNING: This section contains 18+ content. Do you confirm you are of legal age to view this content?")) {
