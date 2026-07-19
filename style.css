@@ -157,16 +157,16 @@ body, html {
 }
 
 /* BRAND TAGLINE FOOTER CONTAINER */
-#site-footer {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 10px 60px 10px; 
-    background: transparent;
-}
+        #site-footer {
+            margin-top: auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 10px 60px 10px; 
+            z-index: 2;
+        }
+
 
 .tagline {
     position: relative;
