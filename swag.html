@@ -51,7 +51,6 @@
             width: 100%;
         }
 
-        /* RE-ENGINEERED SCALING LOGO FOR "IMG_6857.png" */
         .brand-header .brand-logo-img {
             width: 100%;
             max-width: 180px;
@@ -84,8 +83,8 @@
         .vibe-divider .graphic-line {
             display: block;
             font-size: 14px;
-            letter-spacing: 3px;
-            color: #888888;
+            letter-spacing: 2px;
+            color: #666666;
             margin-bottom: 10px;
             user-select: none;
         }
@@ -98,7 +97,7 @@
             margin: 0 auto;
         }
 
-        /* ASCII CONTROLLER BOX - TIGHT MARGINS */
+        /* ASCII CONTROLLER BOX */
         .ascii-quote-container {
             display: flex;
             flex-direction: column;
@@ -110,7 +109,6 @@
             padding: 0 10px;
         }
 
-        /* THE RE-ENGINEERED PERFECT ASCII DOG */
         .dog-ascii {
             font-family: monospace;
             font-size: 8px;
@@ -274,7 +272,6 @@
             display: block;
             border: none;
         }
-        /* Strict framing aspect ratios */
         .img-portrait {
             aspect-ratio: 3 / 4;
             object-fit: cover;
@@ -301,7 +298,7 @@
             color: #111111;
         }
 
-        /* MINI BOTTOM NOTIFICATION SYSTEM TOAST */
+        /* TOAST */
         .cart-toast {
             position: fixed;
             bottom: 20px;
@@ -327,8 +324,8 @@
         @media(min-width: 700px) {
             .product-row-grid {
                 gap: 30px 20px;
-                max-width: 650px; /* Constrains the grid width so cards don't blow up too big */
-                margin: 0 auto;    /* Centers the product grid */
+                max-width: 650px;
+                margin: 0 auto;
             }
         }
         @media(min-width: 750px) {
@@ -369,7 +366,6 @@
     <main class="shop-stream-container">
 
         <div class="product-row-grid">
-            
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="IMG_6976.jpeg" alt="item">
@@ -401,16 +397,15 @@
                     <button class="btn-add-cart" onclick="addToBag('Heavy Chewer Studded Leash')">Add To Cart</button>
                 </div>
             </div>
-
         </div>
 
+        <!-- DIVIDER option 1: Gothic cross with thin dash -->
         <div class="vibe-divider">
             <span class="graphic-line">† ═════════ †</span>
             <p>“The dyslexic agnostic insomniac lays awake at night wondering if there is a dog”</p>
         </div>
 
         <div class="product-row-grid">
-            
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
@@ -444,12 +439,11 @@
                     <button class="btn-add-cart" onclick="addToBag('3AM Zoomies Work Jacket')">Add To Cart</button>
                 </div>
             </div>
-
         </div>
 
+        <!-- DIVIDER option 2: Cute Tongue Out Emoji -->
         <div class="vibe-divider">
-            <span class="graphic-line">† ═════════ †</span>
-            <p>“I love to play dumb”</p>
+            <p>👅 “I love to play dumb” 👅</p>
         </div>
 
         <div class="intermission-lookbook">
@@ -483,7 +477,6 @@
         </div>
 
         <div class="product-row-grid">
-            
             <div class="item-card">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
@@ -511,26 +504,19 @@
                     <button class="btn-add-cart" onclick="addToBag('Emotional Support Tote Bag')">Add To Cart</button>
                 </div>
             </div>
-
         </div>
 
+        <!-- DIVIDER option 3: Classic Y2K / MySpace Star Sparkles -->
         <div class="vibe-divider">
-            <span class="graphic-line">† ═════════ †</span>
+            <span class="graphic-line">✧･ﾟ: *✧  *:･ﾟ✧</span>
             <p>“you can lead a dog to water, but you can't make that b🐾tch drink”</p>
         </div>
 
-        <!-- FULL WIDTH EDITORIAL IMAGE STACK VERTICALLY DOWN THE PAGE -->
+        <!-- EDITORIAL STACK -->
         <section class="editorial-stack">
-            <!-- 1. Full Width Portrait -->
             <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
-            
-            <!-- 2. Full Width Landscape -->
             <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-landscape">
-            
-            <!-- 3. Full Width Portrait -->
             <img src="IMG_5480.jpeg" alt="Lookbook Panel" class="img-portrait">
-            
-            <!-- 4. Full Width Landscape -->
             <img src="IMG_5483.jpeg" alt="Lookbook Panel" class="img-landscape">
         </section>
 
@@ -547,14 +533,12 @@
         const cartCountText = document.getElementById('cart-count');
         const toast = document.getElementById('shop-toast');
 
-        // CHIP SELECTION HANDLER
         function selectSize(element) {
             const siblingChips = element.parentElement.querySelectorAll('.size-chip');
             siblingChips.forEach(chip => chip.classList.remove('selected'));
             element.classList.add('selected');
         }
 
-        // SHOPPING UTILITY BAG FUNCTION
         function addToBag(itemName) {
             itemsInBag += 1;
             cartCountText.innerText = itemsInBag;
