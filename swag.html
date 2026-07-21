@@ -140,11 +140,11 @@
             gap: 30px;
         }
 
-        /* KEPT 2 COLUMNS ON DESKTOP TO MATCH 2-ITEM ROWS PERFECTLY */
         .product-row-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px 15px;
+            width: 100%;
         }
 
         /* INDIVIDUAL SWAG MERCH CARDS */
@@ -327,6 +327,8 @@
         @media(min-width: 700px) {
             .product-row-grid {
                 gap: 30px 20px;
+                max-width: 650px; /* Constrains the grid width so cards don't blow up too big */
+                margin: 0 auto;    /* Centers the product grid */
             }
         }
         @media(min-width: 750px) {
