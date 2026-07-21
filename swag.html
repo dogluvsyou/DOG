@@ -354,7 +354,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             text-align: center;
-            color: #3b3052; /* praying style muted violet */
+            color: #3b3052;
             margin-bottom: 10px;
             font-weight: normal;
         }
@@ -371,7 +371,7 @@
             background: #ffffff;
             font-family: "Times New Roman", Times, serif;
             font-size: 0.95rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             outline: none;
             appearance: none;
             text-align-last: center;
@@ -386,25 +386,13 @@
             font-family: "Times New Roman", Times, serif;
             font-size: 1rem;
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             transition: all 0.2s ease;
+            text-transform: lowercase;
         }
         .modal-btn-buy:hover {
             background: #3b3052;
             color: #ffffff;
-        }
-        .modal-btn-shop {
-            width: 100%;
-            border: none;
-            background: #5b31f4;
-            color: #ffffff;
-            padding: 12px 0;
-            font-family: system-ui, -apple-system, sans-serif;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-bottom: 15px;
-            border-radius: 4px;
         }
         .modal-description {
             font-family: "Times New Roman", Times, serif;
@@ -693,7 +681,6 @@
             </select>
 
             <button class="modal-btn-buy" onclick="addModalItemToCart()">add to cart</button>
-            <button class="modal-btn-shop">Buy with Shop</button>
 
             <div class="modal-description" id="modalDesc">
                 DESCRIPTION GOES HERE.
