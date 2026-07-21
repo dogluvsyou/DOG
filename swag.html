@@ -593,7 +593,7 @@
 
         <div class="ascii-quote-container">
             <pre class="dog-ascii">
-          __
+          _
         /  \
        / ..|\
       (_\  |_)
@@ -845,7 +845,7 @@ _   /  `   |
                 });
             }
 
-            // Setup sizing dropdown (Cleaned up: Size only)
+            // Setup sizing dropdown
             const sizeSelect = document.getElementById('modalSizeSelect');
             sizeSelect.innerHTML = '';
             item.sizes.forEach(size => {
@@ -909,13 +909,11 @@ _   /  `   |
             const item = productData[currentActiveProductKey];
             if (!item || item.images.length <= 1) return;
 
-            const threshold = 35; // Minimum horizontal px swipe
+            const threshold = 35;
             if (touchStartX - touchEndX > threshold) {
-                // Swiped Left -> Next Image
                 const nextIndex = (currentImageIndex + 1) % item.images.length;
                 setImageIndex(nextIndex);
             } else if (touchEndX - touchStartX > threshold) {
-                // Swiped Right -> Previous Image
                 const prevIndex = (currentImageIndex - 1 + item.images.length) % item.images.length;
                 setImageIndex(prevIndex);
             }
