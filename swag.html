@@ -150,6 +150,7 @@
             display: flex;
             flex-direction: column;
             background: #ffffff;
+            cursor: pointer;
         }
         .item-photo-anchor {
             width: 100%;
@@ -281,6 +282,157 @@
             object-fit: cover;
         }
 
+        /* QUICK VIEW MODAL COMPONENT (PRAYING APPAREL STYLE) */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            padding: 20px 15px 50px 15px;
+        }
+        .modal-backdrop.active {
+            display: block;
+        }
+        .modal-container {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-family: monospace;
+            z-index: 10;
+        }
+        .modal-gallery-view {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            position: relative;
+            background: #fdfdfd;
+        }
+        .modal-gallery-view img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #cccccc;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: #000000;
+        }
+        .modal-title {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            color: #3b3052; /* praying style muted violet */
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        .modal-price {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1rem;
+            color: #555555;
+            margin-bottom: 20px;
+        }
+        .modal-select-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000000;
+            background: #ffffff;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            outline: none;
+            appearance: none;
+            text-align-last: center;
+            cursor: pointer;
+        }
+        .modal-btn-buy {
+            width: 100%;
+            border: 1px solid #3b3052;
+            background: transparent;
+            color: #3b3052;
+            padding: 12px 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        .modal-btn-buy:hover {
+            background: #3b3052;
+            color: #ffffff;
+        }
+        .modal-btn-shop {
+            width: 100%;
+            border: none;
+            background: #5b31f4;
+            color: #ffffff;
+            padding: 12px 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .modal-description {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #3b3052;
+            text-align: center;
+            line-height: 1.4;
+            margin: 15px 0 25px 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* PRAYING SIZING CHART TABLE */
+        .size-chart-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 0.75rem;
+            color: #3b3052;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        .size-chart-table th, .size-chart-table td {
+            border: 1px solid #3b3052;
+            padding: 8px 4px;
+            text-align: left;
+        }
+
         /* MATCHING SITE FOOTER STYLE */
         #site-footer {
             text-align: center;
@@ -366,7 +518,7 @@
     <main class="shop-stream-container">
 
         <div class="product-row-grid">
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('barking-shorts')">
                 <div class="item-photo-anchor">
                     <img src="IMG_6976.jpeg" alt="item">
                 </div>
@@ -374,16 +526,16 @@
                     <h2 class="item-title">"Barking At Nothin" Mesh Shorts</h2>
                     <div class="item-price">$65.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">XS</span>
-                        <span class="size-chip" onclick="selectSize(this)">Small</span>
-                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">XS</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Medium</span>
                         <span class="size-chip sold-out">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Barking At Nothin Mesh Shorts')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('Barking At Nothin Mesh Shorts')">Add To Cart</button>
                 </div>
             </div>
 
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('studded-leash')">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
                 </div>
@@ -391,10 +543,10 @@
                     <h2 class="item-title">Heavy Chewer Studded Leash</h2>
                     <div class="item-price">$45.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">4ft</span>
-                        <span class="size-chip" onclick="selectSize(this)">6ft</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">4ft</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">6ft</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Heavy Chewer Studded Leash')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('Heavy Chewer Studded Leash')">Add To Cart</button>
                 </div>
             </div>
         </div>
@@ -406,7 +558,7 @@
         </div>
 
         <div class="product-row-grid">
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('postman-tee')">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
                 </div>
@@ -415,15 +567,15 @@
                     <div class="item-price">$75.00 USD</div>
                     <div class="size-selector-row">
                         <span class="size-chip sold-out">XS</span>
-                        <span class="size-chip" onclick="selectSize(this)">Small</span>
-                        <span class="size-chip" onclick="selectSize(this)">Medium</span>
-                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Medium</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Postman Paranoia Heavy Tee')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('Postman Paranoia Heavy Tee')">Add To Cart</button>
                 </div>
             </div>
 
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('zoomies-jacket')">
                 <div class="item-photo-anchor">
                     <img src="Pug.png" alt="item">
                 </div>
@@ -431,12 +583,12 @@
                     <h2 class="item-title">3AM Zoomies Work Jacket</h2>
                     <div class="item-price">$160.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">XS</span>
-                        <span class="size-chip" onclick="selectSize(this)">Small</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">XS</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Small</span>
                         <span class="size-chip sold-out">Medium</span>
-                        <span class="size-chip" onclick="selectSize(this)">Large</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">Large</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('3AM Zoomies Work Jacket')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('3AM Zoomies Work Jacket')">Add To Cart</button>
                 </div>
             </div>
         </div>
@@ -477,7 +629,7 @@
         </div>
 
         <div class="product-row-grid">
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('trucker-hat')">
                 <div class="item-photo-anchor">
                     <img src="Poodle.png" alt="item">
                 </div>
@@ -485,13 +637,13 @@
                     <h2 class="item-title">Unpaid Vet Bill Trucker Hat</h2>
                     <div class="item-price">$40.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">O/S</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">O/S</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Unpaid Vet Bill Trucker Hat')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('Unpaid Vet Bill Trucker Hat')">Add To Cart</button>
                 </div>
             </div>
 
-            <div class="item-card">
+            <div class="item-card" onclick="openProductModal('tote-bag')">
                 <div class="item-photo-anchor">
                     <img src="Dalmation.png" alt="item">
                 </div>
@@ -499,9 +651,9 @@
                     <h2 class="item-title">Emotional Support Tote Bag</h2>
                     <div class="item-price">$55.00 USD</div>
                     <div class="size-selector-row">
-                        <span class="size-chip" onclick="selectSize(this)">O/S</span>
+                        <span class="size-chip" onclick="event.stopPropagation(); selectSize(this)">O/S</span>
                     </div>
-                    <button class="btn-add-cart" onclick="addToBag('Emotional Support Tote Bag')">Add To Cart</button>
+                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToBag('Emotional Support Tote Bag')">Add To Cart</button>
                 </div>
             </div>
         </div>
@@ -522,6 +674,37 @@
 
     </main>
 
+    <!-- QUICK VIEW POPUP MODAL ARCHITECTURE -->
+    <div class="modal-backdrop" id="productModal">
+        <div class="modal-container">
+            <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+
+            <div class="modal-gallery-view">
+                <img src="" id="modalImg" alt="Product Image">
+            </div>
+
+            <div class="gallery-dots" id="modalDots"></div>
+
+            <h1 class="modal-title" id="modalTitle">PRODUCT TITLE</h1>
+            <div class="modal-price" id="modalPrice">$0.00</div>
+
+            <select class="modal-select-box" id="modalSizeSelect">
+                <!-- Populated dynamically -->
+            </select>
+
+            <button class="modal-btn-buy" onclick="addModalItemToCart()">add to cart</button>
+            <button class="modal-btn-shop">Buy with Shop</button>
+
+            <div class="modal-description" id="modalDesc">
+                DESCRIPTION GOES HERE.
+            </div>
+
+            <table class="size-chart-table" id="modalSizeChart">
+                <!-- Size Chart content populated dynamically -->
+            </table>
+        </div>
+    </div>
+
     <footer id="site-footer">
         <p class="tagline">your new best friend&trade;</p>
     </footer>
@@ -532,6 +715,94 @@
         let itemsInBag = 0;
         const cartCountText = document.getElementById('cart-count');
         const toast = document.getElementById('shop-toast');
+
+        // Centralized Product Data Store for Instant Modal Loading
+        const productData = {
+            'barking-shorts': {
+                title: '"Barking At Nothin" Mesh Shorts',
+                price: '$65.00',
+                images: ['IMG_6976.jpeg', 'Pug.png'],
+                sizes: ['XS', 'Small', 'Medium'],
+                desc: 'INCREDIBLE HEAVYWEIGHT MESH SHORTS. LIGHTWEIGHT DUAL LAYER WITH CUSTOM GRAPHICS. 0 RETURNS. NO EXCEPTIONS.',
+                chart: {
+                    headers: ['SIZE', 'WAIST', 'INSEAM', 'LENGTH'],
+                    rows: [
+                        ['XS', '28"', '5"', '15"'],
+                        ['S', '30"', '5.5"', '15.5"'],
+                        ['M', '32"', '6"', '16"'],
+                        ['L', '34"', '6.5"', '16.5"']
+                    ]
+                }
+            },
+            'studded-leash': {
+                title: 'Heavy Chewer Studded Leash',
+                price: '$45.00',
+                images: ['Poodle.png'],
+                sizes: ['4ft', '6ft'],
+                desc: 'HEAVY DUTY LEATHER STUDS WITH REINFORCED METAL HARDWARE. FOR DOGS WHO BITE BACK.',
+                chart: {
+                    headers: ['SIZE', 'LENGTH', 'WIDTH'],
+                    rows: [
+                        ['4FT', '48"', '1"'],
+                        ['6FT', '72"', '1"']
+                    ]
+                }
+            },
+            'postman-tee': {
+                title: 'Postman Paranoia Heavy Tee',
+                price: '$75.00',
+                images: ['Dalmation.png'],
+                sizes: ['Small', 'Medium', 'Large'],
+                desc: '280 GSM VINTAGE WASHED COTTON TEE. FRONT AND BACK SCREEN PRINT.',
+                chart: {
+                    headers: ['SIZE', 'CHEST', 'LENGTH'],
+                    rows: [
+                        ['S', '20"', '28"'],
+                        ['M', '22"', '29"'],
+                        ['L', '24"', '30"']
+                    ]
+                }
+            },
+            'zoomies-jacket': {
+                title: '3AM Zoomies Work Jacket',
+                price: '$160.00',
+                images: ['Pug.png', 'Germshep.png'],
+                sizes: ['XS', 'Small', 'Large'],
+                desc: 'CANVAS WORK JACKET WITH INTERNAL QUILTED LINING. SILKSCREEN BACK PRINT.',
+                chart: {
+                    headers: ['SIZE', 'CHEST', 'SLEEVE', 'LENGTH'],
+                    rows: [
+                        ['XS', '21"', '24"', '25"'],
+                        ['S', '23"', '25"', '26"'],
+                        ['L', '27"', '27"', '28"']
+                    ]
+                }
+            },
+            'trucker-hat': {
+                title: 'Unpaid Vet Bill Trucker Hat',
+                price: '$40.00',
+                images: ['Poodle.png'],
+                sizes: ['O/S'],
+                desc: 'HIGH CROWN TRUCKER HAT WITH PUFF PRINT EMBROIDERY.',
+                chart: {
+                    headers: ['SIZE', 'FIT'],
+                    rows: [['O/S', 'ADJUSTABLE SNAPBACK']]
+                }
+            },
+            'tote-bag': {
+                title: 'Emotional Support Tote Bag',
+                price: '$55.00',
+                images: ['Dalmation.png'],
+                sizes: ['O/S'],
+                desc: 'HEAVY CANVAS DAILY CARRIER BAG WITH INNER ZIPPER POCKET.',
+                chart: {
+                    headers: ['SIZE', 'WIDTH', 'HEIGHT', 'STRAP'],
+                    rows: [['O/S', '18"', '16"', '12"']]
+                }
+            }
+        };
+
+        let currentActiveProductKey = null;
 
         function selectSize(element) {
             const siblingChips = element.parentElement.querySelectorAll('.size-chip');
@@ -549,6 +820,81 @@
             setTimeout(() => {
                 toast.classList.remove('visible');
             }, 1800);
+        }
+
+        /* MODAL INTERACTION LOGIC */
+        function openProductModal(key) {
+            const item = productData[key];
+            if (!item) return;
+
+            currentActiveProductKey = key;
+
+            // Fill details
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalPrice').innerText = item.price;
+            document.getElementById('modalDesc').innerText = item.desc;
+            document.getElementById('modalImg').src = item.images[0];
+
+            // Setup image dots
+            const dotsContainer = document.getElementById('modalDots');
+            dotsContainer.innerHTML = '';
+            if (item.images.length > 1) {
+                item.images.forEach((img, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                    dot.onclick = () => {
+                        document.getElementById('modalImg').src = img;
+                        document.querySelectorAll('.gallery-dots .dot').forEach(d => d.classList.remove('active'));
+                        dot.classList.add('active');
+                    };
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            // Setup sizing dropdown
+            const sizeSelect = document.getElementById('modalSizeSelect');
+            sizeSelect.innerHTML = '';
+            item.sizes.forEach(size => {
+                const opt = document.createElement('option');
+                opt.value = size;
+                opt.textContent = `${item.title.split(' ')[0]}: ${size}`;
+                sizeSelect.appendChild(opt);
+            });
+
+            // Build Size Chart Table
+            const sizeChartTable = document.getElementById('modalSizeChart');
+            sizeChartTable.innerHTML = '';
+            if (item.chart) {
+                let thead = '<tr>';
+                item.chart.headers.forEach(h => thead += `<th>${h}</th>`);
+                thead += '</tr>';
+
+                let tbody = '';
+                item.chart.rows.forEach(r => {
+                    tbody += '<tr>';
+                    r.forEach(cell => tbody += `<td>${cell}</td>`);
+                    tbody += '</tr>';
+                });
+
+                sizeChartTable.innerHTML = thead + tbody;
+            }
+
+            // Display overlay & lock scrolling
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function addModalItemToCart() {
+            if (currentActiveProductKey) {
+                const item = productData[currentActiveProductKey];
+                addToBag(item.title);
+                closeProductModal();
+            }
         }
     </script>
 </body>
