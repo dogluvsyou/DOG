@@ -326,11 +326,14 @@
             margin-bottom: 15px;
             position: relative;
             background: #fdfdfd;
+            touch-action: pan-y;
+            user-select: none;
         }
         .modal-gallery-view img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            pointer-events: none;
         }
         .gallery-dots {
             display: flex;
@@ -667,7 +670,7 @@
         <div class="modal-container">
             <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
 
-            <div class="modal-gallery-view">
+            <div class="modal-gallery-view" id="modalGallery">
                 <img src="" id="modalImg" alt="Product Image">
             </div>
 
@@ -677,7 +680,7 @@
             <div class="modal-price" id="modalPrice">$0.00</div>
 
             <select class="modal-select-box" id="modalSizeSelect">
-                <!-- Populated dynamically -->
+                <!-- Populated dynamically without prefix -->
             </select>
 
             <button class="modal-btn-buy" onclick="addModalItemToCart()">add to cart</button>
@@ -790,6 +793,7 @@
         };
 
         let currentActiveProductKey = null;
+        let currentImageIndex = 0;
 
         function selectSize(element) {
             const siblingChips = element.parentElement.querySelectorAll('.size-chip');
@@ -809,42 +813,56 @@
             }, 1800);
         }
 
+        /* GALLERY NAVIGATION HELPERS */
+        function setImageIndex(index) {
+            const item = productData[currentActiveProductKey];
+            if (!item || !item.images[index]) return;
+
+            currentImageIndex = index;
+            document.getElementById('modalImg').src = item.images[currentImageIndex];
+
+            // Update active dot
+            const dots = document.querySelectorAll('.gallery-dots .dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentImageIndex);
+            });
+        }
+
         /* MODAL INTERACTION LOGIC */
         function openProductModal(key) {
             const item = productData[key];
             if (!item) return;
 
             currentActiveProductKey = key;
+            currentImageIndex = 0;
 
             // Fill details
             document.getElementById('modalTitle').innerText = item.title;
             document.getElementById('modalPrice').innerText = item.price;
             document.getElementById('modalDesc').innerText = item.desc;
-            document.getElementById('modalImg').src = item.images[0];
+            
+            // Setup gallery
+            setImageIndex(0);
 
             // Setup image dots
             const dotsContainer = document.getElementById('modalDots');
             dotsContainer.innerHTML = '';
             if (item.images.length > 1) {
-                item.images.forEach((img, index) => {
+                item.images.forEach((_, index) => {
                     const dot = document.createElement('div');
                     dot.className = `dot ${index === 0 ? 'active' : ''}`;
-                    dot.onclick = () => {
-                        document.getElementById('modalImg').src = img;
-                        document.querySelectorAll('.gallery-dots .dot').forEach(d => d.classList.remove('active'));
-                        dot.classList.add('active');
-                    };
+                    dot.onclick = () => setImageIndex(index);
                     dotsContainer.appendChild(dot);
                 });
             }
 
-            // Setup sizing dropdown
+            // Setup sizing dropdown (Cleaned up: Size only)
             const sizeSelect = document.getElementById('modalSizeSelect');
             sizeSelect.innerHTML = '';
             item.sizes.forEach(size => {
                 const opt = document.createElement('option');
                 opt.value = size;
-                opt.textContent = `${item.title.split(' ')[0]}: ${size}`;
+                opt.textContent = size;
                 sizeSelect.appendChild(opt);
             });
 
@@ -881,6 +899,36 @@
                 const item = productData[currentActiveProductKey];
                 addToBag(item.title);
                 closeProductModal();
+            }
+        }
+
+        /* TOUCH SWIPE CONTROLLER FOR MOBILE GALLERY */
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const galleryElem = document.getElementById('modalGallery');
+
+        galleryElem.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        galleryElem.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const item = productData[currentActiveProductKey];
+            if (!item || item.images.length <= 1) return;
+
+            const threshold = 35; // Minimum horizontal px swipe
+            if (touchStartX - touchEndX > threshold) {
+                // Swiped Left -> Next Image
+                const nextIndex = (currentImageIndex + 1) % item.images.length;
+                setImageIndex(nextIndex);
+            } else if (touchEndX - touchStartX > threshold) {
+                // Swiped Right -> Previous Image
+                const prevIndex = (currentImageIndex - 1 + item.images.length) % item.images.length;
+                setImageIndex(prevIndex);
             }
         }
     </script>
