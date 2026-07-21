@@ -21,20 +21,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 0px;
             position: relative;
             z-index: 2;
         }
         .mascot-bubble {
             background: #ffffff;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 18px;
-            font-weight: 800;
-            font-size: 1rem;
+            font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
             color: #111111;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 12px;
+            margin-bottom: 0px;
             position: relative;
+            white-space: nowrap;
         }
         .mascot-bubble::after {
             content: '';
@@ -48,11 +50,11 @@
             display: block;
             width: 0;
         }
-      .mascot-img {
-    width: 130px;
-    height: 130px;
-    object-fit: contain;
-}
+        .mascot-img {
+            width: 250px;
+            height: 150px;
+            object-fit: contain;
+        }
 
         .leash-standalone-card {
             width: 100%;
@@ -118,6 +120,7 @@
             background: transparent;
             color: #111111;
         }
+        /* Fixed & Standardized Custom Reset Button Styles */
         .leash-mail-box button {
             -webkit-appearance: none;
             appearance: none;
@@ -172,6 +175,7 @@
             cursor: pointer;
         }
 
+        /* Perfect replication of the homepage black italic footer */
         #site-footer {
             margin-top: auto;
             padding-top: 40px;
@@ -201,8 +205,8 @@
     <div id="shape-canvas"></div>
 
     <div class="mascot-container">
-        <div class="mascot-bubble">keep in touch!</div>
-        <img src="IMG_7197.png" alt="Mascot Dog" class="mascot-img">
+        <div class="mascot-bubble">🐾 keep in touch! 🐾</div>
+        <img src="IMG_7149.png" alt="Mascot Dog" class="mascot-img">
     </div>
 
     <main class="leash-standalone-card">
@@ -216,17 +220,15 @@
 
         <hr style="border: none; border-top: 1px dashed rgba(0,0,0,0.15); margin: 5px 0;">
 
-        <!-- Clean Eastern Channels Matrix -->
+        <!-- Eastern Channels Matrix -->
         <a href="swag.html" class="leash-link" style="background:#b8d7e9;">Shop Collection</a>
         <a href="https://line.me/" target="_blank" class="leash-link" style="background:#d1f3c5;">LINE</a>
         <a href="#" class="leash-link" style="background:#ffc9d7;" onclick="openCutePopup('WeChat ID: DogLuvsYouOfficial'); return false;">WeChat</a>
-        <a href="archive.html" class="leash-link" style="background:#fffbc8;">Archive</a>
     </main>
 
     <footer id="site-footer">
         <p class="tagline" data-text="your new best friend™">your new best friend&trade;</p>
     </footer>
-
 
     <script>
         function openCutePopup(msg) {
