@@ -175,21 +175,20 @@
             cursor: pointer;
         }
 
-        /* Perfect replication of the homepage black italic footer */
+       /* Exact homepage tagline alignment & layout */
         #site-footer {
             margin-top: auto;
-            padding-top: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 10px 60px 10px; 
             z-index: 2;
-            text-align: center;
         }
+
+        /* Enforce bold weight so it renders bold italic like the homepage */
         #site-footer .tagline {
-            font-family: "Times New Roman", Times, serif !important;
-            font-size: 1.2rem !important;
-            font-style: italic !important;
-            font-weight: normal !important;
-            color: #000000 !important;
-            letter-spacing: normal !important;
-            text-transform: none !important;
+            font-weight: bold !important;
         }
     </style>
 </head>
