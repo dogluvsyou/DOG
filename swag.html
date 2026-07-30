@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SWAG // DOG</title>
+    <!-- Google Web Font fallback for Comic Sans on mobile -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -216,22 +220,21 @@
             padding: 1px 4px;
         }
 
-        /* PINK WITH WHITE POLKA DOT BUTTON */
+        /* PINK WITH WHITE POLKA DOT BUTTON - COMIC SANS */
         .btn-add-cart {
             width: 100%;
             max-width: 160px;
             margin: 0 auto;
             border: 1px solid #ff8ebb;
             font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             font-weight: bold;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
-            padding: 8px 0;
+            padding: 6px 0;
             cursor: pointer;
             box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
             
             background-color: #f43db3;
             background-image: radial-gradient(#ffffff 15%, transparent 16%),
@@ -282,7 +285,7 @@
             object-fit: cover;
         }
 
-        /* QUICK VIEW MODAL COMPONENT (PRAYING APPAREL STYLE) */
+        /* QUICK VIEW MODAL COMPONENT */
         .modal-backdrop {
             position: fixed;
             top: 0;
@@ -385,14 +388,13 @@
             border: 1px solid #3b3052;
             background: transparent;
             color: #3b3052;
-            padding: 12px 0;
+            padding: 10px 0;
             font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 15px;
             transition: all 0.2s ease;
-            text-transform: lowercase;
         }
         .modal-btn-buy:hover {
             background: #3b3052;
@@ -409,7 +411,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* PRAYING SIZING CHART TABLE */
+        /* SIZING CHART TABLE */
         .size-chart-table {
             width: 100%;
             border-collapse: collapse;
@@ -425,7 +427,7 @@
             text-align: left;
         }
 
-        /* MATCHING SITE FOOTER STYLE */
+        /* FOOTER */
         #site-footer {
             text-align: center;
             margin-top: 60px;
@@ -448,12 +450,12 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #ffb6c1;
+            background: #f43db3;
             color: #ffffff;
             border: 1px solid #ff8ebb;
             padding: 10px 20px;
             font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: bold;
             z-index: 100;
             opacity: 0;
@@ -465,7 +467,6 @@
             opacity: 1;
         }
 
-        /* Tablet/Desktop Rescale Adjustments */
         @media(min-width: 700px) {
             .product-row-grid {
                 gap: 30px 20px;
@@ -545,7 +546,6 @@
             </div>
         </div>
 
-        <!-- DIVIDER option 1: Gothic cross with thin dash -->
         <div class="vibe-divider">
             <span class="graphic-line">† ═════════ †</span>
             <p>The dyslexic agnostic insomniac lays awake at night wondering if there is a dog</p>
@@ -587,7 +587,6 @@
             </div>
         </div>
 
-        <!-- DIVIDER option 2: Dog Emoji -->
         <div class="vibe-divider">
             <p>🐶 I love to play dumb 🐶</p>
         </div>
@@ -643,13 +642,11 @@ _   /  `   |
             </div>
         </div>
 
-        <!-- DIVIDER option 3: Classic Y2K / MySpace Star Sparkles -->
         <div class="vibe-divider">
             <span class="graphic-line">✧･ﾟ: *✧  *:･ﾟ✧</span>
             <p>you can lead a dog to water, but you can't make that b🐾tch drink</p>
         </div>
 
-        <!-- EDITORIAL STACK -->
         <section class="editorial-stack">
             <img src="IMG_5477.jpeg" alt="Lookbook Panel" class="img-portrait">
             <img src="IMG_5482.jpeg" alt="Lookbook Panel" class="img-landscape">
@@ -659,7 +656,6 @@ _   /  `   |
 
     </main>
 
-    <!-- QUICK VIEW POPUP MODAL ARCHITECTURE -->
     <div class="modal-backdrop" id="productModal">
         <div class="modal-container">
             <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
@@ -674,7 +670,6 @@ _   /  `   |
             <div class="modal-price" id="modalPrice">$0.00</div>
 
             <select class="modal-select-box" id="modalSizeSelect">
-                <!-- Populated dynamically without prefix -->
             </select>
 
             <button class="modal-btn-buy" onclick="addModalItemToCart()">add to cart</button>
@@ -684,7 +679,6 @@ _   /  `   |
             </div>
 
             <table class="size-chart-table" id="modalSizeChart">
-                <!-- Size Chart content populated dynamically -->
             </table>
         </div>
     </div>
@@ -700,7 +694,6 @@ _   /  `   |
         const cartCountText = document.getElementById('cart-count');
         const toast = document.getElementById('shop-toast');
 
-        // Centralized Product Data Store for Instant Modal Loading
         const productData = {
             'barking-shorts': {
                 title: '"Barking At Nothin" Mesh Shorts',
@@ -809,7 +802,6 @@ _   /  `   |
             }, 1800);
         }
 
-        /* GALLERY NAVIGATION HELPERS */
         function setImageIndex(index) {
             const item = productData[currentActiveProductKey];
             if (!item || !item.images[index]) return;
@@ -817,14 +809,12 @@ _   /  `   |
             currentImageIndex = index;
             document.getElementById('modalImg').src = item.images[currentImageIndex];
 
-            // Update active dot
             const dots = document.querySelectorAll('.gallery-dots .dot');
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx === currentImageIndex);
             });
         }
 
-        /* MODAL INTERACTION LOGIC */
         function openProductModal(key) {
             const item = productData[key];
             if (!item) return;
@@ -832,15 +822,12 @@ _   /  `   |
             currentActiveProductKey = key;
             currentImageIndex = 0;
 
-            // Fill details
             document.getElementById('modalTitle').innerText = item.title;
             document.getElementById('modalPrice').innerText = item.price;
             document.getElementById('modalDesc').innerText = item.desc;
             
-            // Setup gallery
             setImageIndex(0);
 
-            // Setup image dots
             const dotsContainer = document.getElementById('modalDots');
             dotsContainer.innerHTML = '';
             if (item.images.length > 1) {
@@ -852,7 +839,6 @@ _   /  `   |
                 });
             }
 
-            // Setup sizing dropdown
             const sizeSelect = document.getElementById('modalSizeSelect');
             sizeSelect.innerHTML = '';
             item.sizes.forEach(size => {
@@ -862,7 +848,6 @@ _   /  `   |
                 sizeSelect.appendChild(opt);
             });
 
-            // Build Size Chart Table
             const sizeChartTable = document.getElementById('modalSizeChart');
             sizeChartTable.innerHTML = '';
             if (item.chart) {
@@ -880,7 +865,6 @@ _   /  `   |
                 sizeChartTable.innerHTML = thead + tbody;
             }
 
-            // Display overlay & lock scrolling
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -898,7 +882,6 @@ _   /  `   |
             }
         }
 
-        /* TOUCH SWIPE CONTROLLER FOR MOBILE GALLERY */
         let touchStartX = 0;
         let touchEndX = 0;
         const galleryElem = document.getElementById('modalGallery');
