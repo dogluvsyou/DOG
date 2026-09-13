@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DogLuvsYou</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Web Font fallback for Comic Sans styling -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
         /* PURE CUTE FLOATING PAW (Top Left) */
         #music-player {
@@ -125,7 +121,7 @@
             background: #333333;
         }
 
-        /* SOCIAL LINKS BLURRED OVERLAY BLOCK */
+        /* SOCIAL LINKS BLURRED OVERLAY BLOCK (MATCHING BARK POPUP STYLE) */
         .socials-blur-block {
             position: relative;
             display: flex;
@@ -137,7 +133,7 @@
 
         .socials-inner-links {
             filter: blur(6px);
-            opacity: 0.55;
+            opacity: 0.5;
             pointer-events: none;
             user-select: none;
             display: flex;
@@ -153,26 +149,21 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 20;
-            width: 88%;
-            padding: 12px 8px;
+            width: 85%;
+            padding: 18px 12px;
 
-            /* PINK POLKA DOT STYLING MATCHING SWAG & POPUPS */
-            background-color: #f43db3;
-            background-image: radial-gradient(#ffffff 15%, transparent 16%),
-                              radial-gradient(#ffffff 15%, transparent 16%);
-            background-size: 12px 12px;
-            background-position: 0 0, 6px 6px;
-
-            color: #ffffff;
-            font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-            font-size: 0.95rem;
-            font-weight: bold;
+            /* MATCHES .cute-popup-box STYLING EXACTLY */
+            background: #ffffff;
+            color: #111111;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
             text-align: center;
-            border: 1px solid #ff8ebb;
-            border-radius: 12px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: none;
             pointer-events: none;
+            line-height: 1.3;
         }
 
         /* CUSTOM CENTERED CUTE POPUP OVERLAY */
