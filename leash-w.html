@@ -17,6 +17,27 @@
             overflow-x: hidden;
         }
 
+        /* MUSIC PLAYER IN TOP RIGHT */
+        #music-player {
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 9999;
+        }
+        #paw-trigger {
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 30px; 
+            cursor: pointer; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         .mascot-container {
             display: flex;
             flex-direction: column;
@@ -25,6 +46,15 @@
             position: relative;
             z-index: 2;
         }
+
+        /* LOGO ABOVE SPEECH BUBBLE */
+        .header-logo {
+            width: 140px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
         .mascot-bubble {
             background: #ffffff;
             padding: 10px 18px;
@@ -255,6 +285,11 @@
 </head>
 <body>
 
+    <div id="music-player">
+        <button id="paw-trigger">🐾</button>
+        <audio id="audio-track"></audio>
+    </div>
+
     <div id="cute-popup-overlay">
         <div class="cute-popup-box">
             <p class="cute-popup-text" id="popup-message-target"></p>
@@ -265,6 +300,7 @@
     <div id="shape-canvas"></div>
 
     <div class="mascot-container">
+        <img src="IMG_6857.png" alt="DOG" class="header-logo">
         <div class="mascot-bubble">🐾 keep in touch! 🐾</div>
         <img src="IMG_7149.png" alt="Mascot Dog" class="mascot-img">
     </div>
@@ -297,12 +333,18 @@
     </footer>
 
     <script>
+        let shouldRedirectHome = false;
+
         function openCutePopup(msg) {
             document.getElementById('popup-message-target').innerText = msg;
             document.getElementById('cute-popup-overlay').style.display = 'flex';
         }
+
         function closeCutePopup() {
             document.getElementById('cute-popup-overlay').style.display = 'none';
+            if (shouldRedirectHome) {
+                window.location.href = 'http://www.dogluvsyou.com';
+            }
         }
 
         function handleFormSubmit(event) {
@@ -318,10 +360,12 @@
                 }
             })
             .then(response => {
+                shouldRedirectHome = true;
                 openCutePopup('🐾 Subscribed to Mailing List! 🐾');
                 form.reset();
             })
             .catch(error => {
+                shouldRedirectHome = true;
                 openCutePopup('🐾 Subscribed to Mailing List! 🐾');
                 form.reset();
             });
@@ -359,6 +403,54 @@
             if (confirm("WARNING: This section contains 18+ content. Do you confirm you are of legal age to view this content?")) {
                 window.open('https://yournsfwlink.com', '_blank'); 
             }
+        });
+
+        // JUKEBOX ENGINE
+        const playlist = [
+            'COUP.mp3',
+            'moon.mp3',
+            'EGYEL.mp3',
+            'topdog.mp3'
+        ];
+
+        const paw = document.getElementById('paw-trigger');
+        const audio = document.getElementById('audio-track');
+
+        let currentTrackIndex = Math.floor(Math.random() * playlist.length);
+
+        function loadTrack(index) {
+            audio.src = playlist[index];
+            audio.load();
+        }
+
+        loadTrack(currentTrackIndex);
+
+        paw.addEventListener('click', () => {
+            if (audio.paused) {
+                paw.innerText = '🔊';
+                paw.style.transform = 'scale(1.15)';
+                
+                audio.play().catch(err => {
+                    console.log("Audio interface engagement blocked: ", err);
+                    paw.innerText = '🐾';
+                    paw.style.transform = 'scale(1)';
+                });
+            } else {
+                audio.pause();
+                paw.innerText = '🐾';
+                paw.style.transform = 'scale(1)';
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            let nextTrackIndex;
+            do {
+                nextTrackIndex = Math.floor(Math.random() * playlist.length);
+            } while (playlist.length > 1 && nextTrackIndex === currentTrackIndex);
+            
+            currentTrackIndex = nextTrackIndex;
+            loadTrack(currentTrackIndex);
+            audio.play().catch(err => console.log("Shuffle progression delayed: ", err));
         });
     </script>
 </body>
