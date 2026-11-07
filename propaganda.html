@@ -27,23 +27,22 @@
             overflow-x: hidden;
         }
 
-        /* BACK FEED HANDLE */
+        /* BACK FEED HANDLE - BORDERLESS & MATCHING PINK */
         .back-home {
             display: inline-block;
             font-family: 'Impact', sans-serif;
-            font-size: 1.1rem;
-            color: #ff003c;
+            font-size: 0.9rem;
+            color: #ff0099;
             text-decoration: none;
             text-transform: uppercase;
-            border: 3px solid #ff003c;
-            padding: 6px 12px;
-            margin-bottom: 40px;
+            padding: 0;
+            margin-bottom: 30px;
             letter-spacing: 1px;
-            box-shadow: 4px 4px 0px #ff003c;
+            transition: opacity 0.2s ease;
         }
         .back-home:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #ff003c;
+            opacity: 0.7;
+            transform: none;
         }
 
         /* HEADER CONTAINER */
@@ -76,17 +75,6 @@
             line-height: 0.85;
             color: #ffffff;
             -webkit-text-stroke: 2px #ffffff;
-        }
-        
-        .zine-subtitle {
-            font-family: "Times New Roman", Times, serif;
-            font-style: italic;
-            font-size: 1.3rem;
-            color: #ff003c;
-            margin-top: 15px;
-            padding: 0 10px;
-            line-height: 1.3;
-            letter-spacing: 0.5px;
         }
 
         /* ASYMMETRICAL STREAM */
@@ -182,7 +170,6 @@
             >
             <h1 id="title-fallback" class="zine-title-fallback">KENNEL</h1>
         </div>
-        <p class="zine-subtitle">lock me up before I hurt myself</p>
     </header>
 
     <main id="propaganda-stream"></main>
