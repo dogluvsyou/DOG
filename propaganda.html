@@ -47,7 +47,7 @@
             -webkit-text-stroke: 2px #ffffff;
         }
 
-        /* CHAIN-LINK FENCE STREAM WRAPPER (COVERS FULL WIDTH, STARTING BELOW LOGO) */
+        /* CHAIN-LINK FENCE STREAM WRAPPER */
         .fence-container {
             background-color: #000000;
             background-image: 
@@ -56,7 +56,9 @@
             background-size: 40px 60px;
             background-position: 0 0, 20px 30px;
             width: 100%;
-            padding: 20px 15px 120px 15px;
+            /* Thicker grey line matching fence shade at the top, plus padding to drop posts down */
+            border-top: 3px solid rgba(255, 255, 255, 0.15);
+            padding: 35px 15px 120px 15px;
         }
 
         /* ASYMMETRICAL STREAM */
@@ -69,13 +71,15 @@
             gap: 60px; 
         }
 
-        /* STICKER POSTS */
+        /* UNIFORM STICKER POSTS */
         .meme-post {
             background: #1a1a1a;
             border: 4px solid #ffffff;
             box-shadow: 10px 10px 0px #ffffff; 
             padding: 8px;
             width: 100%; 
+            max-width: 75%; /* Uniform width constraint */
+            align-self: center; /* Centered uniformly */
             transition: transform 0.3s ease;
         }
 
@@ -85,13 +89,6 @@
             display: block;
             filter: grayscale(20%); 
         }
-
-        .meme-post.size-medium { max-width: 85%; }
-        .meme-post.size-large { max-width: 100%; }
-        
-        .meme-post.align-left { align-self: flex-start; }
-        .meme-post.align-right { align-self: flex-end; }
-        .meme-post.align-center { align-self: center; }
 
         #infinite-sentinel {
             width: 100%;
@@ -104,7 +101,7 @@
             letter-spacing: 2px;
         }
 
-        /* FIXED PINK BACK BUTTON (BOTTOM LEFT) */
+        /* FIXED PINK BACK BUTTON WITH ARROW (BOTTOM LEFT) */
         .back-btn-fixed {
             position: fixed;
             bottom: 30px;
@@ -151,7 +148,7 @@
         </div>
     </header>
 
-    <!-- FENCE PATTERN AREA (EDGE-TO-EDGE, STARTING BELOW LOGO) -->
+    <!-- FENCE PATTERN AREA WITH TOP GREY LINE & SPACING -->
     <div class="fence-container">
         <main id="propaganda-stream"></main>
         <div id="infinite-sentinel">generating transmission...</div>
@@ -185,9 +182,6 @@
         const stream = document.getElementById('propaganda-stream');
         const sentinel = document.getElementById('infinite-sentinel');
 
-        const sizes = ['size-medium', 'size-large'];
-        const alignments = ['align-left', 'align-right', 'align-center'];
-
         let currentImageIndex = 0;
 
         function generateMemeBlock() {
@@ -200,12 +194,10 @@
                 selectedImg = memeImages[Math.floor(Math.random() * memeImages.length)];
             }
             
-            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-            const randomAlign = alignments[Math.floor(Math.random() * alignments.length)];
             const randomTilt = (Math.random() * 5 - 2.5).toFixed(2); 
 
             const postCard = document.createElement('div');
-            postCard.className = `meme-post ${randomSize} ${randomAlign}`;
+            postCard.className = `meme-post`;
             postCard.style.transform = `rotate(${randomTilt}deg)`;
             postCard.style.animation = `postFadeIn 0.4s ease forwards`;
 
