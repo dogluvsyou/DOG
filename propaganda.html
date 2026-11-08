@@ -11,19 +11,19 @@
             padding: 0;
         }
 
-        /* OLED PERFECT BLACK BACKGROUND (#000000) */
+        /* OLED PERFECT BLACK BACKGROUND (#000000) FOR ENTIRE PAGE */
         body {
             background-color: #000000; 
             color: #ffffff;
             font-family: system-ui, -apple-system, sans-serif;
-            padding: 20px 15px 100px 15px;
+            padding: 0;
             overflow-x: hidden;
         }
 
         /* TOP HEADER SECTION (SOLID BLACK #000000) */
         .zine-header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 30px 15px 20px 15px;
             background-color: #000000;
         }
 
@@ -47,31 +47,16 @@
             -webkit-text-stroke: 2px #ffffff;
         }
 
-        /* BACK HOME LINK BELOW LOGO */
-        .back-home {
-            display: inline-block;
-            font-family: 'Impact', sans-serif;
-            font-size: 0.9rem;
-            color: #ff0099;
-            text-decoration: none;
-            text-transform: uppercase;
-            padding: 0;
-            margin: 15px 0 25px 0;
-            letter-spacing: 1px;
-            transition: opacity 0.2s ease;
-        }
-        .back-home:active {
-            opacity: 0.7;
-        }
-
-        /* CHAIN-LINK FENCE STREAM WRAPPER (STARTS BELOW LOGO) */
+        /* CHAIN-LINK FENCE STREAM WRAPPER (COVERS FULL WIDTH, STARTING BELOW LOGO) */
         .fence-container {
+            background-color: #000000;
             background-image: 
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"),
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
             background-size: 40px 60px;
             background-position: 0 0, 20px 30px;
-            padding-top: 20px;
+            width: 100%;
+            padding: 20px 15px 120px 15px;
         }
 
         /* ASYMMETRICAL STREAM */
@@ -119,11 +104,11 @@
             letter-spacing: 2px;
         }
 
-        /* SMALL PINK DOG BUTTON (BOTTOM RIGHT) */
-        .dog-btn-fixed {
+        /* FIXED PINK BACK BUTTON (BOTTOM LEFT) */
+        .back-btn-fixed {
             position: fixed;
             bottom: 30px;
-            right: 25px;
+            left: 25px;
             background-color: #ff0099;
             color: #000000;
             font-family: 'Impact', sans-serif;
@@ -140,7 +125,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .dog-btn-fixed:active {
+        .back-btn-fixed:active {
             transform: translate(1px, 1px);
             box-shadow: 1px 1px 0px #ffffff;
         }
@@ -164,19 +149,16 @@
             >
             <h1 id="title-fallback" class="zine-title-fallback">KENNEL</h1>
         </div>
-        <div>
-            <a href="index.html" class="back-home">← HOME</a>
-        </div>
     </header>
 
-    <!-- FENCE PATTERN AREA (STARTS BELOW LOGO AND HEADER) -->
+    <!-- FENCE PATTERN AREA (EDGE-TO-EDGE, STARTING BELOW LOGO) -->
     <div class="fence-container">
         <main id="propaganda-stream"></main>
         <div id="infinite-sentinel">generating transmission...</div>
     </div>
 
-    <!-- SMALL PINK DOG BUTTON (BOTTOM RIGHT) -->
-    <button class="dog-btn-fixed" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">DOG</button>
+    <!-- FIXED PINK BACK BUTTON WITH ARROW (BOTTOM LEFT) -->
+    <a href="index.html" class="back-btn-fixed">← HOME</a>
 
     <script>
         // =========================================================
