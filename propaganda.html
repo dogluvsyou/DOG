@@ -11,50 +11,20 @@
             padding: 0;
         }
 
+        /* OLED PERFECT BLACK BACKGROUND (#000000) */
         body {
-            background-color: #111111; 
-            
-            /* BLACK BACKGROUND WITH BRIGHT HIGHLIGHT KNUCKLES */
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-size: 40px 60px;
-            background-position: 0 0, 20px 30px;
-            
+            background-color: #000000; 
             color: #ffffff;
             font-family: system-ui, -apple-system, sans-serif;
-            padding: 30px 15px 100px 15px;
+            padding: 20px 15px 100px 15px;
             overflow-x: hidden;
         }
 
-        /* BACK FEED HANDLE - BORDERLESS & MATCHING PINK */
-        .back-home {
-            display: inline-block;
-            font-family: 'Impact', sans-serif;
-            font-size: 0.9rem;
-            color: #ff0099;
-            text-decoration: none;
-            text-transform: uppercase;
-            padding: 0;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            transition: opacity 0.2s ease;
-        }
-        .back-home:active {
-            opacity: 0.7;
-            transform: none;
-        }
-
-        /* HEADER CONTAINER */
+        /* TOP HEADER SECTION (SOLID BLACK #000000) */
         .zine-header {
             text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .title-glitter-wrapper {
-            position: relative;
-            display: inline-block;
-            margin: 0 auto;
+            margin-bottom: 20px;
+            background-color: #000000;
         }
 
         /* LOGO IMAGE */
@@ -75,6 +45,33 @@
             line-height: 0.85;
             color: #ffffff;
             -webkit-text-stroke: 2px #ffffff;
+        }
+
+        /* BACK HOME LINK BELOW LOGO */
+        .back-home {
+            display: inline-block;
+            font-family: 'Impact', sans-serif;
+            font-size: 0.9rem;
+            color: #ff0099;
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 15px 0 25px 0;
+            letter-spacing: 1px;
+            transition: opacity 0.2s ease;
+        }
+        .back-home:active {
+            opacity: 0.7;
+        }
+
+        /* CHAIN-LINK FENCE STREAM WRAPPER (STARTS BELOW LOGO) */
+        .fence-container {
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath d='M10 0 L0 11 C-2 13 -2 17 0 19 L20 41 C22 43 22 47 20 49 L10 60 M30 0 L40 11 C42 13 42 17 40 19 L20 41 C18 43 18 47 20 49 L30 60' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-size: 40px 60px;
+            background-position: 0 0, 20px 30px;
+            padding-top: 20px;
         }
 
         /* ASYMMETRICAL STREAM */
@@ -122,32 +119,30 @@
             letter-spacing: 2px;
         }
 
-        /* LOW OPACITY BACK TO TOP ARROW */
-        #back-to-top {
+        /* SMALL PINK DOG BUTTON (BOTTOM RIGHT) */
+        .dog-btn-fixed {
             position: fixed;
             bottom: 30px;
             right: 25px;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.15); 
-            color: rgba(255, 255, 255, 0.4); 
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: #ff0099;
+            color: #000000;
+            font-family: 'Impact', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 6px 14px;
+            border: none;
+            letter-spacing: 1px;
             cursor: pointer;
             z-index: 9999;
-            opacity: 0; 
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease;
+            box-shadow: 2px 2px 0px #ffffff;
+            transition: transform 0.1s ease;
             -webkit-tap-highlight-color: transparent;
         }
-        
-        #back-to-top:active {
-            background: rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.8);
+
+        .dog-btn-fixed:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #ffffff;
         }
 
         @keyframes postFadeIn {
@@ -158,24 +153,30 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-home">← HOME</a>
-
+    <!-- TOP HEADER ON SOLID PERFECT BLACK (#000000) -->
     <header class="zine-header">
-        <div class="title-glitter-wrapper" id="glitter-container">
+        <div id="glitter-container">
             <img 
-                src="kennelmagweblogo02.png" 
+                src="kennelmagweblogo01.png" 
                 alt="KENNEL" 
                 class="zine-logo-img"
                 onerror="this.style.display='none'; document.getElementById('title-fallback').style.display='block';"
             >
             <h1 id="title-fallback" class="zine-title-fallback">KENNEL</h1>
         </div>
+        <div>
+            <a href="index.html" class="back-home">← HOME</a>
+        </div>
     </header>
 
-    <main id="propaganda-stream"></main>
-    <div id="infinite-sentinel">generating transmission...</div>
+    <!-- FENCE PATTERN AREA (STARTS BELOW LOGO AND HEADER) -->
+    <div class="fence-container">
+        <main id="propaganda-stream"></main>
+        <div id="infinite-sentinel">generating transmission...</div>
+    </div>
 
-    <button id="back-to-top" aria-label="Scroll to top">↑</button>
+    <!-- SMALL PINK DOG BUTTON (BOTTOM RIGHT) -->
+    <button class="dog-btn-fixed" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">DOG</button>
 
     <script>
         // =========================================================
@@ -201,7 +202,6 @@
 
         const stream = document.getElementById('propaganda-stream');
         const sentinel = document.getElementById('infinite-sentinel');
-        const topBtn = document.getElementById('back-to-top');
 
         const sizes = ['size-medium', 'size-large'];
         const alignments = ['align-left', 'align-right', 'align-center'];
@@ -251,24 +251,6 @@
         }, { rootMargin: '300px' }); 
 
         observer.observe(sentinel);
-
-        // BACK-TO-TOP DYNAMIC ROUTER CONTROLS
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                topBtn.style.opacity = '1';
-                topBtn.style.visibility = 'visible';
-            } else {
-                topBtn.style.opacity = '0';
-                topBtn.style.visibility = 'hidden';
-            }
-        });
-
-        topBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
     </script>
 
 </body>
